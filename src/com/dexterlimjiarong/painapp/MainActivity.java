@@ -43,28 +43,36 @@ public class MainActivity extends Activity {
             mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
                         GravityCompat.START);
  
+         //There must always be a drawerItem Header for every drawerItem
          // Add Drawer Item to dataList
+ 
+            //Username Header
+            dataList.add(new DrawerItem("Username"));
+            dataList.add(new DrawerItem("Home", R.drawable.ic_action_email));	//1. Home
+            
+            //Questionaire Header
+            dataList.add(new DrawerItem("Questionaire")); // adding a header to the list
+            dataList.add(new DrawerItem("Message", R.drawable.ic_action_labels));	//3. PQAS
+            //Spinner Future Implementation will allow user to choose which questionnaires to do
             dataList.add(new DrawerItem(true)); // adding a spinner to the list
+            	//dataList.add(new DrawerItem("Likes", R.drawable.ic_action_good));
+            	//dataList.add(new DrawerItem("Games", R.drawable.ic_action_gamepad));
+            	//dataList.add(new DrawerItem("Lables", R.drawable.ic_action_labels));
  
-            dataList.add(new DrawerItem("My Favorites")); // adding a header to the list
-            dataList.add(new DrawerItem("Message", R.drawable.ic_action_email));
-            dataList.add(new DrawerItem("Likes", R.drawable.ic_action_good));
-            dataList.add(new DrawerItem("Games", R.drawable.ic_action_gamepad));
-            dataList.add(new DrawerItem("Lables", R.drawable.ic_action_labels));
+            //History
+            dataList.add(new DrawerItem("History"));
+            dataList.add(new DrawerItem("View Reports", R.drawable.ic_action_search));	//6. View Reports
+            	//dataList.add(new DrawerItem("Cloud", R.drawable.ic_action_cloud));
+            	//dataList.add(new DrawerItem("Camara", R.drawable.ic_action_camera));
+            	//dataList.add(new DrawerItem("Video", R.drawable.ic_action_video));
+            	//dataList.add(new DrawerItem("Groups", R.drawable.ic_action_group));
+            	//dataList.add(new DrawerItem("Import & Export", R.drawable.ic_action_import_export));
  
-             dataList.add(new DrawerItem("Main Options"));// adding a header to the list
-            dataList.add(new DrawerItem("Search", R.drawable.ic_action_search));
-            dataList.add(new DrawerItem("Cloud", R.drawable.ic_action_cloud));
-            dataList.add(new DrawerItem("Camara", R.drawable.ic_action_camera));
-            dataList.add(new DrawerItem("Video", R.drawable.ic_action_video));
-            dataList.add(new DrawerItem("Groups", R.drawable.ic_action_group));
-            dataList.add(new DrawerItem("Import & Export",
-                        R.drawable.ic_action_import_export));
- 
-             dataList.add(new DrawerItem("Other Option")); // adding a header to the list
-            dataList.add(new DrawerItem("About", R.drawable.ic_action_about));
-            dataList.add(new DrawerItem("Settings", R.drawable.ic_action_settings));
-            dataList.add(new DrawerItem("Help", R.drawable.ic_action_help));
+            //Pain Assessment
+            dataList.add(new DrawerItem("Pain Assessment"));
+            dataList.add(new DrawerItem("About", R.drawable.ic_action_about));	//8. Settings
+            dataList.add(new DrawerItem("Settings", R.drawable.ic_action_settings));	//9. Quit
+            	//dataList.add(new DrawerItem("Help", R.drawable.ic_action_help));
  
             adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item,
                         dataList);
@@ -128,97 +136,35 @@ public class MainActivity extends Activity {
           Bundle args = new Bundle();
           switch (possition) {
      
-          case 2:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
-                            .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList
-                            .get(possition).getImgResID());
-                break;
-          case 3:
-                fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
-                            .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
-                            .getImgResID());
-                break;
-          case 4:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
-                            .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(possition)
-                            .getImgResID());
-                break;
-          case 5:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
-                            .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList
-                            .get(possition).getImgResID());
-                break;
-          case 7:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
-                            .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(possition)
-                            .getImgResID());
-                break;
-          case 8:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
-                            .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList
-                            .get(possition).getImgResID());
-                break;
-          case 9:
-                fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
-                            .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
-                            .getImgResID());
-                break;
-          case 10:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
-                            .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(possition)
-                            .getImgResID());
-                break;
-          case 11:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
-                            .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList
-                            .get(possition).getImgResID());
-                break;
-          case 12:
-                fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
-                            .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
-                            .getImgResID());
-                break;
-          case 14:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
-                            .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(possition)
-                            .getImgResID());
-                break;
-          case 15:
-                fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
-                            .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
-                            .getImgResID());
-                break;
-          case 16:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
-                            .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(possition)
-                            .getImgResID());
-                break;
+        case 1:
+              fragment = new FragmentOne();
+              args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
+                          .getItemName());
+              args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList
+                          .get(possition).getImgResID());
+              break;
+        case 3:
+            fragment = new FragmentTwo();
+            args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+            args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList
+                        .get(possition).getImgResID());
+            break;
+        case 6:
+            fragment = new FragmentTwo();
+            args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+            args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList
+                        .get(possition).getImgResID());
+            break;
+        case 8:
+            fragment = new FragmentTwo();
+            args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+            args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList
+                        .get(possition).getImgResID());
+            break;
+        
           default:
                 break;
           }
