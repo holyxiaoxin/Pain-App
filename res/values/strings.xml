@@ -4,9 +4,7 @@
     <string name="app_name">Pain App</string>
     <string name="hello_user">Hello User!</string>
     <string name="action_settings">Settings</string>
-    <string-array name="navigationDrawerItems">
-        <item >Home</item>
-        <item >Settings</item>
-    </string-array>
+    <string name="drawer_open">Open drawer</string>
+	<string name="drawer_close">Close drawer</string>
 
 </resources>
