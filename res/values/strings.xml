@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Pain App</string>
+    <string name="hello_user">Hello User!</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="navigationDrawerItems">
+        <item >Home</item>
+        <item >Settings</item>
+    </string-array>
+
+</resources>

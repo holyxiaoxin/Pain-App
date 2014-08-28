@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#ecf0f1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.dexterlimjiarong.painapp.MainActivity" >
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
+        android:text="@string/hello_user" 
+        android:textColor="#C7D0D9"
+        android:background="#2c4762" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="true"
+        android:orientation="horizontal" >
+
+	    <TextView
+	        android:id="@+id/textView1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="60dp"
+	        android:layout_weight="1"
+	        android:gravity="right|center"
+	        android:paddingRight="20dp"
+	        android:textAppearance="?android:attr/textAppearanceMedium"
+	        android:text="Start the survey!" 
+	        android:background="#1abc9c" />
+
+	    <Button
+	        android:id="@+id/button1"
+	        android:layout_width="60dp"
+	        android:layout_height="60dp"
+	        android:minHeight="0dp"
+	        android:minWidth="0dp"
+	        android:paddingTop="10dp"
+	        android:paddingBottom="10dp"
+	        android:layout_weight="1"
+	        android:gravity="center"
+	        android:text="Begin"
+	        android:background="@drawable/homebegin_button" />
+
+	 </LinearLayout>
+
+</LinearLayout>
