@@ -151,6 +151,13 @@ public class MainActivity extends Activity {
             args.putInt(FragmentPqasQ1.IMAGE_RESOURCE_ID, dataList
                         .get(possition).getImgResID());
             break;
+//        	fragment = new FragmentSeekBar();
+//            args.putString(FragmentSeekBar.ITEM_NAME, dataList.get(possition)
+//                        .getItemName());
+//            args.putInt(FragmentSeekBar.IMAGE_RESOURCE_ID, dataList
+//                        .get(possition).getImgResID());
+//            break;
+            
         case 6:
             fragment = new FragmentTwo();
             args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
