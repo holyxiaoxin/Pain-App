@@ -1,36 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-    
-    <!--  	Start of	-->
-    <!--	SEEKBAR  	-->
-    <!--  				-->
-    
    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/default_screen_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical" >
  
         <ImageView
         android:id="@+id/frag_pqas_q1_icon"
-        android:background="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 		/>
 	 
 	    <TextView
 	        android:id="@+id/frag_pqas_q1_text"
-	        android:background="@color/white"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="10dp"
 	        android:textAppearance="?android:attr/textAppearanceLarge" 
 		/>
-        
-
-	 
+	 		<!--  	Start of	-->
+		    <!--	SEEKBAR  	-->
+		    <!--  				-->
 		    <LinearLayout
 		        android:id="@+id/refresh_match_layout"
-		        android:layout_width="fill_parent"
+		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="5dp"
 		        android:background="@drawable/background_view_rounded_single"
@@ -40,6 +32,7 @@
 		        <TextView
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
+		            android:layout_gravity="center"
 		            android:padding="10dp"
 		            android:text="0-100 Scale"
 		            android:textColor="#ffffff"

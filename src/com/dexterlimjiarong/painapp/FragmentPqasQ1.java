@@ -40,10 +40,10 @@ public class FragmentPqasQ1 extends Fragment{
           volumeControl = (SeekBar) view.findViewById(R.id.volume_bar);
           
 			volumeControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-	  			int progressChanged = 0;
+	  			int pain = 0;
 	   
 	  			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-	  				progressChanged = progress;
+	  				pain = progress;
 	  			}
 	   
 	  			public void onStartTrackingTouch(SeekBar seekBar) {
@@ -51,7 +51,7 @@ public class FragmentPqasQ1 extends Fragment{
 	  			}
 	   
 	  			public void onStopTrackingTouch(SeekBar seekBar) {
-	  				Toast.makeText(seekBar.getContext(),"seek bar progress:"+progressChanged, 
+	  				Toast.makeText(seekBar.getContext(),"Pain Scale:"+pain, 
 	  						Toast.LENGTH_SHORT).show();
 	  			}
 			});
