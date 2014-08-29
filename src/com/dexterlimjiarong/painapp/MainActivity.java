@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
  
       @Override
       protected void onCreate(Bundle savedInstanceState) {
+    	  	//extending the existing parent class' method
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
  
@@ -52,7 +53,7 @@ public class MainActivity extends Activity {
             
             //Questionaire Header
             dataList.add(new DrawerItem("Questionaire")); // adding a header to the list
-            dataList.add(new DrawerItem("Message", R.drawable.ic_action_labels));	//3. PQAS
+            dataList.add(new DrawerItem("PQAS", R.drawable.ic_action_labels));	//3. PQAS
             //Spinner Future Implementation will allow user to choose which questionnaires to do
             dataList.add(new DrawerItem(true)); // adding a spinner to the list
             	//dataList.add(new DrawerItem("Likes", R.drawable.ic_action_good));
@@ -136,18 +137,18 @@ public class MainActivity extends Activity {
           Bundle args = new Bundle();
           switch (possition) {
      
-        case 1:
+        case 1:	//Home
               fragment = new FragmentOne();
               args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
                           .getItemName());
               args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList
                           .get(possition).getImgResID());
               break;
-        case 3:
-            fragment = new FragmentTwo();
-            args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
+        case 3:	//PQAS
+            fragment = new FragmentPqasQ1();
+            args.putString(FragmentPqasQ1.ITEM_NAME, dataList.get(possition)
                         .getItemName());
-            args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList
+            args.putInt(FragmentPqasQ1.IMAGE_RESOURCE_ID, dataList
                         .get(possition).getImgResID());
             break;
         case 6:

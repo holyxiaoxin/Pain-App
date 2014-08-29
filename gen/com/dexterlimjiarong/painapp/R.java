@@ -1111,7 +1111,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f05004f;
+        public static final int action_settings=0x7f050051;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1133,10 +1133,12 @@ containing a value of this type.
         public static final int expanded_menu=0x7f05002c;
         public static final int frag1_icon=0x7f050049;
         public static final int frag1_text=0x7f05004a;
-        public static final int frag2_icon=0x7f05004d;
-        public static final int frag2_text=0x7f05004e;
-        public static final int frag3_icon=0x7f05004b;
-        public static final int frag3_text=0x7f05004c;
+        public static final int frag2_icon=0x7f05004f;
+        public static final int frag2_text=0x7f050050;
+        public static final int frag3_icon=0x7f05004d;
+        public static final int frag3_text=0x7f05004e;
+        public static final int frag_pqas_q1_icon=0x7f05004b;
+        public static final int frag_pqas_q1_text=0x7f05004c;
         public static final int headerLayout=0x7f050041;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
@@ -1235,9 +1237,10 @@ containing a value of this type.
         public static final int custom_drawer_item=0x7f030019;
         public static final int custom_spinner_item=0x7f03001a;
         public static final int fragment_layout_one=0x7f03001b;
-        public static final int fragment_layout_three=0x7f03001c;
-        public static final int fragment_layout_two=0x7f03001d;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
+        public static final int fragment_layout_pqas_q1=0x7f03001c;
+        public static final int fragment_layout_three=0x7f03001d;
+        public static final int fragment_layout_two=0x7f03001e;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001f;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
@@ -1288,6 +1291,8 @@ containing a value of this type.
         public static final int drawer_close=0x7f0a0011;
         public static final int drawer_open=0x7f0a0010;
         public static final int hello_user=0x7f0a000e;
+        public static final int home_text1=0x7f0a0012;
+        public static final int pqas_q1=0x7f0a0013;
     }
     public static final class style {
         /** 

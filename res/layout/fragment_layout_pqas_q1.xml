@@ -14,13 +14,13 @@
       -->
  
     <ImageView
-        android:id="@+id/frag1_icon"
+        android:id="@+id/frag_pqas_q1_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 	/>
  
     <TextView
-        android:id="@+id/frag1_text"
+        android:id="@+id/frag_pqas_q1_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
