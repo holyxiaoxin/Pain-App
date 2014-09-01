@@ -111,7 +111,19 @@
 		                android:textStyle="bold" />
 		        </LinearLayout>
 	    </LinearLayout>
+    	<!--  	End of		-->
+	    <!--	SEEKBAR  	-->
+	    <!--  				-->
+	    
+	    <!-- Button -->
+
+	    <Button
+	        android:id="@+id/button_pqas_q1"
+	        android:minHeight="0dp"
+	        android:minWidth="0dp"
+	        android:layout_gravity="right"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Next" />
+	    
     </LinearLayout>
-    <!--  	End of		-->
-    <!--	SEEKBAR  	-->
-    <!--  				-->

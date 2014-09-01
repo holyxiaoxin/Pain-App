@@ -131,46 +131,40 @@ public class MainActivity extends Activity {
       //correct selectable item. (Be careful you may get runtime errors if you 
       //update incorrectly.) I delete the  0,1 and 6 case statement and 
       //add new case statement for 14,15 and 16 positions .
-      public void SelectItem(int possition) {
+      public void SelectItem(int position) {
     	  
           Fragment fragment = null;
           Bundle args = new Bundle();
-          switch (possition) {
+          switch (position) {
      
         case 1:	//Home
               fragment = new FragmentOne();
-              args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
+              args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
                           .getItemName());
               args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList
-                          .get(possition).getImgResID());
+                          .get(position).getImgResID());
               break;
         case 3:	//PQAS
             fragment = new FragmentPqasQ1();
-            args.putString(FragmentPqasQ1.ITEM_NAME, dataList.get(possition)
+            args.putString(FragmentPqasQ1.ITEM_NAME, dataList.get(position)
                         .getItemName());
             args.putInt(FragmentPqasQ1.IMAGE_RESOURCE_ID, dataList
-                        .get(possition).getImgResID());
+                        .get(position).getImgResID());
             break;
-//        	fragment = new FragmentSeekBar();
-//            args.putString(FragmentSeekBar.ITEM_NAME, dataList.get(possition)
-//                        .getItemName());
-//            args.putInt(FragmentSeekBar.IMAGE_RESOURCE_ID, dataList
-//                        .get(possition).getImgResID());
-//            break;
             
         case 6:
             fragment = new FragmentTwo();
-            args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
+            args.putString(FragmentTwo.ITEM_NAME, dataList.get(position)
                         .getItemName());
             args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList
-                        .get(possition).getImgResID());
+                        .get(position).getImgResID());
             break;
         case 8:
             fragment = new FragmentTwo();
-            args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
+            args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
                         .getItemName());
             args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList
-                        .get(possition).getImgResID());
+                        .get(position).getImgResID());
             break;
         
           default:
@@ -182,10 +176,9 @@ public class MainActivity extends Activity {
           frgManager.beginTransaction().replace(R.id.content_frame, fragment)
                       .commit();
      
-          mDrawerList.setItemChecked(possition, true);
-          setTitle(dataList.get(possition).getItemName());
+          mDrawerList.setItemChecked(position, true);
+          setTitle(dataList.get(position).getItemName());
           mDrawerLayout.closeDrawer(mDrawerList);
-     
     }
  
       @Override

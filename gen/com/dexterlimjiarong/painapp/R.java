@@ -862,10 +862,14 @@ containing a value of this type.
         public static final int abc_search_url_text_normal=0x7f070000;
         public static final int abc_search_url_text_pressed=0x7f070002;
         public static final int abc_search_url_text_selected=0x7f070001;
+        /**  special colors 
+         */
         public static final int default_screen_bg=0x7f070003;
         public static final int light_gray_header_color=0x7f070006;
         public static final int rounded_container_bg=0x7f070004;
         public static final int rounded_container_border=0x7f070005;
+        /**  basic colors 
+         */
         public static final int white=0x7f070007;
     }
     public static final class dimen {
@@ -1118,10 +1122,11 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050054;
+        public static final int action_settings=0x7f050055;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
+        public static final int button_pqas_q1=0x7f050050;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int content_frame=0x7f05003d;
@@ -1140,10 +1145,10 @@ containing a value of this type.
         public static final int expanded_menu=0x7f05002c;
         public static final int frag1_icon=0x7f05004c;
         public static final int frag1_text=0x7f05004d;
-        public static final int frag2_icon=0x7f050052;
-        public static final int frag2_text=0x7f050053;
-        public static final int frag3_icon=0x7f050050;
-        public static final int frag3_text=0x7f050051;
+        public static final int frag2_icon=0x7f050053;
+        public static final int frag2_text=0x7f050054;
+        public static final int frag3_icon=0x7f050051;
+        public static final int frag3_text=0x7f050052;
         public static final int frag_pqas_q1_icon=0x7f05004e;
         public static final int frag_pqas_q1_text=0x7f05004f;
         public static final int headerLayout=0x7f050044;
