@@ -22,9 +22,9 @@ public class FragmentPqasQ1 extends Fragment implements OnClickListener{
 
     public static final String IMAGE_RESOURCE_ID = "iconResourceID";
     public static final String ITEM_NAME = "itemName";
+    int pain = 0;
 
     public FragmentPqasQ1() {
-
     }
 
     @Override
@@ -43,7 +43,6 @@ public class FragmentPqasQ1 extends Fragment implements OnClickListener{
           volumeControl = (SeekBar) view.findViewById(R.id.volume_bar);
           
           volumeControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-  			int pain = 0;
    
   			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
   				pain = progress;
@@ -59,26 +58,56 @@ public class FragmentPqasQ1 extends Fragment implements OnClickListener{
   			}
           });
 			
-          Button nextButton = (Button) view.findViewById(R.id.button_pqas_q1);
+          Button nextButton = (Button) view.findViewById(R.id.button_pqas_q1_next);
           nextButton.setOnClickListener(this);
+          Button backButton = (Button) view.findViewById(R.id.button_pqas_q1_back);
+          backButton.setOnClickListener(this);
           
           return view;
     }
     
     @Override
     public void onClick(View view) {
-    	
     	switch (view.getId()) {
-        case R.id.button_pqas_q1:
-	        Bundle args = new Bundle();
-	        Fragment fragment = new FragmentOne();
-	        args.putString(FragmentOne.ITEM_NAME, "Random Name");
-	        args.putInt(FragmentOne.IMAGE_RESOURCE_ID, R.drawable.ic_action_about);
+        case R.id.button_pqas_q1_next:
+        	Bundle args = getArguments();
+        	//check if there is a bundle from previous fragment
+        	if(args == null){
+        		args = new Bundle();
+        		Toast.makeText(view.getContext(),"NULL", 
+        				Toast.LENGTH_SHORT).show();
+        	}
+        	Toast.makeText(view.getContext(),"NOT NULL", 
+    				Toast.LENGTH_SHORT).show();
+	        Fragment fragment = new FragmentPqasQ2();
+	        //pain slider stored
+	        String[] questionAnswers1 = {Integer.toString(pain)};
+	        //bundle is sent to next fragment
+	        args.putStringArray(FragmentPqasQ2.STRING_ARRAY, questionAnswers1);
+	        args.putString(FragmentPqasQ2.ITEM_NAME, "Random Name");
+	        args.putInt(FragmentPqasQ2.IMAGE_RESOURCE_ID, R.drawable.ic_action_about);
+	        //set bundle to fragment
 	        fragment.setArguments(args);
 	        FragmentManager frgManager = getFragmentManager();
+	        
+//	        getFragmentManager().beginTransaction().add(fragment, "pqas_q1")
+//            // Add this transaction to the back stack
+//            .addToBackStack("pqas_q1").commit();
+	        
+	        //replace fragment
 	        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 	        break;
+        case R.id.button_pqas_q1_back:
+        	getFragmentManager().addOnBackStackChangedListener(
+	                new FragmentManager.OnBackStackChangedListener() {
+	                    public void onBackStackChanged() {
+	                        // Update your UI here.
+	                    }
+	        });
+        	break;
     	} 
 
     }
+    
+    
 }
