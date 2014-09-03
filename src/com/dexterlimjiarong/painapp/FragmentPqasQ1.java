@@ -22,6 +22,8 @@ public class FragmentPqasQ1 extends Fragment implements OnClickListener{
 
     public static final String IMAGE_RESOURCE_ID = "iconResourceID";
     public static final String ITEM_NAME = "itemName";
+    public static final String STRING_ARRAY = "stringArray";    
+    public static final int QUESTION_ONE = 0;
     int pain = 0;
 
     public FragmentPqasQ1() {
@@ -60,8 +62,6 @@ public class FragmentPqasQ1 extends Fragment implements OnClickListener{
 			
           Button nextButton = (Button) view.findViewById(R.id.button_pqas_q1_next);
           nextButton.setOnClickListener(this);
-          Button backButton = (Button) view.findViewById(R.id.button_pqas_q1_back);
-          backButton.setOnClickListener(this);
           
           return view;
     }
@@ -69,38 +69,28 @@ public class FragmentPqasQ1 extends Fragment implements OnClickListener{
     @Override
     public void onClick(View view) {
     	switch (view.getId()) {
-        case R.id.button_pqas_q1_next:
-        	Bundle args = getArguments();
-        	//check if there is a bundle from previous fragment
-        	if(args == null){
-        		args = new Bundle();
-        		Toast.makeText(view.getContext(),"NULL", 
-        				Toast.LENGTH_SHORT).show();
-        	}
-        	Toast.makeText(view.getContext(),"NOT NULL", 
-    				Toast.LENGTH_SHORT).show();
-	        Fragment fragment = new FragmentPqasQ2();
-	        //pain slider stored
-	        String[] questionAnswers1 = {Integer.toString(pain)};
-	        //bundle is sent to next fragment
-	        args.putStringArray(FragmentPqasQ2.STRING_ARRAY, questionAnswers1);
-	        args.putString(FragmentPqasQ2.ITEM_NAME, "Random Name");
-	        args.putInt(FragmentPqasQ2.IMAGE_RESOURCE_ID, R.drawable.ic_action_about);
-	        //set bundle to fragment
-	        fragment.setArguments(args);
-	        FragmentManager frgManager = getFragmentManager();
-	        
-	        //replace fragment
-	        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-	        break;
-        case R.id.button_pqas_q1_back:
-        	getFragmentManager().addOnBackStackChangedListener(
-	                new FragmentManager.OnBackStackChangedListener() {
-	                    public void onBackStackChanged() {
-	                        // Update your UI here.
-	                    }
-	        });
-        	break;
+	        case R.id.button_pqas_q1_next:{
+	        	Bundle bundle = getArguments();
+	        	String[] questionAnswers = bundle.getStringArray(STRING_ARRAY);
+	        	//check if there is a bundle from previous fragment, eg: coming from back button of fragment 2
+	        	if(questionAnswers == null){
+	        		bundle = new Bundle();
+	        		questionAnswers = new String[20];
+	        	}
+	        	//initialize next fragment
+		        Fragment fragment = new FragmentPqasQ2();
+		        //pain slider value stored in question 1 answer
+		        questionAnswers[QUESTION_ONE] = Integer.toString(pain);
+		        //string array is added to bundle
+		        bundle.putStringArray(FragmentPqasQ2.STRING_ARRAY, questionAnswers);
+		        bundle.putInt(FragmentPqasQ2.IMAGE_RESOURCE_ID, R.drawable.ic_action_about);
+		        //set bundle to fragment
+		        fragment.setArguments(bundle);
+		        FragmentManager frgManager = getFragmentManager();
+		        //replace fragment
+		        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+		        break;
+	        }
     	} 
 
     }

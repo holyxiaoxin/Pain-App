@@ -14,7 +14,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FragmentPqasQ3 extends Fragment 
+public class FragmentPqasQ4 extends Fragment 
 	implements OnClickListener
 	{
 
@@ -26,25 +26,25 @@ public class FragmentPqasQ3 extends Fragment
 	  public static final String IMAGE_RESOURCE_ID = "iconResourceID";
 	  public static final String ITEM_NAME = "itemName";
 	  public static final String STRING_ARRAY = "stringArray";
-	  public static final int QUESTION_TWO = 1;
 	  public static final int QUESTION_THREE = 2;
+	  public static final int QUESTION_FOUR = 3;
       int pain = 0;
 
-    public FragmentPqasQ3() {
+    public FragmentPqasQ4() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
 
-          View view = inflater.inflate(R.layout.fragment_layout_pqas_q3, container,
+          View view = inflater.inflate(R.layout.fragment_layout_pqas_q4, container,
                       false);
         //retrieve bundle from previous fragment
         Bundle bundle = getArguments();
-        ivIcon=(ImageView)view.findViewById(R.id.frag_pqas_q3_icon);
-        tvItemName=(TextView)view.findViewById(R.id.frag_pqas_q3_text);
+        ivIcon=(ImageView)view.findViewById(R.id.frag_pqas_q4_icon);
+        tvItemName=(TextView)view.findViewById(R.id.frag_pqas_q4_text);
         //pain scale from previous
-        tvItemName.setText(bundle.getStringArray(STRING_ARRAY)[QUESTION_TWO]);
+        tvItemName.setText(bundle.getStringArray(STRING_ARRAY)[QUESTION_THREE]);
         ivIcon.setImageDrawable(view.getResources().getDrawable(
         		bundle.getInt(IMAGE_RESOURCE_ID)));
           
@@ -67,10 +67,10 @@ public class FragmentPqasQ3 extends Fragment
   			}
           });
           //What happens when next button is pressed
-          Button nextButton = (Button) view.findViewById(R.id.button_pqas_q3_next);
+          Button nextButton = (Button) view.findViewById(R.id.button_pqas_q4_next);
           nextButton.setOnClickListener(this);
         //What happens when back button is pressed
-          Button backButton = (Button) view.findViewById(R.id.button_pqas_q3_back);
+          Button backButton = (Button) view.findViewById(R.id.button_pqas_q4_back);
           backButton.setOnClickListener(this);
           
           return view;
@@ -79,14 +79,14 @@ public class FragmentPqasQ3 extends Fragment
     @Override
     public void onClick(View view) {
     	switch (view.getId()) {
-	        case R.id.button_pqas_q3_next:{
+	        case R.id.button_pqas_q4_next:{
 	        	Bundle bundle = getArguments();
 	        	//retrieve previous bundle
 	        	String[] questionAnswers = bundle.getStringArray(STRING_ARRAY);
 	        	//initialize next fragment
-		        Fragment fragment = new FragmentPqasQ4();
+/*5!!*/		    Fragment fragment = new FragmentPqasQ4();
 		        //pain slider value stored in question 1 answer
-		        questionAnswers[QUESTION_THREE] = Integer.toString(pain);
+		        questionAnswers[QUESTION_FOUR] = Integer.toString(pain);
 		        //string array is added to bundle
 		        bundle.putStringArray(FragmentPqasQ4.STRING_ARRAY, questionAnswers);
 		        bundle.putInt(FragmentPqasQ4.IMAGE_RESOURCE_ID, R.drawable.ic_action_about);
@@ -97,9 +97,9 @@ public class FragmentPqasQ3 extends Fragment
 		        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 		        break;
 	        }
-	        case R.id.button_pqas_q3_back:{
+	        case R.id.button_pqas_q4_back:{
             	Bundle args = getArguments();
-    	        Fragment fragment = new FragmentPqasQ2();
+    	        Fragment fragment = new FragmentPqasQ3();
     	        //set bundle to fragment
     	        fragment.setArguments(args);
     	        FragmentManager frgManager = getFragmentManager();

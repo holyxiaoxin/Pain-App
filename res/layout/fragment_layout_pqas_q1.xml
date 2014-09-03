@@ -118,15 +118,6 @@
 			    android:layout_width="fill_parent"
 			    android:layout_height="fill_parent">
 			<Button
-			        android:id="@+id/button_pqas_q1_back"
-			        android:minHeight="0dp"
-		        	android:minWidth="0dp"
-		        	android:layout_alignParentLeft="true"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:text="Back" />
-
-			<Button
 			    android:id="@+id/button_pqas_q1_next"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"

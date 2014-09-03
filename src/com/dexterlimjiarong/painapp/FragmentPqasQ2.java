@@ -39,9 +39,6 @@
 
 package com.dexterlimjiarong.painapp;
 
-import java.util.Arrays;
-import java.util.List;
-
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
@@ -68,6 +65,8 @@ public class FragmentPqasQ2 extends Fragment
 	  public static final String IMAGE_RESOURCE_ID = "iconResourceID";
 	  public static final String ITEM_NAME = "itemName";
 	  public static final String STRING_ARRAY = "stringArray";
+	  public static final int QUESTION_ONE = 0;
+	  public static final int QUESTION_TWO = 1;
       int pain = 0;
 
     public FragmentPqasQ2() {
@@ -84,7 +83,7 @@ public class FragmentPqasQ2 extends Fragment
         ivIcon=(ImageView)view.findViewById(R.id.frag_pqas_q2_icon);
         tvItemName=(TextView)view.findViewById(R.id.frag_pqas_q2_text);
         //pain scale from previous
-        tvItemName.setText(bundle.getStringArray(STRING_ARRAY)[0]);
+        tvItemName.setText(bundle.getStringArray(STRING_ARRAY)[QUESTION_ONE]);
         ivIcon.setImageDrawable(view.getResources().getDrawable(
         		bundle.getInt(IMAGE_RESOURCE_ID)));
           
@@ -121,20 +120,20 @@ public class FragmentPqasQ2 extends Fragment
     	switch (view.getId()) {
 	        case R.id.button_pqas_q2_next:{
 	        	Bundle bundle = getArguments();
+	        	//retrieve previous bundle
+	        	String[] questionAnswers = bundle.getStringArray(STRING_ARRAY);
+	        	//initialize next fragment
 		        Fragment fragment = new FragmentPqasQ3();
-		        //pain slider value stored
-			        String[] oldQuestionAnswers = bundle.getStringArray(STRING_ARRAY);
-			        //adds pain element to string array
-			        List<String> listArray = Arrays.asList(oldQuestionAnswers);  	//temp list array
-			        listArray.add(Integer.toString(pain));
-			        String[] newQuestionAnswers = new String[listArray.size()];
-			        newQuestionAnswers = listArray.toArray(newQuestionAnswers);
-			        //string array is added to bundle
-			        bundle.putStringArray(FragmentPqasQ3.STRING_ARRAY, newQuestionAnswers);
+		        //pain slider value stored in question 1 answer
+		        questionAnswers[QUESTION_TWO] = Integer.toString(pain);
+		        //string array is added to bundle
+		        bundle.putStringArray(FragmentPqasQ3.STRING_ARRAY, questionAnswers);
+		        bundle.putInt(FragmentPqasQ3.IMAGE_RESOURCE_ID, R.drawable.ic_action_about);
+		        //set bundle to fragment
 		        fragment.setArguments(bundle);
-		        FragmentManager frgManager = getFragmentManager();		      	
+		        FragmentManager frgManager = getFragmentManager();
 		        //replace fragment
-		        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();		        
+		        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 		        break;
 	        }
 	        case R.id.button_pqas_q2_back:{
