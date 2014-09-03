@@ -90,10 +90,6 @@ public class FragmentPqasQ1 extends Fragment implements OnClickListener{
 	        fragment.setArguments(args);
 	        FragmentManager frgManager = getFragmentManager();
 	        
-//	        getFragmentManager().beginTransaction().add(fragment, "pqas_q1")
-//            // Add this transaction to the back stack
-//            .addToBackStack("pqas_q1").commit();
-	        
 	        //replace fragment
 	        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 	        break;

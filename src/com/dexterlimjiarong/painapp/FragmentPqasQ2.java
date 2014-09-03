@@ -45,11 +45,9 @@ import java.util.List;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -108,9 +106,10 @@ public class FragmentPqasQ2 extends Fragment
 			Toast.LENGTH_SHORT).show();
   			}
           });
-			
+          //What happens when next button is pressed
           Button nextButton = (Button) view.findViewById(R.id.button_pqas_q2_next);
           nextButton.setOnClickListener(this);
+        //What happens when back button is pressed
           Button backButton = (Button) view.findViewById(R.id.button_pqas_q2_back);
           backButton.setOnClickListener(this);
           
@@ -120,69 +119,35 @@ public class FragmentPqasQ2 extends Fragment
     @Override
     public void onClick(View view) {
     	switch (view.getId()) {
-        case R.id.button_pqas_q2_next:
-        	Bundle bundle = getArguments();
-	        Fragment fragment = new FragmentPqasQ3();
-	        //pain slider stored
-	        String[] questionAnswers1 = bundle.getStringArray(STRING_ARRAY);
-	        //adds pain element to string array
-	        List<String> listArray = Arrays.asList(questionAnswers1);  	//temp list array
-	        listArray.add(Integer.toString(pain));
-	        String[] questionAnswers2 = new String[listArray.size()];
-	        questionAnswers2 = listArray.toArray(questionAnswers2);
-	        //bundle is sent to next fragment
-	        bundle.putStringArray(FragmentPqasQ3.STRING_ARRAY, questionAnswers2);
-	        fragment.setArguments(bundle);
-	        FragmentManager frgManager = getFragmentManager();
-	        
-	        getFragmentManager().beginTransaction().add(fragment, "pqas_q1")
-            // Add this transaction to the back stack
-            .addToBackStack("pqas_q1").commit();
-	      	
-	        //replace fragment
-	        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-	        
-	        frgManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack( "tag" ).commit();
-	        
-	        
-	        
-	        break;
-        case R.id.button_pqas_q2_back:
-        	getFragmentManager().addOnBackStackChangedListener(
-	                new FragmentManager.OnBackStackChangedListener() {
-	                    public void onBackStackChanged() {
-	                        // Update your UI here.
-//	                    	Bundle args = getArguments();
-//	            	        Fragment fragment = new FragmentPqasQ1();
-//	            	        //set bundle to fragment
-//	            	        fragment.setArguments(args);
-//	            	        FragmentManager frgManager = getFragmentManager();
-//	            	        getFragmentManager().beginTransaction().add(fragment, "pqas_q1")
-//	                        // Add this transaction to the back stack
-//	                        .addToBackStack("pqas_q1").commit();
-//	            	        //replace fragment
-//	            	        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-	                    	
-	                    	Fragment fragment = new FragmentPqasQ1();
-	                    	fragment.getView().setFocusableInTouchMode(true);
-
-	                    	fragment.getView().setOnKeyListener( new OnKeyListener()
-	                    	{
-	                    	    @Override
-	                    	    public boolean onKey( View v, int keyCode, KeyEvent event )
-	                    	    {
-	                    	        if( keyCode == KeyEvent.KEYCODE_BACK )
-	                    	        {
-	                    	            return true;
-	                    	        }
-	                    	        return false;
-	                    	    }
-	                    	} );
-	                    }
-	        });
-        	break;
+	        case R.id.button_pqas_q2_next:{
+	        	Bundle bundle = getArguments();
+		        Fragment fragment = new FragmentPqasQ3();
+		        //pain slider value stored
+			        String[] oldQuestionAnswers = bundle.getStringArray(STRING_ARRAY);
+			        //adds pain element to string array
+			        List<String> listArray = Arrays.asList(oldQuestionAnswers);  	//temp list array
+			        listArray.add(Integer.toString(pain));
+			        String[] newQuestionAnswers = new String[listArray.size()];
+			        newQuestionAnswers = listArray.toArray(newQuestionAnswers);
+			        //string array is added to bundle
+			        bundle.putStringArray(FragmentPqasQ3.STRING_ARRAY, newQuestionAnswers);
+		        fragment.setArguments(bundle);
+		        FragmentManager frgManager = getFragmentManager();		      	
+		        //replace fragment
+		        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();		        
+		        break;
+	        }
+	        case R.id.button_pqas_q2_back:{
+            	Bundle args = getArguments();
+    	        Fragment fragment = new FragmentPqasQ1();
+    	        //set bundle to fragment
+    	        fragment.setArguments(args);
+    	        FragmentManager frgManager = getFragmentManager();
+    	        //replace fragment
+    	        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+	        	break;
+	        }
     	} 
-
     }
     
     
