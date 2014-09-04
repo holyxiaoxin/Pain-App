@@ -39,8 +39,6 @@ public class FragmentPqasQ3 extends Fragment
 
           View view = inflater.inflate(R.layout.fragment_layout_pqas_q3, container,
                       false);
-        //retrieve bundle from previous fragment
-        Bundle bundle = getArguments();
         ivIcon=(ImageView)view.findViewById(R.id.frag_pqas_q3_icon);
         tvItemName=(TextView)view.findViewById(R.id.frag_pqas_q3_text);
         //set question

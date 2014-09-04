@@ -138,6 +138,8 @@ public class MainActivity extends Activity {
           switch (position) {
      
         case 1:	//Home
+        	//since it did not fetch previous bundle, all data will be lost once the home navigation button is pressed
+        	//should remember questionnaires entries? 
               fragment = new FragmentOne();
               args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
                           .getItemName());
