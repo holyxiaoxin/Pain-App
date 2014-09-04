@@ -1324,6 +1324,28 @@ containing a value of this type.
         public static final int hello_user=0x7f0a000e;
         public static final int home_text1=0x7f0a0012;
         public static final int pqas_q1=0x7f0a0013;
+        public static final int pqas_q10=0x7f0a001c;
+        public static final int pqas_q11=0x7f0a001d;
+        public static final int pqas_q12=0x7f0a001e;
+        public static final int pqas_q13=0x7f0a001f;
+        public static final int pqas_q14=0x7f0a0020;
+        public static final int pqas_q15=0x7f0a0021;
+        public static final int pqas_q16=0x7f0a0022;
+        public static final int pqas_q17=0x7f0a0023;
+        public static final int pqas_q18=0x7f0a0024;
+        public static final int pqas_q19=0x7f0a0025;
+        public static final int pqas_q2=0x7f0a0014;
+        public static final int pqas_q20=0x7f0a0026;
+        public static final int pqas_q20_1=0x7f0a0027;
+        public static final int pqas_q20_2=0x7f0a0028;
+        public static final int pqas_q20_3=0x7f0a0029;
+        public static final int pqas_q3=0x7f0a0015;
+        public static final int pqas_q4=0x7f0a0016;
+        public static final int pqas_q5=0x7f0a0017;
+        public static final int pqas_q6=0x7f0a0018;
+        public static final int pqas_q7=0x7f0a0019;
+        public static final int pqas_q8=0x7f0a001a;
+        public static final int pqas_q9=0x7f0a001b;
     }
     public static final class style {
         /** 

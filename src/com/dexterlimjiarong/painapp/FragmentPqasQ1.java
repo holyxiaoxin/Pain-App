@@ -39,10 +39,20 @@ public class FragmentPqasQ1 extends Fragment implements OnClickListener{
           ivIcon = (ImageView) view.findViewById(R.id.frag_pqas_q1_icon);
           tvItemName = (TextView) view.findViewById(R.id.frag_pqas_q1_text);
 
-          ivIcon.setImageDrawable(view.getResources().getDrawable(getArguments().getInt(IMAGE_RESOURCE_ID)));
+          ivIcon.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_action_labels));
           tvItemName.setText(R.string.pqas_q1);
           
           volumeControl = (SeekBar) view.findViewById(R.id.volume_bar);
+          //set up seekbar to remember previous entry (if any)
+	          if (getArguments().getStringArray(STRING_ARRAY) != null){
+	        	  if (getArguments().getStringArray(STRING_ARRAY)[QUESTION_ONE] != null){
+	        		  pain = Integer.parseInt(getArguments().getStringArray(STRING_ARRAY)[QUESTION_ONE]);
+	        		  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+pain, 
+	        					Toast.LENGTH_SHORT).show();
+	        		  
+	        	  }
+	          }
+	          volumeControl.setProgress(pain);
           
           volumeControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
    
@@ -71,6 +81,7 @@ public class FragmentPqasQ1 extends Fragment implements OnClickListener{
     	switch (view.getId()) {
 	        case R.id.button_pqas_q1_next:{
 	        	Bundle bundle = getArguments();
+	        	//Answers to the questions are stored in questionAnswers string array
 	        	String[] questionAnswers = bundle.getStringArray(STRING_ARRAY);
 	        	//check if there is a bundle from previous fragment, eg: coming from back button of fragment 2
 	        	if(questionAnswers == null){
@@ -83,7 +94,6 @@ public class FragmentPqasQ1 extends Fragment implements OnClickListener{
 		        questionAnswers[QUESTION_ONE] = Integer.toString(pain);
 		        //string array is added to bundle
 		        bundle.putStringArray(FragmentPqasQ2.STRING_ARRAY, questionAnswers);
-		        bundle.putInt(FragmentPqasQ2.IMAGE_RESOURCE_ID, R.drawable.ic_action_about);
 		        //set bundle to fragment
 		        fragment.setArguments(bundle);
 		        FragmentManager frgManager = getFragmentManager();

@@ -82,14 +82,22 @@ public class FragmentPqasQ2 extends Fragment
         Bundle bundle = getArguments();
         ivIcon=(ImageView)view.findViewById(R.id.frag_pqas_q2_icon);
         tvItemName=(TextView)view.findViewById(R.id.frag_pqas_q2_text);
-        //pain scale from previous
-        tvItemName.setText(bundle.getStringArray(STRING_ARRAY)[QUESTION_ONE]);
-        ivIcon.setImageDrawable(view.getResources().getDrawable(
-        		bundle.getInt(IMAGE_RESOURCE_ID)));
+        //set question
+        tvItemName.setText(R.string.pqas_q2);
+        ivIcon.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_action_labels));
           
           
           volumeControl = (SeekBar) view.findViewById(R.id.volume_bar);
-          
+          //set up seekbar to remember previous entry (if any)
+	          if (getArguments().getStringArray(STRING_ARRAY) != null){
+	        	  if (getArguments().getStringArray(STRING_ARRAY)[QUESTION_TWO] != null){
+	        		  pain = Integer.parseInt(getArguments().getStringArray(STRING_ARRAY)[QUESTION_TWO]);
+	        		  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+getArguments().getStringArray(STRING_ARRAY)[QUESTION_TWO], 
+	        					Toast.LENGTH_SHORT).show();
+	        		  
+	        	  }
+	          }
+	          volumeControl.setProgress(pain);
           volumeControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
    
   			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
@@ -120,7 +128,7 @@ public class FragmentPqasQ2 extends Fragment
     	switch (view.getId()) {
 	        case R.id.button_pqas_q2_next:{
 	        	Bundle bundle = getArguments();
-	        	//retrieve previous bundle
+	        	//Answers to the questions are stored in questionAnswers string array, retrieve previous bundle
 	        	String[] questionAnswers = bundle.getStringArray(STRING_ARRAY);
 	        	//initialize next fragment
 		        Fragment fragment = new FragmentPqasQ3();

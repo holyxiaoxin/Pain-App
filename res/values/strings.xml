@@ -7,7 +7,30 @@
     <string name="drawer_open">Open drawer</string>
 	<string name="drawer_close">Close drawer</string>
 	
-	<string name="home_text1">Hello User,\nPlease choose one of the Questionnaires to begin.\nYour Reports are stored under History.\nHave a nice day.</string>
-	<string name="pqas_q1">Please use the scale below to tell us how intense your pain has been over the past week, on average.</string>
+	<string name="home_text1">Hello User,\nPlease choose one of the Questionnaires to begin. Your Reports are stored under History. Have a nice day.</string>
+	
+	<string name="pqas_q1">Please use the scale below to tell us how INTENSE your pain has been over the past week, on average.</string>
+	<string name="pqas_q2">Please use the scale below to tell us how SHARP your pain has felt over the past week. Words used to describe sharp feelings include "like a knife" "like a spike" "piercing"</string>
+	<string name="pqas_q3">Please use the scale below to tell us how HOT your pain has felt over the past week. Words used to describe very hot feelings include "burning" and "on fire"</string>
+	<string name="pqas_q4">Please use the scale below to tell us how DULL your pain has felt over the past week.</string>
+	<string name="pqas_q5">Please use the scale below to tell us how COLD your pain has felt over the past week. Words used to describe very cold pain include "like ice" and "freezing"</string>
+	<string name="pqas_q6">Please use the scale below to tell us how SENSITIVE your skin has been to light touch or clothing rubbing against it over the past week. Words used to describe sensitive skin include "like sunburned skin" and "raw skin"</string>
+	<string name="pqas_q7">Please use the scale below to tell us how TENDER your pain is when something has pressed against it over the past week. Another word to describe tender pain is like a "bruise"</string>
+	<string name="pqas_q8">Please use the scale below to tell us how ITCHY your pain has felt over the past week. Words used to describe itchy pain include "like poison ivy" and "like mosquito bite"</string>
+	<string name="pqas_q9">Please use the scale below to tell us how much your pain has felt like it has been SHOOTING over the past week. Another word used to describe shooting pain is "zapping"</string>
+	<string name="pqas_q10">Please use the scale below to tell us how NUMB your pain has felt over the past week. A phrase that can be used to describe numb pain is "like it is asleep"</string>
+	<string name="pqas_q11">Please use the scale below to tell us how much pain sensations have felt ELECTRICAL over the past week. Words used to describe electrical pain include "shocks" "lightning" "sparking"</string>
+	<string name="pqas_q12">Please use the scale below to tell us how TINGLING your pain has felt over the past week. Words used to describe tingling pain include "like pins and needles" "prickling"</string>
+	<string name="pqas_q13">Please use the scale below to tell us how CRAMPING your pain has felt over the past week. Words used to describe cramping pain include "squeezing" "tight"</string>
+	<string name="pqas_q14">Please use the scale below to tell us how RADIATING your pain has felt over the past week. Another word used to describe radiating pain is "spreading"</string>
+	<string name="pqas_q15">Please use the scale below to tell us how THROBBING your pain has felt over the past week. Another word used to describe throbbing pain is "pounding"</string>
+	<string name="pqas_q16">Please use the scale below to tell us how ACHING your pain has felt over the past week. Another word used to describe aching pain is "like a toothache"</string>
+	<string name="pqas_q17">Please use the scale below to tell us how HEAVY your pain has felt over the past week. Other words used to describe heavy pain are "pressure" and "weighted down"</string>
+	<string name="pqas_q18">Now that you have told us the different types of pain sensation you have felt, we want you to tell us overall how UNPLEASANT your pain has been to you over the past week. Words used to describe very unpleasant pain include "annoying" "bothersome" "miserable" "intolerable". Remember, pain can have a low intensity but still feel very unpleasant, and some kinds of pain can have high intensity but be very tolerable. With this scale,  please tell us how unpleasant your pain feels.</string>
+	<string name="pqas_q19">We want you to give us an estimate of the severity of your DEEP versus SURFACE pain over the past week. We want to rate each location of pain separately. We realised that it can be difficult to make these estimates, and most likely it will be "best guess," but please give us your best estimate.</string>
+	<string name="pqas_q20">Pain can also have different time qualities. For some people, the pain comes and goes and so they have some moments that are completely without pain; in other words the pain "comes and goes". This is called INTERMITTENT pain. Others are never pain free, but their pain types and pain severity can vary from one moment to the next. This is called VARIABLE pain. For these people, the increases can be severe, so that they feel they have moments of very intense pain ("breakthrough" pain), but at other times they can feel lower levels of pain ("background" pain). Still, they are never pain free. Other people have pain that really does not change that much from one moment to another. This is called STABLE pain. Which of these best describes the time pattern of your pain (please select only one):</string>
+	<string name="pqas_q20_1">I have INTERMITTENT pain (I feel pain sometimes but I am pain-free at other times).</string>
+	<string name="pqas_q20_2">I have variable pain ("background" pain all the time, but also moments of more pain, or severe "breakthrough pain or varying types of pain").</string>
+	<string name="pqas_q20_3">I have stable pain (constant pain that does not change very much from one moment to another, and no pain-free periods).</string>
 	
 </resources>
