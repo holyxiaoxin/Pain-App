@@ -33,7 +33,7 @@
 			            android:layout_height="wrap_content"
 			            android:layout_gravity="center"
 			            android:padding="10dp"
-			            android:text="0-100 Scale"
+			            android:text="DULL"
 			            android:textColor="#ffffff"
 			            android:textSize="20sp" />
 			 
