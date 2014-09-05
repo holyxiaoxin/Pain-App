@@ -26,7 +26,6 @@ public class FragmentPqasQ4 extends Fragment
 	  public static final String IMAGE_RESOURCE_ID = "iconResourceID";
 	  public static final String ITEM_NAME = "itemName";
 	  public static final String STRING_ARRAY = "stringArray";
-	  public static final int QUESTION_THREE = 2;
 	  public static final int QUESTION_FOUR = 3;
       int pain = 0;
 
@@ -90,12 +89,12 @@ public class FragmentPqasQ4 extends Fragment
 	        	//Answers to the questions are stored in questionAnswers string array, retrieve previous bundle
 	        	String[] questionAnswers = bundle.getStringArray(STRING_ARRAY);
 	        	//initialize next fragment
-/*5!!*/		    Fragment fragment = new FragmentPqasQ4();
+	        	Fragment fragment = new FragmentPqasQ5();
 		        //pain slider value stored in question 1 answer
 		        questionAnswers[QUESTION_FOUR] = Integer.toString(pain);
 		        //string array is added to bundle
-		        bundle.putStringArray(FragmentPqasQ4.STRING_ARRAY, questionAnswers);
-		        bundle.putInt(FragmentPqasQ4.IMAGE_RESOURCE_ID, R.drawable.ic_action_about);
+		        bundle.putStringArray(FragmentPqasQ5.STRING_ARRAY, questionAnswers);
+		        bundle.putInt(FragmentPqasQ5.IMAGE_RESOURCE_ID, R.drawable.ic_action_about);
 		        //set bundle to fragment
 		        fragment.setArguments(bundle);
 		        FragmentManager frgManager = getFragmentManager();
