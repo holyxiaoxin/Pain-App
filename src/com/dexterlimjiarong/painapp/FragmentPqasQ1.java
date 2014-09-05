@@ -86,7 +86,11 @@ public class FragmentPqasQ1 extends Fragment implements OnClickListener{
 	        	//check if there is a bundle from previous fragment, eg: coming from back button of fragment 2
 	        	if(questionAnswers == null){
 	        		bundle = new Bundle();
-	        		questionAnswers = new String[20];
+	        		//answers to questions 1-18 are string[0] - string[17]
+	        		//answer to question 19 part 1 is string[18]
+	        		//answer to question 19 part 2 is string [19]
+	        		//answer to question 20 is string[20]
+	        		questionAnswers = new String[21];
 	        	}
 	        	//initialize next fragment
 		        Fragment fragment = new FragmentPqasQ2();
