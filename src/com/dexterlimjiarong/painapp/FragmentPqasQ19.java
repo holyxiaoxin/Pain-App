@@ -18,7 +18,8 @@ public class FragmentPqasQ19 extends Fragment
 	implements OnClickListener
 	{
 
-	private SeekBar volumeControl = null;
+	private SeekBar volumeControl1 = null;
+	private SeekBar volumeControl2 = null;
 	ImageView ivIcon;
     TextView tvItemName;
 
@@ -26,8 +27,10 @@ public class FragmentPqasQ19 extends Fragment
 	  public static final String IMAGE_RESOURCE_ID = "iconResourceID";
 	  public static final String ITEM_NAME = "itemName";
 	  public static final String STRING_ARRAY = "stringArray";
-	  public static final int QUESTION_NINETEEN = 18;
-      int pain = 0;
+	  public static final int QUESTION_NINETEEN_PART1 = 18;
+	  public static final int QUESTION_NINETEEN_PART2 = 19;
+      int pain1 = 0;
+      int pain2 = 0;
 
     public FragmentPqasQ19() {
     }
@@ -44,22 +47,22 @@ public class FragmentPqasQ19 extends Fragment
         tvItemName.setText(R.string.pqas_q19);
         ivIcon.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_action_labels));
           
-          
-          volumeControl = (SeekBar) view.findViewById(R.id.volume_bar);
-          //set up seekbar to remember previous entry (if any)
+          //SEEKBAR 1
+          volumeControl1 = (SeekBar) view.findViewById(R.id.volume_bar1);
+          //set up seekbar1 to remember previous entry (if any)
 	          if (getArguments().getStringArray(STRING_ARRAY) != null){
-	        	  if (getArguments().getStringArray(STRING_ARRAY)[QUESTION_NINETEEN] != null){
-	        		  pain = Integer.parseInt(getArguments().getStringArray(STRING_ARRAY)[QUESTION_NINETEEN]);
-	        		  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+pain, 
+	        	  if (getArguments().getStringArray(STRING_ARRAY)[QUESTION_NINETEEN_PART1] != null){
+	        		  pain1 = Integer.parseInt(getArguments().getStringArray(STRING_ARRAY)[QUESTION_NINETEEN_PART1]);
+	        		  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+pain1, 
 	        					Toast.LENGTH_SHORT).show();
 	        		  
 	        	  }
 	          }
-	          volumeControl.setProgress(pain);
-          volumeControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+	          volumeControl1.setProgress(pain1);
+          volumeControl1.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
    
   			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-  				pain = progress;
+  				pain1 = progress;
   			}
    
   			public void onStartTrackingTouch(SeekBar seekBar) {
@@ -67,14 +70,45 @@ public class FragmentPqasQ19 extends Fragment
   			}
    
   			public void onStopTrackingTouch(SeekBar seekBar) {
-  				Toast.makeText(seekBar.getContext(),"Pain Scale:"+pain, 
+  				Toast.makeText(seekBar.getContext(),"Pain Scale:"+pain1, 
 			Toast.LENGTH_SHORT).show();
   			}
           });
+          
+	        //SEEKBAR 2
+	          volumeControl2 = (SeekBar) view.findViewById(R.id.volume_bar2);
+	          //set up seekbar1 to remember previous entry (if any)
+		          if (getArguments().getStringArray(STRING_ARRAY) != null){
+		        	  if (getArguments().getStringArray(STRING_ARRAY)[QUESTION_NINETEEN_PART2] != null){
+		        		  pain2 = Integer.parseInt(getArguments().getStringArray(STRING_ARRAY)[QUESTION_NINETEEN_PART2]);
+		        		  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+pain2, 
+		        					Toast.LENGTH_SHORT).show();
+		        		  
+		        	  }
+		          }
+		          volumeControl2.setProgress(pain2);
+	          volumeControl2.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+	   
+	  			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+	  				pain2 = progress;
+	  			}
+	   
+	  			public void onStartTrackingTouch(SeekBar seekBar) {
+	  				// TODO Auto-generated method stub
+	  			}
+	   
+	  			public void onStopTrackingTouch(SeekBar seekBar) {
+	  				Toast.makeText(seekBar.getContext(),"Pain Scale:"+pain2, 
+				Toast.LENGTH_SHORT).show();
+	  			}
+	          });
+          
+          
+          
           //What happens when next button is pressed
           Button nextButton = (Button) view.findViewById(R.id.button_pqas_q19_next);
           nextButton.setOnClickListener(this);
-        //What happens when back button is pressed
+         //What happens when back button is pressed
           Button backButton = (Button) view.findViewById(R.id.button_pqas_q19_back);
           backButton.setOnClickListener(this);
           
@@ -90,8 +124,9 @@ public class FragmentPqasQ19 extends Fragment
 	        	String[] questionAnswers = bundle.getStringArray(STRING_ARRAY);
 	        	//initialize next fragment
 /*5!!*/		    Fragment fragment = new FragmentPqasQ20();
-		        //pain slider value stored in question 1 answer
-		        questionAnswers[QUESTION_NINETEEN] = Integer.toString(pain);
+		        //pain slider value stored in question 19_part1 and part2 answer
+		        questionAnswers[QUESTION_NINETEEN_PART1] = Integer.toString(pain1);
+		        questionAnswers[QUESTION_NINETEEN_PART2] = Integer.toString(pain2);
 		        //string array is added to bundle
 		        bundle.putStringArray(FragmentPqasQ20.STRING_ARRAY, questionAnswers);
 		        bundle.putInt(FragmentPqasQ20.IMAGE_RESOURCE_ID, R.drawable.ic_action_about);
