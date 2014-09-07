@@ -71,8 +71,8 @@ public class MainActivity extends Activity {
  
             //Pain Assessment
             dataList.add(new DrawerItem("Pain Assessment"));
-            dataList.add(new DrawerItem("About", R.drawable.ic_action_about));	//8. Settings
-            dataList.add(new DrawerItem("Settings", R.drawable.ic_action_settings));	//9. Quit
+            dataList.add(new DrawerItem("Settings", R.drawable.ic_action_about));	//8. Settings
+            dataList.add(new DrawerItem("Quit", R.drawable.ic_action_settings));	//9. Quit
             	//dataList.add(new DrawerItem("Help", R.drawable.ic_action_help));
  
             adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item,
@@ -154,14 +154,21 @@ public class MainActivity extends Activity {
                         .get(position).getImgResID());
             break;
             
-        case 6:
+        case 6:	//Reports
+            fragment = new FragmentReport();
+            args.putString(FragmentReport.ITEM_NAME, dataList.get(position)
+                        .getItemName());
+            args.putInt(FragmentReport.IMAGE_RESOURCE_ID, dataList
+                        .get(position).getImgResID());
+            break;
+        case 8:	//Settings
             fragment = new FragmentTwo();
-            args.putString(FragmentTwo.ITEM_NAME, dataList.get(position)
+            args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
                         .getItemName());
             args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList
                         .get(position).getImgResID());
             break;
-        case 8:
+        case 9:	//Quit
             fragment = new FragmentTwo();
             args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
                         .getItemName());

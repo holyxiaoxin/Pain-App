@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+ 
+    <!--
+    **************************IMPORTANT***********************************
+     change this id attribute values as "frag2_icon" and "frag2_text" for
+     fragment_layout_two.xml and "frag3_icon" and "frag3_text" for
+     fragment_layout_three.xml
+    **********************************************************************
+      -->
+ 
+    <ImageView
+        android:id="@+id/frag_report_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+	/>
+ 
+    <TextView
+        android:id="@+id/frag_report_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+	/>
+    
+    <ScrollView
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    android:scrollbars="vertical">
+	<HorizontalScrollView
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent">
+	    <TableLayout 
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:paddingBottom="10dp"
+		    android:stretchColumns="*">
+		    <TableRow>
+		        <TextView
+		            android:text="Type"
+		            android:padding="3dip"/>
+		        <TextView
+		            android:text="Q1"
+		            android:padding="3dip"/>
+		        <TextView
+		            android:text="Q2"
+		            android:padding="3dip"/>
+		        <TextView
+		            android:text="Q3"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q4"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q5"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q6"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q7"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q8"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q9"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q10"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q11"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q12"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q13"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q14"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q15"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q16"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q17"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q18"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q19"
+		            android:padding="3dip" />
+		        <TextView
+		            android:text="Q20"
+		            android:padding="3dip" />
+		        
+		    </TableRow>
+		 </TableLayout>
+	</HorizontalScrollView>
+	</ScrollView>
+    
+ 
+</LinearLayout>
