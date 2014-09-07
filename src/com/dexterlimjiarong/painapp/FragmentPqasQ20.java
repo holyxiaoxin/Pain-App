@@ -1,7 +1,9 @@
 package com.dexterlimjiarong.painapp;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.SeekBar;
@@ -37,7 +38,6 @@ public class FragmentPqasQ20 extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-
           View view = inflater.inflate(R.layout.fragment_layout_pqas_q20, container,
                       false);
         ivIcon=(ImageView)view.findViewById(R.id.frag_pqas_q20_icon);
@@ -56,37 +56,11 @@ public class FragmentPqasQ20 extends Fragment
 	      					Toast.LENGTH_SHORT).show();
 	      	  }
 	        }
-	        if (pain == -1){
-	        	radioGroup.check(R.id.radio0);
+	        if (pain == -1){	//check first radiobutton by default
+	        	radioGroup.check(R.id.radio0);	
 	        }else{
 	        	radioGroup.check(pain);
 	        }
-//	        switch(pain){
-//	        	case 0:{
-//	        		radioGroup.check(R.id.radio0);
-//	        		//RadioButton rb1 = (RadioButton) view.findViewById(R.id.radio0);
-//		        	//rb1.setChecked(true);
-//	        		break;
-//	        		}
-//	        	case 1:{
-//	        		radioGroup.check(R.id.radio1);
-//	        		//RadioButton rb2 = (RadioButton) view.findViewById(R.id.radio1);
-//		        	//rb2.setChecked(true);
-//	        		break;
-//	        	}
-//	        	case 2:{
-//	        		radioGroup.check(R.id.radio2);
-//	        		//RadioButton rb3 = (RadioButton) view.findViewById(R.id.radio2);
-//		        	//rb3.setChecked(true);
-//	        		break;
-//	        	}
-//	        	default:{
-//	        		radioGroup.check(R.id.radio0);
-//	        		//RadioButton rb1 = (RadioButton) view.findViewById(R.id.radio0);
-//		        	//rb1.setChecked(true);
-//	        		break;
-//	        	}
-//	        }
         radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() 
         {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -95,9 +69,8 @@ public class FragmentPqasQ20 extends Fragment
             }
         });
           
-        
           //What happens when next button is pressed
-          Button nextButton = (Button) view.findViewById(R.id.button_pqas_q20_next);
+          Button nextButton = (Button) view.findViewById(R.id.button_pqas_q20_save);
           nextButton.setOnClickListener(this);
         //What happens when back button is pressed
           Button backButton = (Button) view.findViewById(R.id.button_pqas_q20_back);
@@ -109,22 +82,43 @@ public class FragmentPqasQ20 extends Fragment
     @Override
     public void onClick(View view) {
     	switch (view.getId()) {
-	        case R.id.button_pqas_q20_next:{
-	        	Bundle bundle = getArguments();
-	        	//Answers to the questions are stored in questionAnswers string array, retrieve previous bundle
-	        	String[] questionAnswers = bundle.getStringArray(STRING_ARRAY);
-	        	//initialize next fragment
-/*5!!*/		    Fragment fragment = new FragmentPqasQ20();
-		        //pain slider value stored in question 1 answer
-		        questionAnswers[QUESTION_TWENTY] = Integer.toString(pain);
-		        //string array is added to bundle
-		        bundle.putStringArray(FragmentPqasQ20.STRING_ARRAY, questionAnswers);
-		        bundle.putInt(FragmentPqasQ20.IMAGE_RESOURCE_ID, R.drawable.ic_action_about);
-		        //set bundle to fragment
-		        fragment.setArguments(bundle);
-		        FragmentManager frgManager = getFragmentManager();
-		        //replace fragment
-		        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+	        case R.id.button_pqas_q20_save:{
+		        //sets up a POP-UP
+		        AlertDialog.Builder alertDB = new AlertDialog.Builder(getActivity());
+		        alertDB.setMessage("Do you really want to save this entry?");
+		        alertDB.setCancelable(true);
+		        alertDB.setPositiveButton("Confirm",
+	                    new DialogInterface.OnClickListener() {
+	                public void onClick(DialogInterface dialog, int id) {
+	                    dialog.cancel();
+	                    //process save
+	    	        	Bundle bundle = getArguments();
+	    	        	//Answers to the questions are stored in questionAnswers string array, retrieve previous bundle
+	    	        	String[] questionAnswers = bundle.getStringArray(STRING_ARRAY);
+	    	        	//initialize next fragment
+	    	        	Fragment fragment = new FragmentPqasQ20();
+	    		        //pain slider value stored in question 1 answer
+	    		        questionAnswers[QUESTION_TWENTY] = Integer.toString(pain);
+	    		        //string array is added to bundle
+	    		        bundle.putStringArray(FragmentPqasQ20.STRING_ARRAY, questionAnswers);
+	    		        bundle.putInt(FragmentPqasQ20.IMAGE_RESOURCE_ID, R.drawable.ic_action_about);
+	    		        //set bundle to fragment
+	    		        fragment.setArguments(bundle);
+	    		        FragmentManager frgManager = getFragmentManager();
+	    		        //replace fragment
+	    		        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+	                }
+	            });
+		        alertDB.setNegativeButton("Back",
+	                    new DialogInterface.OnClickListener() {
+	                public void onClick(DialogInterface dialog, int id) {
+	                    dialog.cancel();
+	                    //do nothing
+	                }
+	            });
+
+	            AlertDialog confirmSave = alertDB.create();
+	            confirmSave.show();
 		        break;
 	        }
 	        case R.id.button_pqas_q20_back:{

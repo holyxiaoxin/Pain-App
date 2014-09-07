@@ -299,7 +299,7 @@ int id button_pqas_q19_back 0x7f05007a
 int id button_pqas_q19_next 0x7f05007b
 int id button_pqas_q1_next 0x7f05004f
 int id button_pqas_q20_back 0x7f050086
-int id button_pqas_q20_next 0x7f050087
+int id button_pqas_q20_save 0x7f050087
 int id button_pqas_q2_back 0x7f05007e
 int id button_pqas_q2_next 0x7f05007f
 int id button_pqas_q3_back 0x7f05008a

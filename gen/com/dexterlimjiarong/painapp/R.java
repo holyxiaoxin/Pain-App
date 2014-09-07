@@ -1148,7 +1148,7 @@ containing a value of this type.
         public static final int button_pqas_q19_next=0x7f05007b;
         public static final int button_pqas_q1_next=0x7f05004f;
         public static final int button_pqas_q20_back=0x7f050086;
-        public static final int button_pqas_q20_next=0x7f050087;
+        public static final int button_pqas_q20_save=0x7f050087;
         public static final int button_pqas_q2_back=0x7f05007e;
         public static final int button_pqas_q2_next=0x7f05007f;
         public static final int button_pqas_q3_back=0x7f05008a;
