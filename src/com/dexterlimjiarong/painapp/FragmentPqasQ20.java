@@ -41,7 +41,7 @@ public class FragmentPqasQ20 extends Fragment
 	  public static final String PREFS_NAME = "MyPrefsFile";
 	  public static final String REPORT_SIZE = "reportSize";
 	  public static final int QUESTION_TWENTY = 21;
-      int pain = -1;	//stores the radio button identifier
+      int radioButtonNumber = 0;
 
     public FragmentPqasQ20() {
     }
@@ -62,21 +62,46 @@ public class FragmentPqasQ20 extends Fragment
 	    //set up radio buttons to remember previous entry (if any)
 	        if (getArguments().getStringArray(STRING_ARRAY) != null){
 	      	  if (getArguments().getStringArray(STRING_ARRAY)[QUESTION_TWENTY] != null){
-	      		  pain = Integer.parseInt(getArguments().getStringArray(STRING_ARRAY)[QUESTION_TWENTY]);
-	      		  Toast.makeText(view.getContext(),"Refresh radiobutton:"+pain, 
+	      		radioButtonNumber = Integer.parseInt(getArguments().getStringArray(STRING_ARRAY)[QUESTION_TWENTY]);
+	      		  Toast.makeText(view.getContext(),"Refresh radiobutton:"+radioButtonNumber, 
 	      					Toast.LENGTH_SHORT).show();
 	      	  }
 	        }
-	        if (pain == -1){	//check first radiobutton by default
-	        	radioGroup.check(R.id.radio0);	
-	        }else{
-	        	radioGroup.check(pain);
-	        }
+	        
+        	switch(radioButtonNumber){
+    		case 0:
+    			radioGroup.check(R.id.radio0);
+    			break;
+    		case 1:
+    			radioGroup.check(R.id.radio1);
+    			break;
+    		case 2:
+    			radioGroup.check(R.id.radio2);
+    			break;
+    		default:
+    			System.out.println("radiobutton1DEFAULTED");
+    			break;
+        	}
+	        	
+	        
         radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() 
         {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // checkedId is the RadioButton selected
-            	pain = checkedId;
+            	// finds which radiobutton is pressed and sets radiobuttonnumber
+            	switch(checkedId){
+            		case R.id.radio0:
+            			radioButtonNumber = 0;
+            			break;
+            		case R.id.radio1:
+            			radioButtonNumber = 1;
+            			break;
+            		case R.id.radio2:
+            			radioButtonNumber = 2;
+            			break;
+            		default:
+            			System.out.println("radiobutton2DEFAULTED");
+            			break;
+            	}
             }
         });
           
@@ -109,7 +134,7 @@ public class FragmentPqasQ20 extends Fragment
 	    	        	//initialize next fragment
 	    	        	Fragment fragment = new FragmentPqasQ20();
 	    		        //pain slider value stored in question 1 answer
-	    		        questionAnswers[QUESTION_TWENTY] = Integer.toString(pain);
+	    		        questionAnswers[QUESTION_TWENTY] = Integer.toString(radioButtonNumber);
 	    		        //string array is added to bundle
 	    		        bundle.putStringArray(FragmentPqasQ20.STRING_ARRAY, questionAnswers);
 	    		        bundle.putInt(FragmentPqasQ20.IMAGE_RESOURCE_ID, R.drawable.ic_action_about);
@@ -119,23 +144,18 @@ public class FragmentPqasQ20 extends Fragment
 	    		        //replace fragment
 	    		        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 	    		        
-	    		        //persist the data
-	    		        Dialog dialog  = (Dialog) dialogInterface;
-	    		        Context context = dialog.getContext();
-	    		        //gets the size of the reports
-	    		        SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, 0);
-	    		        int reportSizeInt = pref.getInt(REPORT_SIZE,0);
-	    		        String reportSize = Integer.toString(reportSizeInt);
-	    		        SharedPreferences.Editor editor = pref.edit();
-	    		        //increase the size of the report by one, so that report fragment knows how many rows to print
-	    		        editor.putInt(REPORT_SIZE,reportSizeInt+1);
-	    		        editor.commit();
-	    		        
-	    		        //debug
-	    		        int debug = pref.getInt(REPORT_SIZE,0);
-	    		        System.out.println(debug);
-	    		        
-	    		        setStringArrayPref(context,"report"+reportSize, new ArrayList(Arrays.asList(questionAnswers)));
+		    		        //persist the data
+		    		        Dialog dialog  = (Dialog) dialogInterface;
+		    		        Context context = dialog.getContext();
+		    		        //gets the size of the reports
+		    		        SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, 0);
+		    		        int reportSizeInt = pref.getInt(REPORT_SIZE,0);
+		    		        String reportSize = Integer.toString(reportSizeInt);
+		    		        SharedPreferences.Editor editor = pref.edit();
+		    		        //increase the size of the report by one, so that report fragment knows how many rows to print
+		    		        editor.putInt(REPORT_SIZE,reportSizeInt+1);
+		    		        editor.commit();
+		    		        setStringArrayPref(context,"report"+reportSize, new ArrayList(Arrays.asList(questionAnswers)));
 	    		        
 	    		        dialogInterface.cancel();
 	                }
