@@ -29,7 +29,7 @@ public class FragmentPqasQ20 extends Fragment
 	  public static final String ITEM_NAME = "itemName";
 	  public static final String STRING_ARRAY = "stringArray";
 	  public static final int QUESTION_TWENTY = 20;
-      int pain = 0;
+      int pain = -1;	//stores the radio button identifier
 
     public FragmentPqasQ20() {
     }
@@ -52,32 +52,41 @@ public class FragmentPqasQ20 extends Fragment
 	        if (getArguments().getStringArray(STRING_ARRAY) != null){
 	      	  if (getArguments().getStringArray(STRING_ARRAY)[QUESTION_TWENTY] != null){
 	      		  pain = Integer.parseInt(getArguments().getStringArray(STRING_ARRAY)[QUESTION_TWENTY]);
-	      		  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+pain, 
+	      		  Toast.makeText(view.getContext(),"Refresh radiobutton:"+pain, 
 	      					Toast.LENGTH_SHORT).show();
 	      	  }
 	        }
-	        switch(pain){
-	        	case 0:{
-	        		RadioButton rb1 = (RadioButton) view.findViewById(R.id.radio0);
-		        	rb1.setChecked(true);
-	        		break;
-	        		}
-	        	case 1:{
-	        		RadioButton rb2 = (RadioButton) view.findViewById(R.id.radio1);
-		        	rb2.setChecked(true);
-	        		break;
-	        	}
-	        	case 2:{
-	        		RadioButton rb3 = (RadioButton) view.findViewById(R.id.radio2);
-		        	rb3.setChecked(true);
-	        		break;
-	        	}
-	        	default:{
-	        		RadioButton rb1 = (RadioButton) view.findViewById(R.id.radio0);
-		        	rb1.setChecked(true);
-	        		break;
-	        	}
+	        if (pain == -1){
+	        	radioGroup.check(R.id.radio0);
+	        }else{
+	        	radioGroup.check(pain);
 	        }
+//	        switch(pain){
+//	        	case 0:{
+//	        		radioGroup.check(R.id.radio0);
+//	        		//RadioButton rb1 = (RadioButton) view.findViewById(R.id.radio0);
+//		        	//rb1.setChecked(true);
+//	        		break;
+//	        		}
+//	        	case 1:{
+//	        		radioGroup.check(R.id.radio1);
+//	        		//RadioButton rb2 = (RadioButton) view.findViewById(R.id.radio1);
+//		        	//rb2.setChecked(true);
+//	        		break;
+//	        	}
+//	        	case 2:{
+//	        		radioGroup.check(R.id.radio2);
+//	        		//RadioButton rb3 = (RadioButton) view.findViewById(R.id.radio2);
+//		        	//rb3.setChecked(true);
+//	        		break;
+//	        	}
+//	        	default:{
+//	        		radioGroup.check(R.id.radio0);
+//	        		//RadioButton rb1 = (RadioButton) view.findViewById(R.id.radio0);
+//		        	//rb1.setChecked(true);
+//	        		break;
+//	        	}
+//	        }
         radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() 
         {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
