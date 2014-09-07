@@ -23,7 +23,8 @@ public class FragmentPqasQ1 extends Fragment implements OnClickListener{
     public static final String IMAGE_RESOURCE_ID = "iconResourceID";
     public static final String ITEM_NAME = "itemName";
     public static final String STRING_ARRAY = "stringArray";    
-    public static final int QUESTION_ONE = 0;
+    public static final int QUESTION_TYPE = 0;
+    public static final int QUESTION_ONE = 1;
     int pain = 0;
 
     public FragmentPqasQ1() {
@@ -86,11 +87,13 @@ public class FragmentPqasQ1 extends Fragment implements OnClickListener{
 	        	//check if there is a bundle from previous fragment, eg: coming from back button of fragment 2
 	        	if(questionAnswers == null){
 	        		bundle = new Bundle();
-	        		//answers to questions 1-18 are string[0] - string[17]
-	        		//answer to question 19 part 1 is string[18]
-	        		//answer to question 19 part 2 is string [19]
-	        		//answer to question 20 is string[20]
-	        		questionAnswers = new String[21];
+	        		//questionnaire type is string[0]
+	        		//answers to questions 1-18 are string[1] - string[18]
+	        		//answer to question 19 part 1 is string[19]
+	        		//answer to question 19 part 2 is string [20]
+	        		//answer to question 20 is string[21]
+	        		questionAnswers = new String[22];
+	        		questionAnswers[QUESTION_TYPE] = "PQAS";
 	        	}
 	        	//initialize next fragment
 		        Fragment fragment = new FragmentPqasQ2();

@@ -27,8 +27,8 @@ public class FragmentPqasQ19 extends Fragment
 	  public static final String IMAGE_RESOURCE_ID = "iconResourceID";
 	  public static final String ITEM_NAME = "itemName";
 	  public static final String STRING_ARRAY = "stringArray";
-	  public static final int QUESTION_NINETEEN_PART1 = 18;
-	  public static final int QUESTION_NINETEEN_PART2 = 19;
+	  public static final int QUESTION_NINETEEN_PART1 = 19;
+	  public static final int QUESTION_NINETEEN_PART2 = 20;
       int pain1 = 0;
       int pain2 = 0;
 

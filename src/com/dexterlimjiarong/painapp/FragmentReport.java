@@ -10,10 +10,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
  
 public class FragmentReport extends Fragment {
@@ -34,13 +39,28 @@ public class FragmentReport extends Fragment {
  
             View view = inflater.inflate(R.layout.fragment_layout_report, container,
                         false);
- 
-            ivIcon = (ImageView) view.findViewById(R.id.frag_report_icon);
-            tvItemName = (TextView) view.findViewById(R.id.frag_report_text);
- 
-            ivIcon.setImageDrawable(view.getResources().getDrawable(getArguments().getInt(IMAGE_RESOURCE_ID)));
-            //tvItemName.setText(R.string.home_text1);
             
+            //adding some rows dynamically
+            TableLayout tl = (TableLayout) view.findViewById(R.id.frag_report_table);
+            /* Create a new row to be added. */
+            TableRow tr = new TableRow(view.getContext());
+            tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+            
+            //Retrieve report data from persisted data stored in Shared Preference
+            ArrayList<String> questionAnswersList = getStringArrayPref(view.getContext(),"key");
+            //Convert ArrayList to String Array
+            String[] questionAnswers = new String[questionAnswersList.size()];
+            questionAnswers = questionAnswersList.toArray(questionAnswers);
+         	// create a new TextView through the string array
+            for(String item:questionAnswers){
+            	TextView a = new TextView(view.getContext());
+            	a.setText(item);
+            	//edit padding here to suit table's column titles
+            	a.setPadding(10, 10, 30, 10);
+            	a.setGravity(Gravity.LEFT);
+            	tr.addView(a);
+            }
+            tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
             
             return view;
       }
@@ -48,19 +68,19 @@ public class FragmentReport extends Fragment {
       public static ArrayList<String> getStringArrayPref(Context context, String key) {
     	    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
     	    String json = prefs.getString(key, null);
-    	    ArrayList<String> urls = new ArrayList<String>();
+    	    ArrayList<String> questionAnswers = new ArrayList<String>();
     	    if (json != null) {
     	        try {
     	            JSONArray a = new JSONArray(json);
     	            for (int i = 0; i < a.length(); i++) {
-    	                String url = a.optString(i);
-    	                urls.add(url);
+    	                String questionAnswer = a.optString(i);
+    	                questionAnswers.add(questionAnswer);
     	            }
     	        } catch (JSONException e) {
     	            e.printStackTrace();
     	        }
     	    }
-    	    return urls;
+    	    return questionAnswers;
       }
       
       
