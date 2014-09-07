@@ -1,10 +1,20 @@
 package com.dexterlimjiarong.painapp;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.json.JSONArray;
+
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -89,8 +99,8 @@ public class FragmentPqasQ20 extends Fragment
 		        alertDB.setCancelable(true);
 		        alertDB.setPositiveButton("Confirm",
 	                    new DialogInterface.OnClickListener() {
-	                public void onClick(DialogInterface dialog, int id) {
-	                    dialog.cancel();
+		        	//@Override
+	                public void onClick(DialogInterface dialogInterface, int id) {
 	                    //process save
 	    	        	Bundle bundle = getArguments();
 	    	        	//Answers to the questions are stored in questionAnswers string array, retrieve previous bundle
@@ -107,12 +117,19 @@ public class FragmentPqasQ20 extends Fragment
 	    		        FragmentManager frgManager = getFragmentManager();
 	    		        //replace fragment
 	    		        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+	    		        
+	    		        //persist the data
+	    		        Dialog dialog  = (Dialog) dialogInterface;
+	    		        Context context = dialog.getContext();
+	    		        setStringArrayPref(context,"key", new ArrayList(Arrays.asList(questionAnswers)));
+	    		        
+	    		        dialogInterface.cancel();
 	                }
 	            });
 		        alertDB.setNegativeButton("Back",
 	                    new DialogInterface.OnClickListener() {
-	                public void onClick(DialogInterface dialog, int id) {
-	                    dialog.cancel();
+	                public void onClick(DialogInterface dialogInterface, int id) {
+	                    dialogInterface.cancel();
 	                    //do nothing
 	                }
 	            });
@@ -132,6 +149,21 @@ public class FragmentPqasQ20 extends Fragment
 	        	break;
 	        }
     	} 
+    }
+    
+    public static void setStringArrayPref(Context context, String key, ArrayList<String> values) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        JSONArray a = new JSONArray();
+        for (int i = 0; i < values.size(); i++) {
+            a.put(values.get(i));
+        }
+        if (!values.isEmpty()) {
+            editor.putString(key, a.toString());
+        } else {
+            editor.putString(key, null);
+        }
+        editor.commit();
     }
     
     
