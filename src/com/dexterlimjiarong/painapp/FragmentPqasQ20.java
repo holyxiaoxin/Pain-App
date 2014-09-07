@@ -2,7 +2,6 @@ package com.dexterlimjiarong.painapp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.json.JSONArray;
 
@@ -39,6 +38,8 @@ public class FragmentPqasQ20 extends Fragment
 	  public static final String IMAGE_RESOURCE_ID = "iconResourceID";
 	  public static final String ITEM_NAME = "itemName";
 	  public static final String STRING_ARRAY = "stringArray";
+	  public static final String PREFS_NAME = "MyPrefsFile";
+	  public static final String REPORT_SIZE = "reportSize";
 	  public static final int QUESTION_TWENTY = 21;
       int pain = -1;	//stores the radio button identifier
 
@@ -121,7 +122,20 @@ public class FragmentPqasQ20 extends Fragment
 	    		        //persist the data
 	    		        Dialog dialog  = (Dialog) dialogInterface;
 	    		        Context context = dialog.getContext();
-	    		        setStringArrayPref(context,"key", new ArrayList(Arrays.asList(questionAnswers)));
+	    		        //gets the size of the reports
+	    		        SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, 0);
+	    		        int reportSizeInt = pref.getInt(REPORT_SIZE,0);
+	    		        String reportSize = Integer.toString(reportSizeInt);
+	    		        SharedPreferences.Editor editor = pref.edit();
+	    		        //increase the size of the report by one, so that report fragment knows how many rows to print
+	    		        editor.putInt(REPORT_SIZE,reportSizeInt+1);
+	    		        editor.commit();
+	    		        
+	    		        //debug
+	    		        int debug = pref.getInt(REPORT_SIZE,0);
+	    		        System.out.println(debug);
+	    		        
+	    		        setStringArrayPref(context,"report"+reportSize, new ArrayList(Arrays.asList(questionAnswers)));
 	    		        
 	    		        dialogInterface.cancel();
 	                }

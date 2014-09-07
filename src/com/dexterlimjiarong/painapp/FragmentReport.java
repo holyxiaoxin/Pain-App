@@ -10,13 +10,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -28,6 +27,8 @@ public class FragmentReport extends Fragment {
  
       public static final String IMAGE_RESOURCE_ID = "iconResourceID";
       public static final String ITEM_NAME = "itemName";
+	  public static final String PREFS_NAME = "MyPrefsFile";
+	  public static final String REPORT_SIZE = "reportSize";
  
       public FragmentReport() {
  
@@ -42,25 +43,31 @@ public class FragmentReport extends Fragment {
             
             //adding some rows dynamically
             TableLayout tl = (TableLayout) view.findViewById(R.id.frag_report_table);
-            /* Create a new row to be added. */
-            TableRow tr = new TableRow(view.getContext());
-            tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-            
-            //Retrieve report data from persisted data stored in Shared Preference
-            ArrayList<String> questionAnswersList = getStringArrayPref(view.getContext(),"key");
-            //Convert ArrayList to String Array
-            String[] questionAnswers = new String[questionAnswersList.size()];
-            questionAnswers = questionAnswersList.toArray(questionAnswers);
-         	// create a new TextView through the string array
-            for(String item:questionAnswers){
-            	TextView a = new TextView(view.getContext());
-            	a.setText(item);
-            	//edit padding here to suit table's column titles
-            	a.setPadding(10, 10, 30, 10);
-            	a.setGravity(Gravity.LEFT);
-            	tr.addView(a);
+            SharedPreferences pref = view.getContext().getSharedPreferences(PREFS_NAME, 0);
+	        int reportSize = pref.getInt(REPORT_SIZE,0);
+	        //loop through the entire report size
+            for(int i=0;i<reportSize;i++){
+            	System.out.println("ENTERED LOOP");
+	            /* Create a new row to be added. */
+	            TableRow tr = new TableRow(view.getContext());
+	            tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+	            //Retrieve report data from persisted data stored in Shared Preference
+	            String reportIdentifier = "report"+i;
+	            ArrayList<String> questionAnswersList = getStringArrayPref(view.getContext(),reportIdentifier);
+	            //Convert ArrayList to String Array
+	            String[] questionAnswers = new String[questionAnswersList.size()];
+	            questionAnswers = questionAnswersList.toArray(questionAnswers);
+	         	// create a new TextView through the string array
+	            for(String item:questionAnswers){
+	            	TextView a = new TextView(view.getContext());
+	            	a.setText(item);
+	            	//edit padding here to suit table's column titles
+	            	a.setPadding(10, 10, 30, 10);
+	            	a.setGravity(Gravity.LEFT);
+	            	tr.addView(a);
+	            }
+	            tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
             }
-            tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
             
             return view;
       }
