@@ -1122,7 +1122,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f0500a9;
+        public static final int action_settings=0x7f0500ab;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1183,10 +1183,10 @@ containing a value of this type.
         public static final int expanded_menu=0x7f05002c;
         public static final int frag1_icon=0x7f050049;
         public static final int frag1_text=0x7f05004a;
-        public static final int frag2_icon=0x7f0500a7;
-        public static final int frag2_text=0x7f0500a8;
-        public static final int frag3_icon=0x7f0500a5;
-        public static final int frag3_text=0x7f0500a6;
+        public static final int frag2_icon=0x7f0500a9;
+        public static final int frag2_text=0x7f0500aa;
+        public static final int frag3_icon=0x7f0500a7;
+        public static final int frag3_text=0x7f0500a8;
         public static final int frag_pqas_q10_icon=0x7f050050;
         public static final int frag_pqas_q10_text=0x7f050051;
         public static final int frag_pqas_q11_icon=0x7f050054;
@@ -1227,7 +1227,9 @@ containing a value of this type.
         public static final int frag_pqas_q8_text=0x7f05009d;
         public static final int frag_pqas_q9_icon=0x7f0500a0;
         public static final int frag_pqas_q9_text=0x7f0500a1;
-        public static final int frag_report_table=0x7f0500a4;
+        public static final int frag_question_image=0x7f0500a4;
+        public static final int frag_question_text=0x7f0500a5;
+        public static final int frag_report_table=0x7f0500a6;
         public static final int headerLayout=0x7f050041;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
@@ -1356,10 +1358,11 @@ containing a value of this type.
         public static final int fragment_layout_pqas_q7=0x7f03002d;
         public static final int fragment_layout_pqas_q8=0x7f03002e;
         public static final int fragment_layout_pqas_q9=0x7f03002f;
-        public static final int fragment_layout_report=0x7f030030;
-        public static final int fragment_layout_three=0x7f030031;
-        public static final int fragment_layout_two=0x7f030032;
-        public static final int support_simple_spinner_dropdown_item=0x7f030033;
+        public static final int fragment_layout_question_1=0x7f030030;
+        public static final int fragment_layout_report=0x7f030031;
+        public static final int fragment_layout_three=0x7f030032;
+        public static final int fragment_layout_two=0x7f030033;
+        public static final int support_simple_spinner_dropdown_item=0x7f030034;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;

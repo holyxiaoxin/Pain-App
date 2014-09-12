@@ -94,8 +94,8 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
                                     public void onItemSelected(AdapterView<?> arg0,
                                                 View arg1, int arg2, long arg3) {
  
-                                          Toast.makeText(context, "User Changed",
-                                                      Toast.LENGTH_SHORT).show();
+                                          //Toast.makeText(context, "User Changed",
+                                          //            Toast.LENGTH_SHORT).show();
                                     }
  
                                     @Override

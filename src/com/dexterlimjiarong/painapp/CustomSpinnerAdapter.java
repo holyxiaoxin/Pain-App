@@ -13,16 +13,16 @@ import android.widget.TextView;
  
 public class CustomSpinnerAdapter extends ArrayAdapter<SpinnerItem>{
  
-      public CustomSpinnerAdapter(Context context, int layoutResourceID,
-                  int textViewResourceId, List<SpinnerItem> spinnerDataList) {
-            super(context, layoutResourceID, textViewResourceId, spinnerDataList);
- 
-            this.context=context;
-            this.layoutResID=layoutResourceID;
-            this.spinnerData=spinnerDataList;
- 
-      }
- 
+//      public CustomSpinnerAdapter(Context context, int layoutResourceID,
+//                  int textViewResourceId, List<SpinnerItem> spinnerDataList) {
+//            super(context, layoutResourceID, textViewResourceId, spinnerDataList);
+// 
+//            this.context=context;
+//            this.layoutResID=layoutResourceID;
+//            this.spinnerData=spinnerDataList;
+// 
+//      }
+
       Context context;
       int layoutResID;
       List<SpinnerItem> spinnerData;
