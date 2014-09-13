@@ -9,18 +9,21 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -66,6 +69,7 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
     public static final String TYPE_SLIDER = "slider";
     public static final String TYPE_RADIO = "radio";
     public static final String TYPE_CHECKBOX = "checkbox";
+    public static final int NUMBER_OF_RADIO_IDS_AVAILABLE = 10;
     
     //constructor for newly created questions
     public FragmentQuestion(String questionnaireType, String[] questionsType, String[][] questions, String[] sliderTitles, int answerSize) {
@@ -115,16 +119,23 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
 			 TextView seekBarTitleView = (TextView) view.findViewById(R.id.frag_slider_text);
 			 seekBarView.setVisibility(View.GONE);
 			 
-			 System.out.println("Question Number: "+currentQuestionNumber);
-			 System.out.println("Slider Title: "+ sliderTitles[currentQuestionNumber-1]);
+			 View radioGroupView = view.findViewById(R.id.radioGroup);
+			 RadioGroup radioGroup = (RadioGroup) radioGroupView;
+			 radioGroupView.setVisibility(View.GONE);
+			 
 			 switch (questionsType[currentQuestionNumber-1]){
 			 	case "slider":
 					seekBarView.setVisibility(View.VISIBLE);
 					seekBarTitleView.setText(sliderTitles[currentQuestionNumber-1]);
 					painSliderValue = 0; //resets pain slider value
-					System.out.println(painSliderValue);
 					break;
 				case "radio":
+					radioGroupView.setVisibility(View.VISIBLE);
+					for (int i=0; i< radioGroup.getChildCount(); i++){
+						radioGroup.removeViewAt(i);
+				    }
+					radioButtonValue = 0;
+					
 					break;
 				case "checkbox":
 					break;
@@ -137,7 +148,7 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
 			 View backButtonView = view.findViewById(R.id.button_question_back);
 			 
 			 Button nextSaveButton = (Button) view.findViewById(R.id.button_question_next_save);
-			 Button backButton = (Button) view.findViewById(R.id.button_question_back);
+			 Button backButton = (Button) backButtonView;
 			 
 			 if (currentQuestionNumber==1){	//first question does not have a back button
 				 backButtonView.setVisibility(View.GONE);
@@ -154,39 +165,77 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
 				 nextSaveButton.setText("Next");
 			 }
 		  /**
-		   * Programs the SeekBar to remember the value of the slider
+		   * SEEKBAR
 		   */
-		  volumeControl = (SeekBar) view.findViewById(R.id.volume_bar);
-		  //set up seekbar to remember previous entry (if any)
-		  if (currentQuestionNumber!=fragmentSize){ //last question do not have a previous entry from next question
-			  if (questionAnswers[currentQuestionNumber-1] != null){
-				  System.out.println(painSliderValue);
-				  painSliderValue = Integer.parseInt(questionAnswers[currentQuestionNumber-1]);
-				  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+painSliderValue, 
-							Toast.LENGTH_SHORT).show();
-				  
-			  }
-		  }
-		  //this is not workinggggg???
-		  //System.out.println("painSliderValue:"+painSliderValue);
-		  volumeControl.setProgress(painSliderValue);
-		  //System.out.println("Progress: "+ volumeControl.getProgress());
-		  
-          volumeControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-   
-  			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-  				painSliderValue = progress;
-  			}
-   
-  			public void onStartTrackingTouch(SeekBar seekBar) {
-  				// TODO Auto-generated method stub
-  			}
-   
-  			public void onStopTrackingTouch(SeekBar seekBar) {
-  				Toast.makeText(seekBar.getContext(),"Pain Scale:"+painSliderValue, 
-			Toast.LENGTH_SHORT).show();
-  			}
-          });
+			 if (questionsType[currentQuestionNumber-1]==TYPE_SLIDER){
+				  volumeControl = (SeekBar) view.findViewById(R.id.volume_bar);
+					  //set up seekbar to remember previous entry (if any)
+					  if (questionAnswers[currentQuestionNumber-1] != null){
+						  System.out.println(painSliderValue);
+						  painSliderValue = Integer.parseInt(questionAnswers[currentQuestionNumber-1]);
+						  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+painSliderValue, 
+									Toast.LENGTH_SHORT).show();
+					  }
+					  volumeControl.setProgress(painSliderValue);
+		          volumeControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+		   
+		  			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+		  				painSliderValue = progress;
+		  			}
+		   
+		  			public void onStartTrackingTouch(SeekBar seekBar) {
+		  				// TODO Auto-generated method stub
+		  			}
+		   
+		  			public void onStopTrackingTouch(SeekBar seekBar) {
+		  				Toast.makeText(seekBar.getContext(),"Pain Scale:"+painSliderValue, 
+					Toast.LENGTH_SHORT).show();
+		  			}
+		          });
+			 }else if (questionsType[currentQuestionNumber-1]==TYPE_RADIO){
+		          /**
+		           * RADIO BUTTONS
+		           */
+				 final int numberOfRadioButtons = questions[currentQuestionNumber-1].length-1;
+				 //sets up radio button
+				 if (numberOfRadioButtons<=NUMBER_OF_RADIO_IDS_AVAILABLE){	//but first check if numberOfRadioButtons given by the questions exceeds the available ID Resources created for the radio buttons
+					 final RadioButton[] rb = new RadioButton[numberOfRadioButtons]; 
+			         for(int i=0; i<numberOfRadioButtons; i++){
+			        	  rb[i] = new RadioButton(view.getContext());
+			        	  rb[i].setText(questions[currentQuestionNumber-1][i+1]);
+			        	  int idResource = getResources().getIdentifier("rb"+i, "id", view.getContext().getPackageName());
+			        	  rb[i].setId(idResource);
+			        	  radioGroup.addView(rb[i]);
+			         }
+				     //set up radio buttons to remember previous entry (if any)
+				        if (questionAnswers[currentQuestionNumber-1] != null){
+				        	radioButtonValue = Integer.parseInt(questionAnswers[currentQuestionNumber-1]);
+				      		  Toast.makeText(view.getContext(),"Refresh radiobutton:"+radioButtonValue, 
+				      					Toast.LENGTH_SHORT).show();
+				        }
+				        int idResource = getResources().getIdentifier("rb"+radioButtonValue, "id", view.getContext().getPackageName());
+				        
+				        radioGroup.check(idResource);
+			        //sets up on checked listener
+				        radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() 
+			        {
+			            public void onCheckedChanged(RadioGroup group, int checkedId) {
+			            	// finds which radiobutton is pressed and sets radiobuttonnumber
+			            	for(int i=0; i<numberOfRadioButtons; i++){
+			            		int idResource = getResources().getIdentifier("rb"+i, "id", group.getContext().getPackageName());
+			            		if (checkedId==idResource){
+			            			radioButtonValue = i;
+			            			System.out.println("radioButtonValue: "+ radioButtonValue);
+			            		}
+			            	}
+			            }
+			        });
+			         
+				 }
+				 
+				 
+			 }
+          
           /**
            * Set listeners for the different buttons
            */
@@ -207,12 +256,6 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
 	    		if(currentQuestionNumber!=1){	//first question does not have a back button
 	    			currentQuestionNumber--;
 			        currentQuestion = questions[currentQuestionNumber-1][0];
-//			      //update the view by detach and attach fragment
-//			        FragmentTransaction fragTransaction = getFragmentManager().beginTransaction();
-//			        fragTransaction.detach(this);
-//			        fragTransaction.attach(this);
-//			        fragTransaction.commit();
-			        
 			        //update the view by replacing the fragment
 			        FragmentManager frgManager = getFragmentManager();
 			        frgManager.beginTransaction().replace(R.id.content_frame, new FragmentQuestion()).commit();
@@ -235,11 +278,6 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
 		        if(currentQuestionNumber!=fragmentSize){	//if not the last question update variables to next question in questionnaire
 		        	currentQuestionNumber++;
 			        currentQuestion = questions[currentQuestionNumber-1][0];
-//			        //update the view by detach and attach fragment
-//			        FragmentTransaction fragTransaction = getFragmentManager().beginTransaction();
-//			        fragTransaction.detach(this);
-//			        fragTransaction.attach(this);
-//			        fragTransaction.commit();
 			      //update the view by replacing the fragment
 			        FragmentManager frgManager = getFragmentManager();
 			        frgManager.beginTransaction().replace(R.id.content_frame, new FragmentQuestion()).commit();

@@ -214,7 +214,7 @@ public class MainActivity extends Activity {
         case 3:	//PQAS
             //questionnaireType = "PQAS", numberOfQuestions = 20, answerSize = 21, questionNumber = 1, question = (look below)
             //fragment = new FragmentQuestion1("PQAS" ,20 , 21, 1, "Please use the scale below to tell us how INTENSE your pain has been over the past week, on average.");
-            
+
         	//questionnaireType = "PQAS", answerSize = 21
             fragment = new FragmentQuestion("PQAS", questionsType, questions, sliderTitle, 21);
             break;
