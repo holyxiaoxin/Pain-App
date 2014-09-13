@@ -29,6 +29,45 @@ public class MainActivity extends Activity {
  
       List<DrawerItem> dataList;
  
+      /**
+       * QUESTIONNAIRES
+       */
+      //questions
+      public static final String PQAS_QUESTION_1 = "Please use the scale below to tell us how INTENSE your pain has been over the past week, on average.";
+      public static final String PQAS_QUESTION_2 = "Please use the scale below to tell us how SHARP your pain has felt over the past week. Words used to describe sharp feelings include like a knife like a spike piercing";
+      public static final String PQAS_QUESTION_3  = "Please use the scale below to tell us how HOT your pain has felt over the past week. Words used to describe very hot feelings include burning and on fire";
+      public static final String PQAS_QUESTION_4  = "Please use the scale below to tell us how DULL your pain has felt over the past week.";
+      public static final String PQAS_QUESTION_5  = "Please use the scale below to tell us how COLD your pain has felt over the past week. Words used to describe very cold pain include like ice and freezing";
+      public static final String PQAS_QUESTION_6  = "Please use the scale below to tell us how SENSITIVE your skin has been to light touch or clothing rubbing against it over the past week. Words used to describe sensitive skin include like sunburned skin and raw skin";
+      public static final String PQAS_QUESTION_7  = "Please use the scale below to tell us how TENDER your pain is when something has pressed against it over the past week. Another word to describe tender pain is like a bruise";
+      public static final String PQAS_QUESTION_8  = "Please use the scale below to tell us how ITCHY your pain has felt over the past week. Words used to describe itchy pain include like poison ivy and like mosquito bite";
+      public static final String PQAS_QUESTION_9  = "Please use the scale below to tell us how much your pain has felt like it has been SHOOTING over the past week. Another word used to describe shooting pain is zapping";
+      public static final String PQAS_QUESTION_10  = "Please use the scale below to tell us how NUMB your pain has felt over the past week. A phrase that can be used to describe numb pain is like it is asleep";
+      public static final String PQAS_QUESTION_11  = "Please use the scale below to tell us how much pain sensations have felt ELECTRICAL over the past week. Words used to describe electrical pain include shocks lightning sparking";
+      public static final String PQAS_QUESTION_12  = "Please use the scale below to tell us how TINGLING your pain has felt over the past week. Words used to describe tingling pain include like pins and needles prickling";
+      public static final String PQAS_QUESTION_13  = "Please use the scale below to tell us how CRAMPING your pain has felt over the past week. Words used to describe cramping pain include squeezing tight";
+      public static final String PQAS_QUESTION_14  = "Please use the scale below to tell us how RADIATING your pain has felt over the past week. Another word used to describe radiating pain is spreading";
+      public static final String PQAS_QUESTION_15  = "Please use the scale below to tell us how THROBBING your pain has felt over the past week. Another word used to describe throbbing pain is pounding";
+      public static final String PQAS_QUESTION_16  = "Please use the scale below to tell us how ACHING your pain has felt over the past week. Another word used to describe aching pain is like a toothache";
+      public static final String PQAS_QUESTION_17  = "Please use the scale below to tell us how HEAVY your pain has felt over the past week. Other words used to describe heavy pain are pressure and weighted down";
+      public static final String PQAS_QUESTION_18  = "Now that you have told us the different types of pain sensation you have felt, we want you to tell us overall how UNPLEASANT your pain has been to you over the past week. Words used to describe very unpleasant pain include annoying bothersome miserable intolerable. Remember, pain can have a low intensity but still feel very unpleasant, and some kinds of pain can have high intensity but be very tolerable. With this scale,  please tell us how unpleasant your pain feels.";
+      public static final String PQAS_QUESTION_19  = "We want you to give us an estimate of the severity of your DEEP versus SURFACE pain over the past week. We want to rate each location of pain separately. We realised that it can be difficult to make these estimates, and most likely it will be best guess, but please give us your best estimate.";
+      public static final String PQAS_QUESTION_20  = "Pain can also have different time qualities. For some people, the pain comes and goes and so they have some moments that are completely without pain; in other words the pain comes and goes. This is called INTERMITTENT pain. Others are never pain free, but their pain types and pain severity can vary from one moment to the next. This is called VARIABLE pain. For these people, the increases can be severe, so that they feel they have moments of very intense pain (breakthrough pain), but at other times they can feel lower levels of pain (background pain). Still, they are never pain free. Other people have pain that really does not change that much from one moment to another. This is called STABLE pain. Which of these best describes the time pattern of your pain (please select only one):";
+      public static final String PQAS_QUESTION_20_1 ="I have INTERMITTENT pain (I feel pain sometimes but I am pain-free at other times).";
+      public static final String PQAS_QUESTION_20_2 ="I have variable pain (background pain all the time, but also moments of more pain, or severe breakthrough pain or varying types of pain).";
+      public static final String PQAS_QUESTION_20_3 ="I have stable pain (constant pain that does not change very much from one moment to another, and no pain-free periods).";
+      //question types
+      public static final String TYPE_SLIDER = "slider";
+      public static final String TYPE_RADIO = "radio";
+      
+      public static final String[] questionsType = {TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER
+    	  											, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_RADIO};
+      public static final String[][] questions = {{PQAS_QUESTION_1}, {PQAS_QUESTION_2}, {PQAS_QUESTION_3}, {PQAS_QUESTION_4}, {PQAS_QUESTION_5}, {PQAS_QUESTION_6}, {PQAS_QUESTION_7}
+      								,{PQAS_QUESTION_8}, {PQAS_QUESTION_9}, {PQAS_QUESTION_10}, {PQAS_QUESTION_11}, {PQAS_QUESTION_12}, {PQAS_QUESTION_13}, {PQAS_QUESTION_14}
+      								,{PQAS_QUESTION_15}, {PQAS_QUESTION_16}, {PQAS_QUESTION_17}, {PQAS_QUESTION_18}, {PQAS_QUESTION_19}, {PQAS_QUESTION_20}
+      								, {PQAS_QUESTION_20_1}, {PQAS_QUESTION_20_2}, {PQAS_QUESTION_20_3}}; 
+      
+      
       @Override
       protected void onCreate(Bundle savedInstanceState) {
     	  	//extending the existing parent class' method
@@ -147,8 +186,11 @@ public class MainActivity extends Activity {
                           .get(position).getImgResID());
               break;
         case 3:	//PQAS
-            //questionnaireType = "PQAS", questionSize = 21, questionNumber = 1, question = (look below)
-            fragment = new FragmentQuestion1("PQAS" , 21, 1, "Please use the scale below to tell us how INTENSE your pain has been over the past week, on average.");
+            //questionnaireType = "PQAS", numberOfQuestions = 20, answerSize = 21, questionNumber = 1, question = (look below)
+            //fragment = new FragmentQuestion1("PQAS" ,20 , 21, 1, "Please use the scale below to tell us how INTENSE your pain has been over the past week, on average.");
+            
+        	//questionnaireType = "PQAS", answerSize = 21
+            fragment = new FragmentQuestion("PQAS", questionsType, questions, 21);
             break;
             
         case 6:	//Reports

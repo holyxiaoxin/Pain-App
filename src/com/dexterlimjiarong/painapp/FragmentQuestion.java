@@ -14,54 +14,64 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FragmentQuestion1 extends Fragment implements OnClickListener{
+public class FragmentQuestion extends Fragment implements OnClickListener{
 
 	private SeekBar volumeControl = null;
 	private int pain = 0;
-	//Setting up the questionnaire bundles requires this attributes
-	//This is only required for the initial fragment (i.e. FragmentQuestion1.java)
+	/**
+	 * Setting up the questionnaire requires these attributes
+	 * This will not change
+	 */
 	private String questionnaireType = null;	//eg. PQAS
+	private String questionsType[] = null;	//eg. slider, radio, checkbox, etc..  
+	private String[][] questions = null;	//this is all the questions for the questionnaire. Each question number can contain several questions (eg. some questions are needed for radiobuttons, checkboxes, etc).
 	private int answerSize = 0;	//the number of different answers there are from user inputs
-	private int numberOfQuestions = 0;	//the number of different questions posed by doctors in one questionnaire
-	//this is the specific to the unique questions
+	private int fragmentSize = 0;	//the total number of questions. eg. Q1, Q2, Q3 ..... (i.e. the number of pages/fragments generated for the entire questionnaire)
+	/**
+	 * This will change depending on the specific questions
+	 */
 	private int currentQuestionNumber = 0;
 	private String currentQuestion = null;
 	ImageView ivIcon;
-    TextView tvItemName;
+    TextView tvItemName;    
     
     public static final String IMAGE_RESOURCE_ID = "iconResourceID";
     public static final String ITEM_NAME = "itemName";
     //this is the name of the key for the bundle
     public static final String STRING_ARRAY = "stringArray";    
     public static final int QUESTIONNAIRE_TYPE = 0;
-    //types of questions
-    public static final int TYPE_SLIDER = 0;
-    public static final int TYPE_RADIO = 1;
     
     //number of answers
     public static final int ONE_ANSWER = 1;
     public static final int TWO_ANSWER = 2;
     
-    //different questions:
-    public static final String PQAS_QUESTION_2 = "Please use the scale below to tell us how SHARP your pain has felt over the past week. Words used to describe sharp feelings include \"like a knife\" \"like a spike\" \"piercing\"";
-    
-    public FragmentQuestion1(String questionType, int numberOfQuestions, int answerSize, int currentQuestionNumber, String currentQuestion) {
-    	this.questionnaireType = questionType;
-    	this.numberOfQuestions = numberOfQuestions;
+    //constructor
+    public FragmentQuestion(String questionnaireType, String[] questionsType, String[][] questions, int answerSize) {
+    	this.questionnaireType = questionnaireType;
+    	this.questionsType = questionsType;
+    	this.questions = questions;
     	this.answerSize = answerSize;
-    	this.currentQuestionNumber = currentQuestionNumber;
-    	this.currentQuestion = currentQuestion;
+    	this.fragmentSize = questions.length;
+    	
+    	//sets up currentQuestion
+    	if (fragmentSize!=0){
+    		currentQuestion = questions[0][0];	//gets first question
+    	}
+    	//sets up currentQuestionNumber
+    	if (fragmentSize!=0){
+    		currentQuestionNumber = 1;
+    	}
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
 
-          View view = inflater.inflate(R.layout.fragment_layout_question_1, container,
+          View view = inflater.inflate(R.layout.fragment_layout_question, container,
                       false);
 
-          ivIcon = (ImageView) view.findViewById(R.id.frag_question_1_image);
-          tvItemName = (TextView) view.findViewById(R.id.frag_question_1_text);
+          ivIcon = (ImageView) view.findViewById(R.id.frag_question_image);
+          tvItemName = (TextView) view.findViewById(R.id.frag_question_text);
 
           ivIcon.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_action_labels));
           tvItemName.setText(currentQuestion);
@@ -94,7 +104,7 @@ public class FragmentQuestion1 extends Fragment implements OnClickListener{
   			}
           });
 			
-          Button nextButton = (Button) view.findViewById(R.id.button_question_next);
+          Button nextButton = (Button) view.findViewById(R.id.button_question_next_save);
           nextButton.setOnClickListener(this);
           
           return view;
@@ -103,6 +113,9 @@ public class FragmentQuestion1 extends Fragment implements OnClickListener{
     @Override
     public void onClick(View view) {
     	switch (view.getId()) {
+    		/**
+    		 * What happens when the next button is pressed
+    		 */
 	        case R.id.button_question_next:{
 	        	Bundle bundle = getArguments();
 	        	//Answers to the questions are stored in questionAnswers string array
@@ -115,16 +128,20 @@ public class FragmentQuestion1 extends Fragment implements OnClickListener{
 	        		//answer to question 19 part 1 is string[19]
 	        		//answer to question 19 part 2 is string [20]
 	        		//answer to question 20 is string[21]
-	        		questionAnswers = new String[answerSize+1];
-	        		questionAnswers[QUESTIONNAIRE_TYPE] = questionnaireType;
+	        		questionAnswers = new String[answerSize];
+	        			//dont set questionnaire type here: 
+	        			//questionAnswers[0] should not contain questionnaireType
+	        			//a seperate key for the sharedPeference to store the questionnaireType will be used instead
+	        		//questionAnswers[QUESTIONNAIRE_TYPE] = questionnaireType;
 	        	}
-	        	//initialize next fragment
-		        //Fragment fragment = new FragmentPqasQ2();
+	        	/**
+	        	 * Update current fragment
+	        	 */
 	        	//questionNumber, question, questionType = Slider, numberOfAnswers = 1
-		        Fragment fragment = new FragmentQuestion2(currentQuestionNumber+1, PQAS_QUESTION_2, TYPE_SLIDER, ONE_ANSWER);
+		        Fragment fragment = this;
 		        //pain slider value stored in question 1 answer
-		        questionAnswers[currentQuestionNumber] = Integer.toString(pain);
-		        //string array is added to bundle
+		        questionAnswers[currentQuestionNumber-1] = Integer.toString(pain);
+		        //string array is edited/added to bundle
 		        bundle.putStringArray(STRING_ARRAY, questionAnswers);
 		        //set bundle to fragment
 		        fragment.setArguments(bundle);

@@ -60,13 +60,12 @@ public class FragmentQuestion2 extends Fragment
 	private SeekBar volumeControl = null;
 	private int pain = 0;
 	//this is the specific to the unique questions
-	private int questionNumber = 0;
-	private String question = null;
-	private int questionType = 0;
-	private int numberOfAnswers = 0;
+	private int currentQuestionNumber = 0;	
+	private String currentQuestion = null;	
+	private int questionType = 0;	//eg. slider, radio buttons, checkboxes
+	private int numberOfAnswersForThisQuestion = 0;	
 	ImageView ivIcon;
     TextView tvItemName;
-
     
 	  public static final String IMAGE_RESOURCE_ID = "iconResourceID";
 	  public static final String ITEM_NAME = "itemName";
@@ -75,11 +74,11 @@ public class FragmentQuestion2 extends Fragment
 	    public static final int TYPE_SLIDER = 0;
 	    public static final int TYPE_RADIO = 1;
 
-    public FragmentQuestion2(int questionNumber, String question, int questionType, int numberOfAnswers) {
-    	this.questionNumber = questionNumber;
-    	this.question = question;
+    public FragmentQuestion2(int currentQuestionNumber, String currentQuestion, int questionType, int numberOfAnswers) {
+    	this.currentQuestionNumber = currentQuestionNumber;
+    	this.currentQuestion = currentQuestion;
     	this.questionType = questionType;
-    	this.numberOfAnswers = numberOfAnswers;
+    	this.numberOfAnswersForThisQuestion = numberOfAnswers;
     }
 
     @Override
@@ -91,16 +90,16 @@ public class FragmentQuestion2 extends Fragment
         ivIcon=(ImageView)view.findViewById(R.id.frag_question_2_image);
         tvItemName=(TextView)view.findViewById(R.id.frag_question_2_text);
         //set question
-        tvItemName.setText(question);
+        tvItemName.setText(currentQuestion);
         ivIcon.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_action_labels));
           
           
           volumeControl = (SeekBar) view.findViewById(R.id.volume_bar);
           //set up seekbar to remember previous entry (if any)
 	          if (getArguments().getStringArray(STRING_ARRAY) != null){
-	        	  if (getArguments().getStringArray(STRING_ARRAY)[questionNumber] != null){
-	        		  pain = Integer.parseInt(getArguments().getStringArray(STRING_ARRAY)[questionNumber]);
-	        		  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+getArguments().getStringArray(STRING_ARRAY)[questionNumber], 
+	        	  if (getArguments().getStringArray(STRING_ARRAY)[currentQuestionNumber] != null){
+	        		  pain = Integer.parseInt(getArguments().getStringArray(STRING_ARRAY)[currentQuestionNumber]);
+	        		  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+getArguments().getStringArray(STRING_ARRAY)[currentQuestionNumber], 
 	        					Toast.LENGTH_SHORT).show();
 	        		  
 	        	  }
@@ -141,7 +140,7 @@ public class FragmentQuestion2 extends Fragment
 	        	//initialize next fragment
 		        Fragment fragment = new FragmentPqasQ3();
 		        //pain slider value stored in question 1 answer
-		        questionAnswers[questionNumber] = Integer.toString(pain);
+		        questionAnswers[currentQuestionNumber] = Integer.toString(pain);
 		        //string array is added to bundle
 		        bundle.putStringArray(FragmentPqasQ3.STRING_ARRAY, questionAnswers);
 		        bundle.putInt(FragmentPqasQ3.IMAGE_RESOURCE_ID, R.drawable.ic_action_about);
