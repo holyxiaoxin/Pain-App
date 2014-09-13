@@ -35,24 +35,24 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
 	 * Setting up the questionnaire requires these attributes
 	 * This will not change
 	 */
-	private String questionnaireType = null;	//eg. PQAS
-	private String[] questionsType = null;	//eg. slider, radio, checkbox, etc..  
-	private String[][] questions = null;	//this is all the questions for the questionnaire. Each question number can contain several questions (eg. some questions are needed for radiobuttons, checkboxes, etc).
-	private String[] sliderTitles = null; //this is the slider title for different questions (if the question has a slider in the first place)
-	private int answerSize = 0;	//the number of different answers there are from user inputs
-	private int fragmentSize = 0;	//the total number of questions. eg. Q1, Q2, Q3 ..... (i.e. the number of pages/fragments generated for the entire questionnaire)
+	private static String questionnaireType = null;	//eg. PQAS
+	private static String[] questionsType = null;	//eg. slider, radio, checkbox, etc..  
+	private static String[][] questions = null;	//this is all the questions for the questionnaire. Each question number can contain several questions (eg. some questions are needed for radiobuttons, checkboxes, etc).
+	private static String[] sliderTitles = null; //this is the slider title for different questions (if the question has a slider in the first place)
+	private static int answerSize = 0;	//the number of different answers there are from user inputs
+	private static int fragmentSize = 0;	//the total number of questions. eg. Q1, Q2, Q3 ..... (i.e. the number of pages/fragments generated for the entire questionnaire)
 	/**
 	 * This will change depending on the specific questions
 	 */
-	private int currentQuestionNumber = 0;
-	private String currentQuestion = null;
+	private static int currentQuestionNumber = 0;
+	private static String currentQuestion = null;
 	
 	/**
 	 * This stores all the answers
 	 */
 	//For now, the questionsAnswers stores answers for the static questionnaire: PQAS with the following questions below
 	//answers to questions 1-21 are string[0] - string[20]
-	private String[] questionAnswers = null;
+	private static String[] questionAnswers = null;
 	
 	ImageView ivIcon;
     TextView tvItemName;    
@@ -66,7 +66,8 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
     public static final String TYPE_SLIDER = "slider";
     public static final String TYPE_RADIO = "radio";
     public static final String TYPE_CHECKBOX = "checkbox";
-    //constructor
+    
+    //constructor for newly created questions
     public FragmentQuestion(String questionnaireType, String[] questionsType, String[][] questions, String[] sliderTitles, int answerSize) {
     	this.questionnaireType = questionnaireType;
     	this.questionsType = questionsType;
@@ -87,6 +88,10 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
     	if (answerSize!=0){
     		questionAnswers = new String[answerSize];
     	}
+    }
+    
+    //constructor for existing questions
+    public FragmentQuestion(){
     }
 
     @Override
@@ -154,9 +159,9 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
 		  volumeControl = (SeekBar) view.findViewById(R.id.volume_bar);
 		  //set up seekbar to remember previous entry (if any)
 		  if (currentQuestionNumber!=fragmentSize){ //last question do not have a previous entry from next question
-			  if (questionAnswers[currentQuestionNumber] != null){ //this is actually the next question's answer
+			  if (questionAnswers[currentQuestionNumber-1] != null){
 				  System.out.println(painSliderValue);
-				  painSliderValue = Integer.parseInt(questionAnswers[currentQuestionNumber]);
+				  painSliderValue = Integer.parseInt(questionAnswers[currentQuestionNumber-1]);
 				  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+painSliderValue, 
 							Toast.LENGTH_SHORT).show();
 				  
@@ -202,11 +207,15 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
 	    		if(currentQuestionNumber!=1){	//first question does not have a back button
 	    			currentQuestionNumber--;
 			        currentQuestion = questions[currentQuestionNumber-1][0];
-			      //update the view by detach and attach fragment
-			        FragmentTransaction fragTransaction = getFragmentManager().beginTransaction();
-			        fragTransaction.detach(this);
-			        fragTransaction.attach(this);
-			        fragTransaction.commit();
+//			      //update the view by detach and attach fragment
+//			        FragmentTransaction fragTransaction = getFragmentManager().beginTransaction();
+//			        fragTransaction.detach(this);
+//			        fragTransaction.attach(this);
+//			        fragTransaction.commit();
+			        
+			        //update the view by replacing the fragment
+			        FragmentManager frgManager = getFragmentManager();
+			        frgManager.beginTransaction().replace(R.id.content_frame, new FragmentQuestion()).commit();
 	    		}
 	        	break;
 	        }
@@ -226,11 +235,14 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
 		        if(currentQuestionNumber!=fragmentSize){	//if not the last question update variables to next question in questionnaire
 		        	currentQuestionNumber++;
 			        currentQuestion = questions[currentQuestionNumber-1][0];
-			        //update the view by detach and attach fragment
-			        FragmentTransaction fragTransaction = getFragmentManager().beginTransaction();
-			        fragTransaction.detach(this);
-			        fragTransaction.attach(this);
-			        fragTransaction.commit();
+//			        //update the view by detach and attach fragment
+//			        FragmentTransaction fragTransaction = getFragmentManager().beginTransaction();
+//			        fragTransaction.detach(this);
+//			        fragTransaction.attach(this);
+//			        fragTransaction.commit();
+			      //update the view by replacing the fragment
+			        FragmentManager frgManager = getFragmentManager();
+			        frgManager.beginTransaction().replace(R.id.content_frame, new FragmentQuestion()).commit();
 		        }else{	//this is the last question, save it to the report
 		        	//sets up a POP-UP
 			        AlertDialog.Builder alertDB = new AlertDialog.Builder(getActivity());
