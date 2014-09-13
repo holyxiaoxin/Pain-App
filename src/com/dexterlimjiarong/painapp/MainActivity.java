@@ -52,21 +52,47 @@ public class MainActivity extends Activity {
       public static final String PQAS_QUESTION_17  = "Please use the scale below to tell us how HEAVY your pain has felt over the past week. Other words used to describe heavy pain are pressure and weighted down";
       public static final String PQAS_QUESTION_18  = "Now that you have told us the different types of pain sensation you have felt, we want you to tell us overall how UNPLEASANT your pain has been to you over the past week. Words used to describe very unpleasant pain include annoying bothersome miserable intolerable. Remember, pain can have a low intensity but still feel very unpleasant, and some kinds of pain can have high intensity but be very tolerable. With this scale,  please tell us how unpleasant your pain feels.";
       public static final String PQAS_QUESTION_19  = "We want you to give us an estimate of the severity of your DEEP versus SURFACE pain over the past week. We want to rate each location of pain separately. We realised that it can be difficult to make these estimates, and most likely it will be best guess, but please give us your best estimate.";
-      public static final String PQAS_QUESTION_20  = "Pain can also have different time qualities. For some people, the pain comes and goes and so they have some moments that are completely without pain; in other words the pain comes and goes. This is called INTERMITTENT pain. Others are never pain free, but their pain types and pain severity can vary from one moment to the next. This is called VARIABLE pain. For these people, the increases can be severe, so that they feel they have moments of very intense pain (breakthrough pain), but at other times they can feel lower levels of pain (background pain). Still, they are never pain free. Other people have pain that really does not change that much from one moment to another. This is called STABLE pain. Which of these best describes the time pattern of your pain (please select only one):";
-      public static final String PQAS_QUESTION_20_1 ="I have INTERMITTENT pain (I feel pain sometimes but I am pain-free at other times).";
-      public static final String PQAS_QUESTION_20_2 ="I have variable pain (background pain all the time, but also moments of more pain, or severe breakthrough pain or varying types of pain).";
-      public static final String PQAS_QUESTION_20_3 ="I have stable pain (constant pain that does not change very much from one moment to another, and no pain-free periods).";
+      public static final String PQAS_QUESTION_20  = "We want you to give us an estimate of the severity of your DEEP versus SURFACE pain over the past week. We want to rate each location of pain separately. We realised that it can be difficult to make these estimates, and most likely it will be best guess, but please give us your best estimate.";
+      public static final String PQAS_QUESTION_21  = "Pain can also have different time qualities. For some people, the pain comes and goes and so they have some moments that are completely without pain; in other words the pain comes and goes. This is called INTERMITTENT pain. Others are never pain free, but their pain types and pain severity can vary from one moment to the next. This is called VARIABLE pain. For these people, the increases can be severe, so that they feel they have moments of very intense pain (breakthrough pain), but at other times they can feel lower levels of pain (background pain). Still, they are never pain free. Other people have pain that really does not change that much from one moment to another. This is called STABLE pain. Which of these best describes the time pattern of your pain (please select only one):";
+      public static final String PQAS_QUESTION_21_1 ="I have INTERMITTENT pain (I feel pain sometimes but I am pain-free at other times).";
+      public static final String PQAS_QUESTION_21_2 ="I have variable pain (background pain all the time, but also moments of more pain, or severe breakthrough pain or varying types of pain).";
+      public static final String PQAS_QUESTION_21_3 ="I have stable pain (constant pain that does not change very much from one moment to another, and no pain-free periods).";
+      
+      public static final String PQAS_SLIDER_TITLE_1 = "INTENSE";
+      public static final String PQAS_SLIDER_TITLE_2 = "SHARP";
+      public static final String PQAS_SLIDER_TITLE_3 = "HOT";
+      public static final String PQAS_SLIDER_TITLE_4 = "DULL";
+      public static final String PQAS_SLIDER_TITLE_5 = "COOL";
+      public static final String PQAS_SLIDER_TITLE_6 = "SENSITIVE";
+      public static final String PQAS_SLIDER_TITLE_7 = "TENDER";
+      public static final String PQAS_SLIDER_TITLE_8 = "ITCHY";
+      public static final String PQAS_SLIDER_TITLE_9 = "SHOOTING";
+      public static final String PQAS_SLIDER_TITLE_10 = "NUMB";
+      public static final String PQAS_SLIDER_TITLE_11 = "ELECTRICAL";
+      public static final String PQAS_SLIDER_TITLE_12 = "TINGLING";
+      public static final String PQAS_SLIDER_TITLE_13 = "CRAMPING";
+      public static final String PQAS_SLIDER_TITLE_14 = "RADIATING";
+      public static final String PQAS_SLIDER_TITLE_15 = "THROBBING";
+      public static final String PQAS_SLIDER_TITLE_16 = "ACHING";
+      public static final String PQAS_SLIDER_TITLE_17 = "HEAVY";
+      public static final String PQAS_SLIDER_TITLE_18 = "UNPLEASANT";
+      public static final String PQAS_SLIDER_TITLE_19 = "DEEP";
+      public static final String PQAS_SLIDER_TITLE_20 = "SURFACE";
+      public static final String PQAS_SLIDER_TITLE_21 = "";
+      
       //question types
       public static final String TYPE_SLIDER = "slider";
       public static final String TYPE_RADIO = "radio";
       
       public static final String[] questionsType = {TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER
-    	  											, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_RADIO};
+    	  											, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_SLIDER, TYPE_RADIO};
       public static final String[][] questions = {{PQAS_QUESTION_1}, {PQAS_QUESTION_2}, {PQAS_QUESTION_3}, {PQAS_QUESTION_4}, {PQAS_QUESTION_5}, {PQAS_QUESTION_6}, {PQAS_QUESTION_7}
       								,{PQAS_QUESTION_8}, {PQAS_QUESTION_9}, {PQAS_QUESTION_10}, {PQAS_QUESTION_11}, {PQAS_QUESTION_12}, {PQAS_QUESTION_13}, {PQAS_QUESTION_14}
       								,{PQAS_QUESTION_15}, {PQAS_QUESTION_16}, {PQAS_QUESTION_17}, {PQAS_QUESTION_18}, {PQAS_QUESTION_19}, {PQAS_QUESTION_20}
-      								, {PQAS_QUESTION_20_1}, {PQAS_QUESTION_20_2}, {PQAS_QUESTION_20_3}}; 
-      
+      								, {PQAS_QUESTION_21, PQAS_QUESTION_21_1, PQAS_QUESTION_21_2, PQAS_QUESTION_21_3}}; 
+      public static final String[] sliderTitle = {PQAS_SLIDER_TITLE_1, PQAS_SLIDER_TITLE_2, PQAS_SLIDER_TITLE_3, PQAS_SLIDER_TITLE_4, PQAS_SLIDER_TITLE_5, PQAS_SLIDER_TITLE_6, PQAS_SLIDER_TITLE_7
+    	  										, PQAS_SLIDER_TITLE_8, PQAS_SLIDER_TITLE_9, PQAS_SLIDER_TITLE_10, PQAS_SLIDER_TITLE_11, PQAS_SLIDER_TITLE_12, PQAS_SLIDER_TITLE_13, PQAS_SLIDER_TITLE_14
+    	  										, PQAS_SLIDER_TITLE_15, PQAS_SLIDER_TITLE_16, PQAS_SLIDER_TITLE_17, PQAS_SLIDER_TITLE_18, PQAS_SLIDER_TITLE_19, PQAS_SLIDER_TITLE_20, PQAS_SLIDER_TITLE_21};
       
       @Override
       protected void onCreate(Bundle savedInstanceState) {
@@ -190,7 +216,7 @@ public class MainActivity extends Activity {
             //fragment = new FragmentQuestion1("PQAS" ,20 , 21, 1, "Please use the scale below to tell us how INTENSE your pain has been over the past week, on average.");
             
         	//questionnaireType = "PQAS", answerSize = 21
-            fragment = new FragmentQuestion("PQAS", questionsType, questions, 21);
+            fragment = new FragmentQuestion("PQAS", questionsType, questions, sliderTitle, 21);
             break;
             
         case 6:	//Reports

@@ -20,7 +20,7 @@
 			    <!--	SEEKBAR  	-->
 			    <!--  				-->
 			    <LinearLayout
-			        android:id="@+id/refresh_match_layout"
+			        android:id="@+id/slider_view"
 			        android:layout_width="match_parent"
 			        android:layout_height="wrap_content"
 			        android:layout_margin="5dp"
@@ -34,7 +34,6 @@
 			            android:layout_height="wrap_content"
 			            android:layout_gravity="center"
 			            android:padding="10dp"
-			            android:text="SLIDER"
 			            android:textColor="#ffffff"
 			            android:textSize="20sp" />
 			 
