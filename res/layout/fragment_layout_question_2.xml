@@ -4,13 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 	        <ImageView
-	        android:id="@+id/frag_question_1_image"
+	        android:id="@+id/frag_question_2_image"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 			/>
 		 
 		    <TextView
-		        android:id="@+id/frag_question_1_text"
+		        android:id="@+id/frag_question_2_text"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_marginLeft="10dp"
@@ -33,7 +33,7 @@
 			            android:layout_height="wrap_content"
 			            android:layout_gravity="center"
 			            android:padding="10dp"
-			            android:text="INTENSE"
+			            android:text="SHARP"
 			            android:textColor="#ffffff"
 			            android:textSize="20sp" />
 			 
@@ -119,6 +119,15 @@
 			<RelativeLayout 
 			    android:layout_width="fill_parent"
 			    android:layout_height="fill_parent">
+			<Button
+			        android:id="@+id/button_question_back"
+			        android:minHeight="0dp"
+		        	android:minWidth="0dp"
+		        	android:layout_alignParentLeft="true"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="Back" />
+
 			<Button
 			    android:id="@+id/button_question_next"
 			    android:layout_width="wrap_content"

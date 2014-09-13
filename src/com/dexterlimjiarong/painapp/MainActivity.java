@@ -147,7 +147,7 @@ public class MainActivity extends Activity {
                           .get(position).getImgResID());
               break;
         case 3:	//PQAS
-            //questionType = "PQAS", questionSize = 21, questionNumber = 1, question = (look below)
+            //questionnaireType = "PQAS", questionSize = 21, questionNumber = 1, question = (look below)
             fragment = new FragmentQuestion1("PQAS" , 21, 1, "Please use the scale below to tell us how INTENSE your pain has been over the past week, on average.");
             break;
             

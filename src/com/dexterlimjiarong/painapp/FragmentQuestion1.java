@@ -20,7 +20,7 @@ public class FragmentQuestion1 extends Fragment implements OnClickListener{
 	private int pain = 0;
 	//Setting up the questionnaire bundles requires this attributes
 	//This is only required for the initial fragment (i.e. FragmentQuestion1.java)
-	private String questionType = null;
+	private String questionnaireType = null;
 	private int answerSize = 0;
 	//this is the specific to the unique questions
 	private int questionNumber = 0;
@@ -32,11 +32,20 @@ public class FragmentQuestion1 extends Fragment implements OnClickListener{
     public static final String ITEM_NAME = "itemName";
     //this is the name of the key for the bundle
     public static final String STRING_ARRAY = "stringArray";    
-    public static final int QUESTION_TYPE = 0;
+    public static final int QUESTIONNAIRE_TYPE = 0;
+    //types of questions
+    public static final int TYPE_SLIDER = 0;
+    public static final int TYPE_RADIO = 1;
     
+    //number of answers
+    public static final int ONE_ANSWER = 1;
+    public static final int TWO_ANSWER = 2;
+    
+    //different questions:
+    public static final String PQAS_QUESTION_2 = "Please use the scale below to tell us how SHARP your pain has felt over the past week. Words used to describe sharp feelings include \"like a knife\" \"like a spike\" \"piercing\"";
     
     public FragmentQuestion1(String questionType, int answerSize, int questionNumber, String question) {
-    	this.questionType = questionType;
+    	this.questionnaireType = questionType;
     	this.answerSize = answerSize;
     	this.questionNumber = questionNumber;
     	this.question = question;
@@ -49,8 +58,8 @@ public class FragmentQuestion1 extends Fragment implements OnClickListener{
           View view = inflater.inflate(R.layout.fragment_layout_question_1, container,
                       false);
 
-          ivIcon = (ImageView) view.findViewById(R.id.frag_question_image);
-          tvItemName = (TextView) view.findViewById(R.id.frag_question_text);
+          ivIcon = (ImageView) view.findViewById(R.id.frag_question_1_image);
+          tvItemName = (TextView) view.findViewById(R.id.frag_question_1_text);
 
           ivIcon.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_action_labels));
           tvItemName.setText(question);
@@ -83,7 +92,7 @@ public class FragmentQuestion1 extends Fragment implements OnClickListener{
   			}
           });
 			
-          Button nextButton = (Button) view.findViewById(R.id.button_pqas_q1_next);
+          Button nextButton = (Button) view.findViewById(R.id.button_question_next);
           nextButton.setOnClickListener(this);
           
           return view;
@@ -92,7 +101,7 @@ public class FragmentQuestion1 extends Fragment implements OnClickListener{
     @Override
     public void onClick(View view) {
     	switch (view.getId()) {
-	        case R.id.button_pqas_q1_next:{
+	        case R.id.button_question_next:{
 	        	Bundle bundle = getArguments();
 	        	//Answers to the questions are stored in questionAnswers string array
 	        	String[] questionAnswers = bundle.getStringArray(STRING_ARRAY);
@@ -105,14 +114,16 @@ public class FragmentQuestion1 extends Fragment implements OnClickListener{
 	        		//answer to question 19 part 2 is string [20]
 	        		//answer to question 20 is string[21]
 	        		questionAnswers = new String[answerSize+1];
-	        		questionAnswers[QUESTION_TYPE] = questionType;
+	        		questionAnswers[QUESTIONNAIRE_TYPE] = questionnaireType;
 	        	}
 	        	//initialize next fragment
-		        Fragment fragment = new FragmentPqasQ2();
+		        //Fragment fragment = new FragmentPqasQ2();
+	        	//questionNumber, question, questionType = Slider, numberOfAnswers = 1
+		        Fragment fragment = new FragmentQuestion2(questionNumber+1, PQAS_QUESTION_2, TYPE_SLIDER, ONE_ANSWER);
 		        //pain slider value stored in question 1 answer
 		        questionAnswers[questionNumber] = Integer.toString(pain);
 		        //string array is added to bundle
-		        bundle.putStringArray(FragmentPqasQ2.STRING_ARRAY, questionAnswers);
+		        bundle.putStringArray(STRING_ARRAY, questionAnswers);
 		        //set bundle to fragment
 		        fragment.setArguments(bundle);
 		        FragmentManager frgManager = getFragmentManager();
