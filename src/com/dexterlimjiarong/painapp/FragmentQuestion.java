@@ -1,9 +1,20 @@
 package com.dexterlimjiarong.painapp;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.json.JSONArray;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +30,7 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
 
 	private SeekBar volumeControl = null;
 	private int painSliderValue = 0;
+	private int radioButtonValue = 0;
 	/**
 	 * Setting up the questionnaire requires these attributes
 	 * This will not change
@@ -47,7 +59,13 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
     
     public static final String IMAGE_RESOURCE_ID = "iconResourceID";
     public static final String ITEM_NAME = "itemName";
-    
+	public static final String PREFS_NAME = "MyPrefsFile";
+	public static final String REPORT_SIZE = "reportSize";
+	public static final String REPORT_TYPE = "reportType";
+	public static final String REPORT = "report";
+    public static final String TYPE_SLIDER = "slider";
+    public static final String TYPE_RADIO = "radio";
+    public static final String TYPE_CHECKBOX = "checkbox";
     //constructor
     public FragmentQuestion(String questionnaireType, String[] questionsType, String[][] questions, String[] sliderTitles, int answerSize) {
     	this.questionnaireType = questionnaireType;
@@ -181,9 +199,6 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
     		 * What happens when the next button is pressed
     		 */
 	    	case R.id.button_question_back:{
-	    		/**
-	        	 * Update current fragment
-	        	 */
 	    		if(currentQuestionNumber!=1){	//first question does not have a back button
 	    			currentQuestionNumber--;
 			        currentQuestion = questions[currentQuestionNumber-1][0];
@@ -196,11 +211,18 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
 	        	break;
 	        }
 	        case R.id.button_question_next_save:{
-	        	/**
-	        	 * Update current fragment
-	        	 */
-		        questionAnswers[currentQuestionNumber-1] = Integer.toString(painSliderValue);	//save painSliderValue
-		        //FragmentManager frgManager = getFragmentManager();
+	        	//save values into questionAnswers
+	        	switch(questionsType[currentQuestionNumber-1]){
+	        		case TYPE_SLIDER:
+	        			questionAnswers[currentQuestionNumber-1] = Integer.toString(painSliderValue);
+	        			break;
+	        		case TYPE_RADIO:
+	        			questionAnswers[currentQuestionNumber-1] = Integer.toString(radioButtonValue);	
+	        			break;
+	        		default:
+	        			//do nothing
+	        			break;
+	        	}
 		        if(currentQuestionNumber!=fragmentSize){	//if not the last question update variables to next question in questionnaire
 		        	currentQuestionNumber++;
 			        currentQuestion = questions[currentQuestionNumber-1][0];
@@ -210,14 +232,63 @@ public class FragmentQuestion extends Fragment implements OnClickListener{
 			        fragTransaction.attach(this);
 			        fragTransaction.commit();
 		        }else{	//this is the last question, save it to the report
-		        	Toast.makeText(view.getContext(),"Report:"+questionAnswers[0]+questionAnswers[1]+questionAnswers[2]+questionAnswers[3]+questionAnswers[4]+questionAnswers[5], 
-							Toast.LENGTH_SHORT).show();
+		        	//sets up a POP-UP
+			        AlertDialog.Builder alertDB = new AlertDialog.Builder(getActivity());
+			        alertDB.setMessage("Do you really want to save this entry?");
+			        alertDB.setCancelable(true);
+			        alertDB.setPositiveButton("Confirm",
+		                    new DialogInterface.OnClickListener() {
+			        	@Override
+		                public void onClick(DialogInterface dialogInterface, int id) {
+			    		        //persist the data
+			    		        Dialog dialog  = (Dialog) dialogInterface;
+			    		        Context context = dialog.getContext();
+			    		        //gets the size of the reports
+			    		        SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, 0);
+			    		        //gets the current reportsize so far
+			    		        int reportSizeInt = pref.getInt(REPORT_SIZE,0);
+			    		        String reportSize = Integer.toString(reportSizeInt);
+			    		        SharedPreferences.Editor editor = pref.edit();
+			    		        //increase the size of the report by one, so that report fragment knows how many rows to print
+			    		        editor.putInt(REPORT_SIZE,reportSizeInt+1);
+			    		        //add questionnaireType to the memory
+			    		        editor.putString(REPORT_TYPE+reportSize, questionnaireType);
+			    		        editor.commit();
+			    		        setStringArrayPref(context,REPORT+reportSize, new ArrayList(Arrays.asList(questionAnswers)));
+		    		        dialogInterface.cancel();
+		                }
+		            });
+			        alertDB.setNegativeButton("Back",
+		                    new DialogInterface.OnClickListener() {
+		                public void onClick(DialogInterface dialogInterface, int id) {
+		                    dialogInterface.cancel();
+		                    //do nothing
+		                }
+		            });
+			        //create the alertdialog after customizing
+		            AlertDialog confirmSave = alertDB.create();
+		            confirmSave.show();
 		        }
 		        
 		        break;
 	        }
     	} 
 
+    }
+    
+    public static void setStringArrayPref(Context context, String key, ArrayList<String> values) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        JSONArray a = new JSONArray();
+        for (int i = 0; i < values.size(); i++) {
+            a.put(values.get(i));
+        }
+        if (!values.isEmpty()) {
+            editor.putString(key, a.toString());
+        } else {
+            editor.putString(key, null);
+        }
+        editor.commit();
     }
     
     

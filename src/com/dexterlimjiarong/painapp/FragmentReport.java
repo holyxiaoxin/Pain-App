@@ -29,6 +29,8 @@ public class FragmentReport extends Fragment {
       public static final String ITEM_NAME = "itemName";
 	  public static final String PREFS_NAME = "MyPrefsFile";
 	  public static final String REPORT_SIZE = "reportSize";
+	  public static final String REPORT_TYPE = "reportType";
+	  public static final String REPORT = "report";
  
       public FragmentReport() {
  
@@ -52,17 +54,22 @@ public class FragmentReport extends Fragment {
 	            TableRow tr = new TableRow(view.getContext());
 	            tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 	            //Retrieve report data from persisted data stored in Shared Preference
-	            String reportIdentifier = "report"+i;
-	            ArrayList<String> questionAnswersList = getStringArrayPref(view.getContext(),reportIdentifier);
+	            ArrayList<String> questionAnswersList = getStringArrayPref(view.getContext(),REPORT+i);
 	            //Convert ArrayList to String Array
 	            String[] questionAnswers = new String[questionAnswersList.size()];
 	            questionAnswers = questionAnswersList.toArray(questionAnswers);
-	         	// create a new TextView through the string array
+	            String questionType = pref.getString(REPORT_TYPE+i, "");
+	            TextView a = new TextView(view.getContext());
+	            a.setText(questionType);
+	            a.setPadding(10,10,30,10);
+	            a.setGravity(Gravity.LEFT);
+            	tr.addView(a);
+	         	// create a new TextView and add it to the table row through the string array
 	            for(String item:questionAnswers){
-	            	TextView a = new TextView(view.getContext());
+	            	a = new TextView(view.getContext());
 	            	a.setText(item);
 	            	//edit padding here to suit table's column titles
-	            	a.setPadding(10, 10, 30, 10);
+	            	a.setPadding(10,10,30,10);
 	            	a.setGravity(Gravity.LEFT);
 	            	tr.addView(a);
 	            }
