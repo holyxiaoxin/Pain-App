@@ -202,19 +202,17 @@ public class MainActivity extends Activity {
           Bundle args = new Bundle();
           switch (position) {
      
-        case 1:	//Home
+        case 1:	//Login
         	//since it did not fetch previous bundle, all data will be lost once the home navigation button is pressed
         	//should remember questionnaires entries? 
-              fragment = new FragmentOne();
-              args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
-                          .getItemName());
-              args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList
-                          .get(position).getImgResID());
-              break;
+//              fragment = new FragmentOne();
+//              args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
+//                          .getItemName());
+//              args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList
+//                          .get(position).getImgResID());
+        	fragment = new Fragment_Login();
+            break;
         case 3:	//PQAS
-            //questionnaireType = "PQAS", numberOfQuestions = 20, answerSize = 21, questionNumber = 1, question = (look below)
-            //fragment = new FragmentQuestion1("PQAS" ,20 , 21, 1, "Please use the scale below to tell us how INTENSE your pain has been over the past week, on average.");
-
         	//questionnaireType = "PQAS", answerSize = 21
             fragment = new Fragment_Question("PQAS", questionsType, questions, sliderTitle, 21);
             break;
