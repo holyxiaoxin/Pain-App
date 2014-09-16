@@ -17,14 +17,14 @@
 	        android:layout_marginBottom="10dip" 
 	        android:textSize="25dip"
 	        android:textStyle="bold"/>
-		<!--  Email Label -->
+		<!--  Username Label -->
 	    <TextView
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Email" />
-	    <!--  Email TextField -->
+	        android:text="Username" />
+	    <!--  Username TextField -->
 	    <EditText
-	        android:id="@+id/editLoginEmail"
+	        android:id="@+id/editLoginUsername"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:ems="10" >

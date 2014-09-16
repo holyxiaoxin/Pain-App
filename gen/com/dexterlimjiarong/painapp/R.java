@@ -1141,8 +1141,8 @@ containing a value of this type.
         public static final int drawer_itemName=0x7f05004f;
         public static final int drawer_layout=0x7f050046;
         public static final int dropdown=0x7f05000f;
-        public static final int editLoginEmail=0x7f050053;
         public static final int editLoginPassword=0x7f050054;
+        public static final int editLoginUsername=0x7f050053;
         public static final int edit_query=0x7f05003a;
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050030;

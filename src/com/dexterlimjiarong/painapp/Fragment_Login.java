@@ -4,19 +4,16 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.protocol.HTTP;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Fragment;
@@ -29,18 +26,21 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Fragment_Login extends Fragment implements OnClickListener{
 	
-	EditText mEditEmail;
+	EditText mEditUsername;
 	EditText mEditPassword;
 	Button loginButton;
 	
 	InputStream is = null;
 	String jsonString = "";
 	
-	final static String URL = "http://jiarong.me/android_login_api/";
+	//final static String URL = "http://jiarong.me/android_login_api/";
+	final static String URL = "http://jiarong.me/painapp/api/login-api.php";
 	final static String LOGIN_TAG = "login";
+	final static String KEY_SUCCESS = "success";
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +49,7 @@ public class Fragment_Login extends Fragment implements OnClickListener{
 	              false);
 		
 		
-		mEditEmail   = (EditText) view.findViewById(R.id.editLoginEmail);
+		mEditUsername   = (EditText) view.findViewById(R.id.editLoginUsername);
 		mEditPassword   = (EditText) view.findViewById(R.id.editLoginPassword);
 		
 		loginButton = (Button) view.findViewById(R.id.loginButton);
@@ -61,18 +61,34 @@ public class Fragment_Login extends Fragment implements OnClickListener{
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.id.loginButton:
-				String email = mEditEmail.getText().toString();
+				String username = mEditUsername.getText().toString();
 				String password = mEditPassword.getText().toString();
 				
-				String stringResponse = sendJson(email,password);
-				Log.d("stringResponse", stringResponse);
+				JSONObject json = sendJson(username,password);
+				try{
+					if (json.getString(KEY_SUCCESS) != null) {
+						//loginErrorMsg.setText("");
+						String res = json.getString(KEY_SUCCESS);
+						if(Integer.parseInt(res) == 1){	//SUCCESS
+							Toast.makeText(view.getContext(),"SUCCESS!", 
+									Toast.LENGTH_SHORT).show();
+						}else{
+							Toast.makeText(view.getContext(),"INCORRECT USERNAME/PASSWORD", 
+									Toast.LENGTH_SHORT).show();
+						}
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				
 		}
 		
 	}
 	
-	protected String sendJson(final String email, final String pwd) {
+	protected JSONObject sendJson(final String username, final String pwd) {
 		
 		String jsonString = null;
+		JSONObject json = null;
 		HttpClient client = new DefaultHttpClient();
         HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000); //Timeout Limit
         HttpResponse response;
@@ -83,23 +99,12 @@ public class Fragment_Login extends Fragment implements OnClickListener{
             
             ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
             postParameters.add(new BasicNameValuePair("tag", LOGIN_TAG));
-            Log.d("EMAIL: ", email);
+            Log.d("USERNAME: ", username);
             Log.d("PASSWORD: ", pwd);
-            postParameters.add(new BasicNameValuePair("email", email));
+            postParameters.add(new BasicNameValuePair("username", username));
             postParameters.add(new BasicNameValuePair("password", pwd));
             UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(postParameters);    
             
-//            List<NameValuePair> params = new ArrayList<NameValuePair>();
-//            params.add(new BasicNameValuePair("tag", LOGIN_TAG));
-//    		params.add(new BasicNameValuePair("email", email));
-//    		params.add(new BasicNameValuePair("password", pwd));
-//    		post.setEntity(new UrlEncodedFormEntity(params));
-            
-//            jsonObject.put("tag", LOGIN_TAG);
-//            jsonObject.put("email", email);
-//            jsonObject.put("password", pwd);
-//            StringEntity se = new StringEntity( jsonObject.toString());  
-//            se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
             post.setEntity(formEntity);
             
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -132,7 +137,14 @@ public class Fragment_Login extends Fragment implements OnClickListener{
 		} catch (Exception e) {
 			Log.e("Buffer Error", "Error converting result " + e.toString());
 		}
-        
-        return jsonString;
+        Log.d("stringResponse", jsonString);
+     // try parse the string to a JSON object
+     		try {
+     			json = new JSONObject(jsonString);			
+     		} catch (JSONException e) {
+     			Log.e("JSON Parser", "Error parsing data " + e.toString());
+     		}
+
+        return json;
 	}
 }
