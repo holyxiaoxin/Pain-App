@@ -1122,11 +1122,10 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f05002e;
-        public static final int action_settings=0x7f050067;
+        public static final int action_settings=0x7f05006c;
         public static final int activity_chooser_view_content=0x7f05002f;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
-        public static final int btnLinkToRegisterScreen=0x7f050057;
         public static final int button_question_back=0x7f050060;
         public static final int button_question_next_save=0x7f050061;
         public static final int checkbox=0x7f050037;
@@ -1143,19 +1142,23 @@ containing a value of this type.
         public static final int dropdown=0x7f05000f;
         public static final int editLoginPassword=0x7f050054;
         public static final int editLoginUsername=0x7f050053;
+        public static final int editRegisterConfirmPassword=0x7f050065;
+        public static final int editRegisterEmail=0x7f050063;
+        public static final int editRegisterPassword=0x7f050064;
+        public static final int editRegisterUsername=0x7f050062;
         public static final int edit_query=0x7f05003a;
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050030;
         public static final int expanded_menu=0x7f050036;
         public static final int frag1_icon=0x7f050058;
         public static final int frag1_text=0x7f050059;
-        public static final int frag2_icon=0x7f050065;
-        public static final int frag2_text=0x7f050066;
-        public static final int frag3_icon=0x7f050063;
-        public static final int frag3_text=0x7f050064;
+        public static final int frag2_icon=0x7f05006a;
+        public static final int frag2_text=0x7f05006b;
+        public static final int frag3_icon=0x7f050068;
+        public static final int frag3_text=0x7f050069;
         public static final int frag_question_image=0x7f05005a;
         public static final int frag_question_text=0x7f05005b;
-        public static final int frag_report_table=0x7f050062;
+        public static final int frag_report_table=0x7f050067;
         public static final int frag_slider_text=0x7f05005d;
         public static final int headerLayout=0x7f05004b;
         public static final int home=0x7f050014;
@@ -1188,6 +1191,8 @@ containing a value of this type.
         public static final int rb7=0x7f050021;
         public static final int rb8=0x7f050022;
         public static final int rb9=0x7f050023;
+        public static final int registerButton=0x7f050057;
+        public static final int register_error=0x7f050066;
         public static final int search_badge=0x7f05003c;
         public static final int search_bar=0x7f05003b;
         public static final int search_button=0x7f05003d;
@@ -1272,10 +1277,11 @@ containing a value of this type.
         public static final int fragment_layout_login=0x7f03001b;
         public static final int fragment_layout_one=0x7f03001c;
         public static final int fragment_layout_question=0x7f03001d;
-        public static final int fragment_layout_report=0x7f03001e;
-        public static final int fragment_layout_three=0x7f03001f;
-        public static final int fragment_layout_two=0x7f030020;
-        public static final int support_simple_spinner_dropdown_item=0x7f030021;
+        public static final int fragment_layout_register=0x7f03001e;
+        public static final int fragment_layout_report=0x7f03001f;
+        public static final int fragment_layout_three=0x7f030020;
+        public static final int fragment_layout_two=0x7f030021;
+        public static final int support_simple_spinner_dropdown_item=0x7f030022;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;

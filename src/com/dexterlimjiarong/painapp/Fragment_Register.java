@@ -4,24 +4,25 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Fragment_Login extends Fragment implements OnClickListener{
+public class Fragment_Register extends Fragment implements OnClickListener{
 	
 	EditText mEditUsername;
+	EditText mEditEmail;
 	EditText mEditPassword;
-	TextView loginErrorMsg;
+	EditText mEditConfirmPassword;
+	TextView registerErrorMsg;
 	
 	WordPressApiFunctions wordPressApiFunctions = new WordPressApiFunctions();
 	
@@ -31,17 +32,17 @@ public class Fragment_Login extends Fragment implements OnClickListener{
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_layout_login, container,
+		View view = inflater.inflate(R.layout.fragment_layout_register, container,
 	              false);
 		
 		
-		mEditUsername   = (EditText) view.findViewById(R.id.editLoginUsername);
-		mEditPassword   = (EditText) view.findViewById(R.id.editLoginPassword);
-		loginErrorMsg = (TextView) view.findViewById(R.id.login_error);
-		loginErrorMsg.setText("");	//clear error message at the start
+		mEditUsername   = (EditText) view.findViewById(R.id.editRegisterUsername);
+		mEditEmail   = (EditText) view.findViewById(R.id.editRegisterEmail);
+		mEditPassword   = (EditText) view.findViewById(R.id.editRegisterPassword);
+		mEditConfirmPassword   = (EditText) view.findViewById(R.id.editRegisterConfirmPassword);
+		registerErrorMsg = (TextView) view.findViewById(R.id.register_error);
 		
-		Button loginButton = (Button) view.findViewById(R.id.loginButton);
-		loginButton.setOnClickListener(this);
+		Log.d("register view", "register view");
 		Button registerButton = (Button) view.findViewById(R.id.registerButton);
 		registerButton.setOnClickListener(this);
 		return view;
@@ -50,20 +51,34 @@ public class Fragment_Login extends Fragment implements OnClickListener{
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
-			case R.id.loginButton:{
+			case R.id.registerButton:{
 				String username = mEditUsername.getText().toString();
+				String email = mEditEmail.getText().toString();
 				String password = mEditPassword.getText().toString();
-				//uses the wordpress api to login
-				JSONObject json = wordPressApiFunctions.loginUser(username,password);
+				String confirmPassword = mEditConfirmPassword.getText().toString();
+				
+				Log.e("base username" , username);
+				Log.e("base email" , email);
+				Log.e("base password" , password);
+				Log.e("base confirmPassword" , confirmPassword);
+				
+				//make sure that fields are valid before sending to API
+				if(!password.equals(confirmPassword)){
+					registerErrorMsg.setText("Passwords do not match.");
+					break;
+				}
+								
+				JSONObject json = wordPressApiFunctions.registerUser(username, password, email);
+				
 				try{
 					if (json.getString(KEY_SUCCESS) != null) {
+						registerErrorMsg.setText("");
 						if(Integer.parseInt(json.getString(KEY_SUCCESS)) == 1){	//SUCCESS
-							loginErrorMsg.setText("");	//clear error message if successful
 							Toast.makeText(view.getContext(),"SUCCESS!", 
 									Toast.LENGTH_SHORT).show();
 						}else{	//NOT SUCCESS
 							String error_string = json.getString(KEY_ERROR_STRING);
-							loginErrorMsg.setText(Html.fromHtml(error_string));
+							registerErrorMsg.setText(Html.fromHtml(error_string));
 						}
 					}
 				} catch (JSONException e) {
@@ -71,17 +86,9 @@ public class Fragment_Login extends Fragment implements OnClickListener{
 				}
 				break;
 			}
-			case R.id.registerButton:{
-				Log.d("debug","register LINK pressed");
-				//switch page to register button
-				FragmentManager frgManager = getFragmentManager();
-		        frgManager.beginTransaction().replace(R.id.content_frame, new Fragment_Register()).addToBackStack(null).commit();
-				break;
-			}
 			default:
 				Log.e("Button Error","button id not recorded in switch case");
 		}
 	}
-    
-    
+	
 }

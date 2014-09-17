@@ -22,11 +22,9 @@ import android.util.Log;
 
 public class WordPressApiFunctions {
 	
-	final static String LOGIN_URL = "http://jiarong.me/painapp/api/login-api.php";
-	final static String REGISTER_URL = "http://jiarong.me/painapp/api/register-api.php";
+	final static String URL = "http://jiarong.me/painapp/api/user-api.php";
 	final static String LOGIN_TAG = "login";
-	final static String KEY_SUCCESS = "success";
-	final static String KEY_ERROR_STRING = "errorstring";
+	final static String REGISTER_TAG = "register";
 	
 	public JSONObject loginUser(String username, String password){
 		// Building Parameters
@@ -34,8 +32,25 @@ public class WordPressApiFunctions {
 		params.add(new BasicNameValuePair("tag", LOGIN_TAG));
 		params.add(new BasicNameValuePair("username", username));
 		params.add(new BasicNameValuePair("password", password));
-		JSONObject json = getJSONFromUrl(LOGIN_URL, params);
+		JSONObject json = getJSONFromUrl(URL, params);
 
+		return json;
+	}
+	
+	public JSONObject registerUser(String username, String password ,String email){
+		// Building Parameters
+				List<NameValuePair> params = new ArrayList<NameValuePair>();
+				params.add(new BasicNameValuePair("tag", REGISTER_TAG));
+				params.add(new BasicNameValuePair("username", username));
+				params.add(new BasicNameValuePair("password", password));
+				params.add(new BasicNameValuePair("email", email));
+				JSONObject json = getJSONFromUrl(URL, params);
+				Log.d("register tag",REGISTER_TAG);
+				Log.d("username",username);
+				Log.d("password",password);
+				Log.d("email",email);
+				Log.d("URL", URL);
+		
 		return json;
 	}
     
@@ -47,13 +62,12 @@ public class WordPressApiFunctions {
         HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000); //Timeout Limit
         HttpResponse response;
         InputStream is = null;
+        
+        Log.d("getJSONFromUrl", "getJSONFromUrl");
 
         try {
-            HttpPost post = new HttpPost(LOGIN_URL);
+            HttpPost post = new HttpPost(url);
             
-            ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-//            postParameters.add(new BasicNameValuePair("username", username));
-//            postParameters.add(new BasicNameValuePair("password", pwd));
             UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(params);    
             
             post.setEntity(formEntity);
