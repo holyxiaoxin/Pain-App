@@ -22,9 +22,11 @@ import android.util.Log;
 
 public class WordPressApiFunctions {
 	
-	final static String URL = "http://jiarong.me/painapp/api/user-api.php";
+	final static String API_USER_URL = "http://jiarong.me/painapp/api/user.php";
+	final static String API_POST_URL = "http://jiarong.me/painapp/api/post.php";
 	final static String LOGIN_TAG = "login";
 	final static String REGISTER_TAG = "register";
+	final static String GET_POSTS_TAG = "get";
 	
 	public JSONObject loginUser(String username, String password){
 		// Building Parameters
@@ -32,7 +34,7 @@ public class WordPressApiFunctions {
 		params.add(new BasicNameValuePair("tag", LOGIN_TAG));
 		params.add(new BasicNameValuePair("username", username));
 		params.add(new BasicNameValuePair("password", password));
-		JSONObject json = getJSONFromUrl(URL, params);
+		JSONObject json = getJSONFromUrl(API_USER_URL, params);
 
 		return json;
 	}
@@ -44,16 +46,25 @@ public class WordPressApiFunctions {
 				params.add(new BasicNameValuePair("username", username));
 				params.add(new BasicNameValuePair("password", password));
 				params.add(new BasicNameValuePair("email", email));
-				JSONObject json = getJSONFromUrl(URL, params);
+				JSONObject json = getJSONFromUrl(API_USER_URL, params);
 				Log.d("register tag",REGISTER_TAG);
 				Log.d("username",username);
 				Log.d("password",password);
 				Log.d("email",email);
-				Log.d("URL", URL);
+				Log.d("URL", API_USER_URL);
 		
 		return json;
 	}
     
+	public JSONObject getPosts(){
+		// Building Parameters
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", GET_POSTS_TAG));
+		JSONObject json = getJSONFromUrl(API_POST_URL, params);
+
+		return json;
+	}
+	
 	private JSONObject getJSONFromUrl(String url, List<NameValuePair> params) {
 		
 		String jsonString = null;
