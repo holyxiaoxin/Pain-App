@@ -3,6 +3,10 @@ package com.dexterlimjiarong.painapp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,13 +19,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
  
 public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
  
       Context context;
       List<DrawerItem> drawerItemList;
       int layoutResID;
+      
+      final static String KEY_POST = "posts";
+      final static String KEY_TITLE = "title";
  
       public CustomDrawerAdapter(Context context, int layoutResourceID,
                   List<DrawerItem> listItems) {
@@ -38,6 +44,22 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
  
             DrawerItemHolder drawerHolder;
             View view = convertView;
+            
+            //setting up the list of assessments to be displayed by spinner
+            WordPressApiFunctions wordPressApiFunctions = new WordPressApiFunctions();
+            int postsSize=0;
+            JSONArray jsonArray = null;
+            
+            JSONObject json = wordPressApiFunctions.getPosts();
+            try{
+				if (json.getJSONArray(KEY_POST) != null) {
+					//gets all posts
+					jsonArray = json.getJSONArray(KEY_POST);
+					postsSize = jsonArray.length();
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
  
             if (view == null) {
                   LayoutInflater inflater = ((Activity) context).getLayoutInflater();
@@ -76,11 +98,31 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
  
                   List<SpinnerItem> userList = new ArrayList<SpinnerItem>();
  
-                    userList.add(new SpinnerItem(R.drawable.user1, "Ahamed Ishak",
-                              "ishakgmail.com"));
- 
-                  userList.add(new SpinnerItem(R.drawable.user2, "Brain Jekob",
-                              "brain.jgmail.com"));
+                  for (int i=0;i<postsSize;i++){                	  
+                	  try{
+          				if (jsonArray.getJSONObject(i) != null) {
+          					//gets post at index
+          					json = jsonArray.getJSONObject(i);
+          					try{
+                  				if (json.getString(KEY_TITLE) != null) {
+                  					//gets title of post
+                  					userList.add(new SpinnerItem(R.drawable.user1, json.getString(KEY_TITLE),
+                                            "extra details"));
+        	          			}
+        	          		} catch (JSONException e) {
+        	          				e.printStackTrace();
+        	          		}
+	          			}
+	          		} catch (JSONException e) {
+	          				e.printStackTrace();
+	          		}
+                  }
+                  
+//                    userList.add(new SpinnerItem(R.drawable.user1, "Ahamed Ishak",
+//                              "ishakgmail.com"));
+// 
+//                  userList.add(new SpinnerItem(R.drawable.user2, "Brain Jekob",
+//                              "brain.jgmail.com"));
  
                   CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(context,
                               R.layout.custom_spinner_item, userList);
