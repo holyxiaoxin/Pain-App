@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
  
 public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
  
@@ -51,26 +52,6 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
             View view = convertView;
             JSONArray jsonArray = null;
             JSONObject json = null;
-            
-            //setting up the list of assessments to be displayed by spinner
-//            WordPressApiFunctions wordPressApiFunctions = new WordPressApiFunctions();
-//            int postsSize=0;
-//            JSONObject json = null;
-//            JSONArray jsonArray = null;
-//            
-//            if (!isAssessmentsUpdated){
-//            	json = wordPressApiFunctions.getPosts();
-//            	try{
-//    				if (json.getJSONArray(KEY_POST) != null) {
-//    					//gets all posts
-//    					jsonArray = json.getJSONArray(KEY_POST);
-//    					postsSize = jsonArray.length();
-//    				}
-//    			} catch (JSONException e) {
-//    				e.printStackTrace();
-//    			}
-//            	isAssessmentsUpdated = true;
-//            }
             
             if(view!=null){
             	Context context = view.getContext();
@@ -144,12 +125,6 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
     	          		}
                       } 
                   }
-                  
-//                    userList.add(new SpinnerItem(R.drawable.user1, "Ahamed Ishak",
-//                              "ishakgmail.com"));
-// 
-//                  userList.add(new SpinnerItem(R.drawable.user2, "Brain Jekob",
-//                              "brain.jgmail.com"));
  
                   CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(context,
                               R.layout.custom_spinner_item, userList);
@@ -160,11 +135,10 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
                               .setOnItemSelectedListener(new OnItemSelectedListener() {
  
                                     @Override
-                                    public void onItemSelected(AdapterView<?> arg0,
-                                                View arg1, int arg2, long arg3) {
- 
-                                          //Toast.makeText(context, "User Changed",
-                                          //            Toast.LENGTH_SHORT).show();
+                                    public void onItemSelected(AdapterView<?> parent,
+                                                View view, int position, long id) {
+                                    	int indexOfSpinner = position;
+                                    	Toast.makeText(context, "IS SPINNER: "+ indexOfSpinner, Toast.LENGTH_SHORT).show();
                                     }
  
                                     @Override
