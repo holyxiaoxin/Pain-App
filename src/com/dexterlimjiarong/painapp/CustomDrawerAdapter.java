@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +27,12 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
       List<DrawerItem> drawerItemList;
       int layoutResID;
       
+      final static String PREFS_NAME = "MyPrefsFile";
+      final static String ASSESSMENTS_JSONARRAY = "assessmentsJSONArray";
       final static String KEY_POST = "posts";
       final static String KEY_TITLE = "title";
+      
+      boolean isAssessmentsUpdated = false;
  
       public CustomDrawerAdapter(Context context, int layoutResourceID,
                   List<DrawerItem> listItems) {
@@ -44,22 +49,42 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
  
             DrawerItemHolder drawerHolder;
             View view = convertView;
+            JSONArray jsonArray = null;
+            JSONObject json = null;
             
             //setting up the list of assessments to be displayed by spinner
-            WordPressApiFunctions wordPressApiFunctions = new WordPressApiFunctions();
-            int postsSize=0;
-            JSONArray jsonArray = null;
+//            WordPressApiFunctions wordPressApiFunctions = new WordPressApiFunctions();
+//            int postsSize=0;
+//            JSONObject json = null;
+//            JSONArray jsonArray = null;
+//            
+//            if (!isAssessmentsUpdated){
+//            	json = wordPressApiFunctions.getPosts();
+//            	try{
+//    				if (json.getJSONArray(KEY_POST) != null) {
+//    					//gets all posts
+//    					jsonArray = json.getJSONArray(KEY_POST);
+//    					postsSize = jsonArray.length();
+//    				}
+//    			} catch (JSONException e) {
+//    				e.printStackTrace();
+//    			}
+//            	isAssessmentsUpdated = true;
+//            }
             
-            JSONObject json = wordPressApiFunctions.getPosts();
-            try{
-				if (json.getJSONArray(KEY_POST) != null) {
-					//gets all posts
-					jsonArray = json.getJSONArray(KEY_POST);
-					postsSize = jsonArray.length();
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
+            if(view!=null){
+            	Context context = view.getContext();
+    			SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, 0);
+    			String jsonArrayString =  pref.getString(ASSESSMENTS_JSONARRAY, null);
+    			if(jsonArrayString!=null){
+    				try{
+        				//converts string in SharedPreferences to JSONArray of posts
+        				jsonArray = new JSONArray(jsonArrayString); 
+        			}catch (JSONException e) {
+          				e.printStackTrace();
+          			}
+    			}
+            }
  
             if (view == null) {
                   LayoutInflater inflater = ((Activity) context).getLayoutInflater();
@@ -97,25 +122,27 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
                   drawerHolder.spinnerLayout.setVisibility(LinearLayout.VISIBLE);
  
                   List<SpinnerItem> userList = new ArrayList<SpinnerItem>();
- 
-                  for (int i=0;i<postsSize;i++){                	  
-                	  try{
-          				if (jsonArray.getJSONObject(i) != null) {
-          					//gets post at index
-          					json = jsonArray.getJSONObject(i);
-          					try{
-                  				if (json.getString(KEY_TITLE) != null) {
-                  					//gets title of post
-                  					userList.add(new SpinnerItem(R.drawable.user1, json.getString(KEY_TITLE),
-                                            "extra details"));
-        	          			}
-        	          		} catch (JSONException e) {
-        	          				e.printStackTrace();
-        	          		}
-	          			}
-	          		} catch (JSONException e) {
-	          				e.printStackTrace();
-	          		}
+                  
+                  if(jsonArray!=null){
+                	  for (int i=0;i<jsonArray.length();i++){ 
+                    	  try{
+              				if (jsonArray.getJSONObject(i) != null) {
+              					//gets post at index
+              					json = jsonArray.getJSONObject(i);
+              					try{
+                      				if (json.getString(KEY_TITLE) != null) {
+                      					//gets title of post
+                      					userList.add(new SpinnerItem(R.drawable.user1, json.getString(KEY_TITLE),
+                                                "extra details"));
+            	          			}
+            	          		} catch (JSONException e) {
+            	          				e.printStackTrace();
+            	          		}
+    	          			}
+    	          		} catch (JSONException e) {
+    	          				e.printStackTrace();
+    	          		}
+                      } 
                   }
                   
 //                    userList.add(new SpinnerItem(R.drawable.user1, "Ahamed Ishak",

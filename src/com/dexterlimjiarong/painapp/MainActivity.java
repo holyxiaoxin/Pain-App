@@ -225,11 +225,7 @@ public class MainActivity extends Activity {
                         .get(position).getImgResID());
             break;
         case 8:	//Settings
-            fragment = new FragmentTwo();
-            args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
-                        .getItemName());
-            args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList
-                        .get(position).getImgResID());
+            fragment = new Fragment_Settings();
             break;
         case 9:	//Quit
             fragment = new FragmentTwo();
