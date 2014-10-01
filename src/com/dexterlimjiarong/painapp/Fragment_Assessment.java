@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -121,33 +122,52 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     		fragmentSize = Integer.parseInt(json.getString(KEY_NUMBER_OF_QUESTIONS));
     		//intialise questions multi array
     		questions = new String[fragmentSize][];
+    		//initialise questionsType
+    		questionsType = new String[fragmentSize];
     		//initialise slider titles
     		sliderTitles = new String[fragmentSize];
     		answerSize = fragmentSize;
     		//intialise questions
     		for(int i=0;i<jsonArray.length();i++){
 				json = jsonArray.getJSONObject(i);
-				questions[i][DEFAULT_INT_ZERO] = json.getString(KEY_QUESTION);
+				Log.d("frag_ass", json.toString());
+				
 				questionsType[i] = json.getString(KEY_QUESTION_TYPE);
+				
+				switch(questionsType[i]){
+					case TYPE_SLIDER:
+						//intialise question
+						questions[i] = new String[1];
+						questions[i][DEFAULT_INT_ZERO] = json.getString(KEY_QUESTION);
+						break;
+					case TYPE_RADIO:
+						//intialise question
+						String numberOfOptions = json.getString(KEY_NUMBER_OF_OPTIONS);
+						questions[i] = new String[Integer.parseInt(numberOfOptions)];
+						questions[i][DEFAULT_INT_ZERO] = json.getString(KEY_QUESTION);
+						
+						//initialising number of options
+						questions[i] = new String[Integer.parseInt(numberOfOptions)];
+						switch(numberOfOptions){
+							case "5":
+								questions[i][OPTION_FIVE] = json.getString(KEY_OPTION_FIVE);
+							case "4":
+								questions[i][OPTION_FOUR] = json.getString(KEY_OPTION_FOUR);
+							case "3":
+								questions[i][OPTION_THREE] = json.getString(KEY_OPTION_THREE);
+							case "2":
+								questions[i][OPTION_ONE] = json.getString(KEY_OPTION_ONE);
+								questions[i][OPTION_TWO] = json.getString(KEY_OPTION_TWO);
+								break;
+							default:
+								//number of options not listed above? print out error message
+								break;
+						}
+						break;
+				
+				}
 				if(questionsType[i] == TYPE_RADIO){
-					String numberOfOptions = json.getString(KEY_NUMBER_OF_OPTIONS);
-					//initialising number of options
-					questions[i] = new String[Integer.parseInt(numberOfOptions)];
-					switch(numberOfOptions){
-						case "5":
-							questions[i][OPTION_FIVE] = json.getString(KEY_OPTION_FIVE);
-						case "4":
-							questions[i][OPTION_FOUR] = json.getString(KEY_OPTION_FOUR);
-						case "3":
-							questions[i][OPTION_THREE] = json.getString(KEY_OPTION_THREE);
-						case "2":
-							questions[i][OPTION_ONE] = json.getString(KEY_OPTION_ONE);
-							questions[i][OPTION_TWO] = json.getString(KEY_OPTION_TWO);
-							break;
-						default:
-							//number of options not listed above? print out error message
-							break;
-					}
+					
 				}
     		}
 		} catch (JSONException e) {

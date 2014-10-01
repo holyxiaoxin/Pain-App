@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -53,8 +54,7 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
             JSONArray jsonArray = null;
             JSONObject json = null;
             
-            if(view!=null){
-            	Context context = view.getContext();
+//            if(view!=null){
     			SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, 0);
     			String jsonArrayString =  pref.getString(ASSESSMENTS_JSONARRAY, null);
     			if(jsonArrayString!=null){
@@ -65,7 +65,7 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
           				e.printStackTrace();
           			}
     			}
-            }
+//            }
  
             if (view == null) {
                   LayoutInflater inflater = ((Activity) context).getLayoutInflater();
@@ -132,13 +132,18 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
                   
 //                  drawerHolder.spinner.setSelection(position, false);
                   
+                  final JSONArray tempJSONArray = jsonArray;
                   drawerHolder.spinner.setOnItemSelectedListener(new OnItemSelectedListenerWrapper(new OnItemSelectedListener() {
 		                @Override
 		                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-		                	if(view!=null){
+		                		
 		                		int indexOfSpinner = position;
+		                		final JSONObject tempJSONObject = getTempJSONObject(tempJSONArray, position);
+		                		
 			                	Toast.makeText(context, "IS SPINNER: "+ indexOfSpinner, Toast.LENGTH_SHORT).show();
-		                	}
+			                	Context context = view.getContext();
+			                	FragmentManager frgManager = ((Activity) context).getFragmentManager();
+						        frgManager.beginTransaction().replace(R.id.content_frame, new Fragment_Assessment(tempJSONObject)).commit();
 		                }
 		 
                         @Override
@@ -172,6 +177,17 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
             ImageView icon;
             LinearLayout headerLayout, itemLayout, spinnerLayout;
             Spinner spinner;
+      }
+      
+      private JSONObject getTempJSONObject(JSONArray jsonArray, int position){
+    	  JSONObject json =null;
+    	  try{
+    		  json = jsonArray.getJSONObject(position);
+	  		}catch (JSONException e) {
+					e.printStackTrace();
+	    	}
+    	  return json;
+    	  
       }
       
       //prevents newly instantiated spinner from firing onItemSelected
