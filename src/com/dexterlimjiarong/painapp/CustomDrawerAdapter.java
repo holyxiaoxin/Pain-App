@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +36,7 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
       
       boolean isAssessmentsUpdated = false;
  
-      public CustomDrawerAdapter(Context context, int layoutResourceID,
-                  List<DrawerItem> listItems) {
+      public CustomDrawerAdapter(Context context, int layoutResourceID, List<DrawerItem> listItems) {
             super(context, layoutResourceID, listItems);
             this.context = context;
             this.drawerItemList = listItems;
@@ -104,6 +104,7 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
  
                   List<SpinnerItem> userList = new ArrayList<SpinnerItem>();
                   
+                  //draws spinner based on WordPress posts
                   if(jsonArray!=null){
                 	  for (int i=0;i<jsonArray.length();i++){ 
                     	  try{
@@ -126,27 +127,25 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
                       } 
                   }
  
-                  CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(context,
-                              R.layout.custom_spinner_item, userList);
- 
+                  CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(context, R.layout.custom_spinner_item, userList);
                   drawerHolder.spinner.setAdapter(adapter);
- 
-                  drawerHolder.spinner
-                              .setOnItemSelectedListener(new OnItemSelectedListener() {
- 
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> parent,
-                                                View view, int position, long id) {
-                                    	int indexOfSpinner = position;
-                                    	Toast.makeText(context, "IS SPINNER: "+ indexOfSpinner, Toast.LENGTH_SHORT).show();
-                                    }
- 
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> arg0) {
-                                          // TODO Auto-generated method stub
- 
-                                    }
-                              });
+                  
+//                  drawerHolder.spinner.setSelection(position, false);
+                  
+                  drawerHolder.spinner.setOnItemSelectedListener(new OnItemSelectedListenerWrapper(new OnItemSelectedListener() {
+		                @Override
+		                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+		                	if(view!=null){
+		                		int indexOfSpinner = position;
+			                	Toast.makeText(context, "IS SPINNER: "+ indexOfSpinner, Toast.LENGTH_SHORT).show();
+		                	}
+		                }
+		 
+                        @Override
+                        public void onNothingSelected(AdapterView<?> arg0) {
+                              // TODO Auto-generated method stub
+                        }
+                  }));
  
             } else if (dItem.getTitle() != null) {
                   drawerHolder.headerLayout.setVisibility(LinearLayout.VISIBLE);
@@ -174,4 +173,33 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
             LinearLayout headerLayout, itemLayout, spinnerLayout;
             Spinner spinner;
       }
+      
+      //prevents newly instantiated spinner from firing onItemSelected
+      public class OnItemSelectedListenerWrapper implements OnItemSelectedListener {
+
+    	    private int lastPosition;
+    	    private OnItemSelectedListener listener;
+
+    	    public OnItemSelectedListenerWrapper(OnItemSelectedListener aListener) {
+    	        lastPosition = 0;
+    	        listener = aListener;
+    	    }
+
+    	    @Override
+    	    public void onItemSelected(AdapterView<?> aParentView, View aView, int aPosition, long anId) {
+    	        if (lastPosition == aPosition) {
+    	            Log.d(getClass().getName(), "Ignoring onItemSelected for same position: " + aPosition);
+    	        } else {
+    	            Log.d(getClass().getName(), "Passing on onItemSelected for different position: " + aPosition);
+    	            listener.onItemSelected(aParentView, aView, aPosition, anId);
+    	        }
+    	        lastPosition = aPosition;
+    	    }
+
+    	    @Override
+    	    public void onNothingSelected(AdapterView<?> aParentView) {
+    	        listener.onNothingSelected(aParentView);
+    	    }
+    	}
+      
 }

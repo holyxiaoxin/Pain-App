@@ -23,8 +23,7 @@ public class CustomSpinnerAdapter extends ArrayAdapter<SpinnerItem>{
  
             this.context=context;
             this.layoutResID=layoutResourceID;
-            this.spinnerData=spinnerDataList;
- 
+            this.spinnerData=spinnerDataList; 
       }
  
       @Override
