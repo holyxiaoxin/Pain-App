@@ -77,17 +77,18 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     static final int NUMBER_OF_RADIO_IDS_AVAILABLE = 10;
     static final int QUESTION_INDEX = 0;
     static final int DEFAULT_INT_ZERO = 0;
+    static final int SLIDER_QUESTION_SIZE = 1;
     
-    static final int OPTION_ONE = 0;
-    static final int OPTION_TWO = 1;
-    static final int OPTION_THREE = 2;
-    static final int OPTION_FOUR = 3;
-    static final int OPTION_FIVE = 4;
-    static final int OPTION_SIX = 5;
-    static final int OPTION_SEVEN = 6;
-    static final int OPTION_EIGHT = 7;
-    static final int OPTION_NINE = 8;
-    static final int OPTION_TEN = 9;
+    static final int OPTION_ONE = 1;
+    static final int OPTION_TWO = 2;
+    static final int OPTION_THREE = 3;
+    static final int OPTION_FOUR = 4;
+    static final int OPTION_FIVE = 5;
+    static final int OPTION_SIX = 6;
+    static final int OPTION_SEVEN = 7;
+    static final int OPTION_EIGHT = 8;
+    static final int OPTION_NINE = 9;
+    static final int OPTION_TEN = 10;
     
     //json keys
     static final String KEY_TITLE = "title";
@@ -137,17 +138,16 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 				switch(questionsType[i]){
 					case TYPE_SLIDER:
 						//intialise question
-						questions[i] = new String[1];
+						questions[i] = new String[SLIDER_QUESTION_SIZE];
 						questions[i][DEFAULT_INT_ZERO] = json.getString(KEY_QUESTION);
 						break;
 					case TYPE_RADIO:
 						//intialise question
 						String numberOfOptions = json.getString(KEY_NUMBER_OF_OPTIONS);
-						questions[i] = new String[Integer.parseInt(numberOfOptions)];
+						questions[i] = new String[Integer.parseInt(numberOfOptions)+1];
 						questions[i][DEFAULT_INT_ZERO] = json.getString(KEY_QUESTION);
 						
 						//initialising number of options
-						questions[i] = new String[Integer.parseInt(numberOfOptions)];
 						switch(numberOfOptions){
 							case "5":
 								questions[i][OPTION_FIVE] = json.getString(KEY_OPTION_FIVE);
@@ -163,11 +163,9 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 								//number of options not listed above? print out error message
 								break;
 						}
+						Log.d("questions array inside radio switch: ", Arrays.deepToString(questions));
 						break;
 				
-				}
-				if(questionsType[i] == TYPE_RADIO){
-					
 				}
     		}
 		} catch (JSONException e) {
@@ -258,79 +256,88 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 				 backButtonView.setVisibility(View.VISIBLE);
 				 nextSaveButton.setText("Next");
 			 }
-		  /**
-		   * SEEKBAR
-		   */
-			 if (questionsType[currentQuestionNumber-1]==TYPE_SLIDER){
-				  volumeControl = (SeekBar) view.findViewById(R.id.volume_bar);
-					  //set up seekbar to remember previous entry (if any)
-					  if (questionAnswers[currentQuestionNumber-1] != null){
-						  System.out.println(painSliderValue);
-						  painSliderValue = Integer.parseInt(questionAnswers[currentQuestionNumber-1]);
-						  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+painSliderValue, 
-									Toast.LENGTH_SHORT).show();
-					  }
-					  volumeControl.setProgress(painSliderValue);
-		          volumeControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-		   
-		  			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-		  				painSliderValue = progress;
-		  			}
-		   
-		  			public void onStartTrackingTouch(SeekBar seekBar) {
-		  				// TODO Auto-generated method stub
-		  			}
-		   
-		  			public void onStopTrackingTouch(SeekBar seekBar) {
-		  				Toast.makeText(seekBar.getContext(),"Pain Scale:"+painSliderValue, 
-					Toast.LENGTH_SHORT).show();
-		  			}
-		          });
-			 }else if (questionsType[currentQuestionNumber-1]==TYPE_RADIO){
-		          /**
-		           * RADIO BUTTONS
-		           */
-				 final int numberOfRadioButtons = questions[currentQuestionNumber-1].length-1;
-				 //sets up radio button
-				 if (numberOfRadioButtons<=NUMBER_OF_RADIO_IDS_AVAILABLE){	//but first check if numberOfRadioButtons given by the questions exceeds the available ID Resources created for the radio buttons, CURRENTLY: 10
-					 final RadioButton[] rb = new RadioButton[numberOfRadioButtons]; 
-			         for(int i=0; i<numberOfRadioButtons; i++){
-			        	  rb[i] = new RadioButton(view.getContext());
-			        	  rb[i].setText(questions[currentQuestionNumber-1][i+1]);
-			        	  int idResource = getResources().getIdentifier("rb"+i, "id", view.getContext().getPackageName());
-			        	  rb[i].setId(idResource);
-			        	  radioGroup.addView(rb[i]);
-			         }
-				     //set up radio buttons to remember previous entry (if any)
-				        if (questionAnswers[currentQuestionNumber-1] != null){
-				        	radioButtonValue = Integer.parseInt(questionAnswers[currentQuestionNumber-1]);
-				      		  Toast.makeText(view.getContext(),"Refresh radiobutton:"+radioButtonValue, 
-				      					Toast.LENGTH_SHORT).show();
-				        }
-				        int idResource = getResources().getIdentifier("rb"+radioButtonValue, "id", view.getContext().getPackageName());
-				        
-				        radioGroup.check(idResource);
-			        //sets up on checked listener
-				        radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() 
-			        {
-			            public void onCheckedChanged(RadioGroup group, int checkedId) {
-			            	// finds which radiobutton is pressed and sets radiobuttonnumber
-			            	for(int i=0; i<numberOfRadioButtons; i++){
-			            		int idResource = getResources().getIdentifier("rb"+i, "id", group.getContext().getPackageName());
-			            		if (checkedId==idResource){
-			            			radioButtonValue = i;
-			            			System.out.println("radioButtonValue: "+ radioButtonValue);
-			            		}
-			            	}
-			            }
-			        });
-			         
-				 }else{//not enough radio button ids
-					 //output some error message
+		  
+			 switch (questionsType[currentQuestionNumber-1]){
+				 case TYPE_SLIDER:{
+					 /**
+					   * SEEKBAR
+					   */
+						 volumeControl = (SeekBar) view.findViewById(R.id.volume_bar);
+						  //set up seekbar to remember previous entry (if any)
+						  if (questionAnswers[currentQuestionNumber-1] != null){
+							  System.out.println(painSliderValue);
+							  painSliderValue = Integer.parseInt(questionAnswers[currentQuestionNumber-1]);
+							  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+painSliderValue, 
+										Toast.LENGTH_SHORT).show();
+						  }
+						  volumeControl.setProgress(painSliderValue);
+			          volumeControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			   
+			  			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+			  				painSliderValue = progress;
+			  			}
+			   
+			  			public void onStartTrackingTouch(SeekBar seekBar) {
+			  				// TODO Auto-generated method stub
+			  			}
+			   
+			  			public void onStopTrackingTouch(SeekBar seekBar) {
+			  				Toast.makeText(seekBar.getContext(),"Pain Scale:"+painSliderValue, 
+						Toast.LENGTH_SHORT).show();
+			  			}
+			          });
+					 break;
 				 }
-				 
-				 
+				 case TYPE_RADIO:{
+					 /**
+			           * RADIO BUTTONS
+			           */
+					 final int numberOfRadioButtons = questions[currentQuestionNumber-1].length-1;
+					 //sets up radio button
+					 if (numberOfRadioButtons<=NUMBER_OF_RADIO_IDS_AVAILABLE){	//but first check if numberOfRadioButtons given by the questions exceeds the available ID Resources created for the radio buttons, CURRENTLY: 10
+						 final RadioButton[] rb = new RadioButton[numberOfRadioButtons]; 
+				         for(int i=0; i<numberOfRadioButtons; i++){
+				        	  rb[i] = new RadioButton(view.getContext());
+				        	  rb[i].setText(questions[currentQuestionNumber-1][i+1]);
+				        	  int idResource = getResources().getIdentifier("rb"+i, "id", view.getContext().getPackageName());
+				        	  rb[i].setId(idResource);
+				        	  radioGroup.addView(rb[i]);
+				         }
+					     //set up radio buttons to remember previous entry (if any)
+					        if (questionAnswers[currentQuestionNumber-1] != null){
+					        	radioButtonValue = Integer.parseInt(questionAnswers[currentQuestionNumber-1]);
+					      		  Toast.makeText(view.getContext(),"Refresh radiobutton:"+radioButtonValue, 
+					      					Toast.LENGTH_SHORT).show();
+					        }
+					        int idResource = getResources().getIdentifier("rb"+radioButtonValue, "id", view.getContext().getPackageName());
+					        
+					        radioGroup.check(idResource);
+				        //sets up on checked listener
+					        radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() 
+				        {
+				            public void onCheckedChanged(RadioGroup group, int checkedId) {
+				            	// finds which radiobutton is pressed and sets radiobuttonnumber
+				            	for(int i=0; i<numberOfRadioButtons; i++){
+				            		int idResource = getResources().getIdentifier("rb"+i, "id", group.getContext().getPackageName());
+				            		if (checkedId==idResource){
+				            			radioButtonValue = i;
+				            			System.out.println("radioButtonValue: "+ radioButtonValue);
+				            		}
+				            	}
+				            }
+				        });
+				         
+					 }else{//not enough radio button ids
+						 //output some error message
+					 }
+					 break;
+				 }
+				 default:
+					 //prints out error message
+					 break;
 			 }
+			 
+			 
           
           /**
            * Set listeners for the different buttons
