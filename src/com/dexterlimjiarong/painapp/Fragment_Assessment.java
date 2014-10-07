@@ -429,6 +429,10 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 
     }
     
+    public String getAssessmentTitle(){
+    	return assessmentTitle;
+    }
+    
     public static void setStringArrayPref(Context context, String key, ArrayList<String> values) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();

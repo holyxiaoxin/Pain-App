@@ -19,12 +19,12 @@ import android.widget.ListView;
  
 public class MainActivity extends Activity {
  
-      private DrawerLayout mDrawerLayout;
-      private ListView mDrawerList;
+      public static DrawerLayout mDrawerLayout;
+      public static ListView mDrawerList;
       private ActionBarDrawerToggle mDrawerToggle;
  
       private CharSequence mDrawerTitle;
-      private CharSequence mTitle;
+      public CharSequence mTitle;
       CustomDrawerAdapter adapter;
  
       List<DrawerItem> dataList;
@@ -160,6 +160,8 @@ public class MainActivity extends Activity {
                   }
  
                   public void onDrawerOpened(View drawerView) {
+                	  	//forces updateView to the spinner whenever the drawer is opened
+                	  	adapter.updateView();
                         getActionBar().setTitle(mDrawerTitle);
                         invalidateOptionsMenu(); // creates call to
                                                                   // onPrepareOptionsMenu()

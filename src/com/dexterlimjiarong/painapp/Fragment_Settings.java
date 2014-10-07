@@ -60,6 +60,7 @@ public class Fragment_Settings extends Fragment implements OnClickListener{
     					SharedPreferences.Editor editor = pref.edit();
     					editor.putString(ASSESSMENTS_JSONARRAY, jsonArray.toString());
     					editor.commit();
+    					
     					//updated assessments successfully
     					Toast.makeText(view.getContext(),"Updated Assessments successfully!", Toast.LENGTH_SHORT).show();
     				}

@@ -8,9 +8,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,15 +22,16 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
  
 public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
  
-      Context context;
-      List<DrawerItem> drawerItemList;
-      int layoutResID;
+      static Context context;
+      static List<DrawerItem> drawerItemList;
+      static int layoutResID;
       
       final static String PREFS_NAME = "MyPrefsFile";
       final static String ASSESSMENTS_JSONARRAY = "assessmentsJSONArray";
@@ -143,7 +146,15 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 			                	Toast.makeText(context, "IS SPINNER: "+ indexOfSpinner, Toast.LENGTH_SHORT).show();
 			                	Context context = view.getContext();
 			                	FragmentManager frgManager = ((Activity) context).getFragmentManager();
-						        frgManager.beginTransaction().replace(R.id.content_frame, new Fragment_Assessment(tempJSONObject)).commit();
+			                	Fragment_Assessment assessmentFragment = new Fragment_Assessment(tempJSONObject);
+			                	Fragment spinnerFragment = assessmentFragment;
+						        frgManager.beginTransaction().replace(R.id.content_frame, spinnerFragment).commit();
+						        
+						        MainActivity mainActivity  = new MainActivity();
+						        mainActivity.mDrawerLayout.closeDrawer(mainActivity.mDrawerList);
+						        
+					            Activity activity = (Activity) context;
+					            activity.setTitle(assessmentFragment.getAssessmentTitle());
 		                }
 		 
                         @Override
@@ -188,6 +199,10 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 	    	}
     	  return json;
     	  
+      }
+      
+      public void updateView(){
+    	  notifyDataSetChanged();
       }
       
       //prevents newly instantiated spinner from firing onItemSelected
