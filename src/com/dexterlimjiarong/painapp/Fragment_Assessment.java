@@ -41,12 +41,11 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 	 * This will not change
 	 */
 	static String assessmentTitle = null;	//eg. PQAS
-	static String[] questionsType = null;	//eg. slider, radio, checkbox, etc.. 
+	static String[] questionType = null;	//eg. slider, radio, checkbox, etc.. 
 	static String[][] questions = null;	//this is all the questions for the assessment. The main question is always stored in question[index][0]. Each questions can contain several options (eg. some questions are needed for radiobuttons, checkboxes, etc).
 	static String[] sliderTitles = null; //this is the slider title for different questions (if the question has a slider in the first place)
 	static int answerSize = 0;	//the number of different answers there are from user inputs
 	static int fragmentSize = 0;	//the total number of questions. eg. Q1, Q2, Q3 ..... (i.e. the number of pages/fragments generated for the entire assessment)
-	static JSONArray jsonArray = null;
 	
 	/**
 	 * This will change depending on the specific questions
@@ -94,22 +93,25 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     static final String KEY_TITLE = "title";
     static final String KEY_QUESTIONS = "questions";
     static final String KEY_QUESTION = "question";
+    static final String KEY_OPTIONS = "options";
+    static final String KEY_OPTION = "option";
     static final String KEY_NUMBER_OF_QUESTIONS = "numberOfQuestions";
     static final String KEY_QUESTION_TYPE = "questionType";
     static final String KEY_NUMBER_OF_OPTIONS = "numberOfOptions";
-    static final String KEY_OPTION_ONE = "option1";
-    static final String KEY_OPTION_TWO = "option2";
-    static final String KEY_OPTION_THREE = "option3";
-    static final String KEY_OPTION_FOUR = "option4";
-    static final String KEY_OPTION_FIVE = "option5";
-    static final String KEY_OPTION_SIX = "option6";
-    static final String KEY_OPTION_SEVEN = "option7";
-    static final String KEY_OPTION_EIGHT = "option8";
-    static final String KEY_OPTION_NINE = "option9";
-    static final String KEY_OPTION_TEN = "option10";
+    
+    static final int INDEX_ONE = 0;
+    static final int INDEX_TWO = 1;
+    static final int INDEX_THREE = 2;
+    static final int INDEX_FOUR = 3;
+    static final int INDEX_FIVE = 4;
+    static final int INDEX_SIX = 5;
+    static final int INDEX_SEVEN = 6;
+    static final int INDEX_EIGHT = 7;
+    static final int INDEX_NINE = 8;
+    static final int INDEX_TEN = 9;
     
     //constructor for newly created questions
-    public Fragment_Assessment(JSONObject json) {
+    public Fragment_Assessment(JSONObject jsonAssessment) {
 //    	this.assessmentTitle = assessmentTitle;
 //    	this.questionsType = questionsType;
 //    	this.questions = questions;
@@ -117,47 +119,65 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 //    	this.answerSize = answerSize;
 //    	this.fragmentSize = questions.length;
     	
+    	JSONArray jsonArrayQuestions = null;
+    	JSONArray jsonArrayOptions = null;
+    	JSONObject jsonQuestion = null;
+    	JSONObject jsonOption = null;
+    	
     	try{
-    		jsonArray = json.getJSONArray(KEY_QUESTIONS);
-    		assessmentTitle = json.getString(KEY_TITLE);
-    		fragmentSize = Integer.parseInt(json.getString(KEY_NUMBER_OF_QUESTIONS));
+    		jsonArrayQuestions = jsonAssessment.getJSONArray(KEY_QUESTIONS);
+    		assessmentTitle = jsonAssessment.getString(KEY_TITLE);
+    		fragmentSize = jsonArrayQuestions.length();
     		//intialise questions multi array
     		questions = new String[fragmentSize][];
     		//initialise questionsType
-    		questionsType = new String[fragmentSize];
+    		questionType = new String[fragmentSize];
     		//initialise slider titles
     		sliderTitles = new String[fragmentSize];
     		answerSize = fragmentSize;
     		//intialise questions
-    		for(int i=0;i<jsonArray.length();i++){
-				json = jsonArray.getJSONObject(i);
-				Log.d("frag_ass", json.toString());
+    		for(int i=0;i<jsonArrayQuestions.length();i++){
+    			jsonQuestion = jsonArrayQuestions.getJSONObject(i);
+				Log.d("frag_question", jsonQuestion.toString());
 				
-				questionsType[i] = json.getString(KEY_QUESTION_TYPE);
+				questionType[i] = jsonQuestion.getString(KEY_QUESTION_TYPE);
+				Log.d("frag_questionType", questionType[i]);
 				
-				switch(questionsType[i]){
+				switch(questionType[i]){
 					case TYPE_SLIDER:
 						//intialise question
 						questions[i] = new String[SLIDER_QUESTION_SIZE];
-						questions[i][DEFAULT_INT_ZERO] = json.getString(KEY_QUESTION);
+						questions[i][DEFAULT_INT_ZERO] = jsonQuestion.getString(KEY_QUESTION);
 						break;
 					case TYPE_RADIO:
 						//intialise question
-						String numberOfOptions = json.getString(KEY_NUMBER_OF_OPTIONS);
-						questions[i] = new String[Integer.parseInt(numberOfOptions)+1];
-						questions[i][DEFAULT_INT_ZERO] = json.getString(KEY_QUESTION);
+//						String numberOfOptions = json.getString(KEY_NUMBER_OF_OPTIONS);
+						jsonArrayOptions = jsonQuestion.getJSONArray(KEY_OPTIONS);
+						int numberOfOptions = jsonArrayOptions.length();
+						questions[i] = new String[numberOfOptions+1];
+						questions[i][DEFAULT_INT_ZERO] = jsonQuestion.getString(KEY_QUESTION);
+						
+						Log.d("frag number of options", Integer.toString(numberOfOptions));
 						
 						//initialising number of options
 						switch(numberOfOptions){
-							case "5":
-								questions[i][OPTION_FIVE] = json.getString(KEY_OPTION_FIVE);
-							case "4":
-								questions[i][OPTION_FOUR] = json.getString(KEY_OPTION_FOUR);
-							case "3":
-								questions[i][OPTION_THREE] = json.getString(KEY_OPTION_THREE);
-							case "2":
-								questions[i][OPTION_ONE] = json.getString(KEY_OPTION_ONE);
-								questions[i][OPTION_TWO] = json.getString(KEY_OPTION_TWO);
+							case 5:
+								jsonOption = jsonArrayOptions.getJSONObject(INDEX_FIVE);
+								questions[i][OPTION_FIVE] = jsonOption.getString(KEY_OPTION);
+							case 4:
+								jsonOption = jsonArrayOptions.getJSONObject(INDEX_FOUR);
+								questions[i][OPTION_FOUR] = jsonOption.getString(KEY_OPTION);
+							case 3:
+								jsonOption = jsonArrayOptions.getJSONObject(INDEX_THREE);
+								questions[i][OPTION_THREE] = jsonOption.getString(KEY_OPTION);
+							case 2:
+								jsonOption = jsonArrayOptions.getJSONObject(INDEX_TWO);
+								questions[i][OPTION_ONE] = jsonOption.getString(KEY_OPTION);
+								
+							case 1:
+								jsonOption = jsonArrayOptions.getJSONObject(INDEX_ONE);
+								questions[i][OPTION_TWO] = jsonOption.getString(KEY_OPTION);
+								
 								break;
 							default:
 								//number of options not listed above? print out error message
@@ -215,7 +235,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 			 RadioGroup radioGroup = (RadioGroup) radioGroupView;
 			 radioGroupView.setVisibility(View.GONE);
 			 
-			 switch (questionsType[currentQuestionNumber-1]){
+			 switch (questionType[currentQuestionNumber-1]){
 			 	case "slider":
 					seekBarView.setVisibility(View.VISIBLE);
 					seekBarTitleView.setText(sliderTitles[currentQuestionNumber-1]);
@@ -257,7 +277,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 				 nextSaveButton.setText("Next");
 			 }
 		  
-			 switch (questionsType[currentQuestionNumber-1]){
+			 switch (questionType[currentQuestionNumber-1]){
 				 case TYPE_SLIDER:{
 					 /**
 					   * SEEKBAR
@@ -367,7 +387,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 	        }
 	        case R.id.button_question_next_save:{
 	        	//save values into questionAnswers
-	        	switch(questionsType[currentQuestionNumber-1]){
+	        	switch(questionType[currentQuestionNumber-1]){
 	        		case TYPE_SLIDER:
 	        			questionAnswers[currentQuestionNumber-1] = Integer.toString(painSliderValue);
 	        			break;
