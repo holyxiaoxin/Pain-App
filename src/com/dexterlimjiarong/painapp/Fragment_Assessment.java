@@ -112,12 +112,6 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     
     //constructor for newly created questions
     public Fragment_Assessment(JSONObject jsonAssessment) {
-//    	this.assessmentTitle = assessmentTitle;
-//    	this.questionsType = questionsType;
-//    	this.questions = questions;
-//    	this.sliderTitles = sliderTitles;
-//    	this.answerSize = answerSize;
-//    	this.fragmentSize = questions.length;
     	
     	JSONArray jsonArrayQuestions = null;
     	JSONArray jsonArrayOptions = null;
@@ -160,29 +154,11 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 						Log.d("frag number of options", Integer.toString(numberOfOptions));
 						
 						//initialising number of options
-						switch(numberOfOptions){
-							case 5:
-								jsonOption = jsonArrayOptions.getJSONObject(INDEX_FIVE);
-								questions[i][OPTION_FIVE] = jsonOption.getString(KEY_OPTION);
-							case 4:
-								jsonOption = jsonArrayOptions.getJSONObject(INDEX_FOUR);
-								questions[i][OPTION_FOUR] = jsonOption.getString(KEY_OPTION);
-							case 3:
-								jsonOption = jsonArrayOptions.getJSONObject(INDEX_THREE);
-								questions[i][OPTION_THREE] = jsonOption.getString(KEY_OPTION);
-							case 2:
-								jsonOption = jsonArrayOptions.getJSONObject(INDEX_TWO);
-								questions[i][OPTION_ONE] = jsonOption.getString(KEY_OPTION);
-								
-							case 1:
-								jsonOption = jsonArrayOptions.getJSONObject(INDEX_ONE);
-								questions[i][OPTION_TWO] = jsonOption.getString(KEY_OPTION);
-								
-								break;
-							default:
-								//number of options not listed above? print out error message
-								break;
+						for(int j=0;j<numberOfOptions;j++){
+							jsonOption = jsonArrayOptions.getJSONObject(j);
+							questions[i][j+1] = jsonOption.getString(KEY_OPTION);
 						}
+
 						Log.d("questions array inside radio switch: ", Arrays.deepToString(questions));
 						break;
 				
