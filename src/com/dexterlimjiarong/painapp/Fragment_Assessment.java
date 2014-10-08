@@ -42,10 +42,10 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 	 */
 	static String assessmentTitle = null;	//eg. PQAS
 	static String[] questionType = null;	//eg. slider, radio, checkbox, etc.. 
-	static String[][] questions = null;	//this is all the questions for the assessment. The main question is always stored in question[index][0]. Each questions can contain several options (eg. some questions are needed for radiobuttons, checkboxes, etc).
+	static String[] questions = null;	//this are all the questions for the assessment.
+	static String[][] options = null;	//this are all the options for the assessment. Eg, for question 1, the options are stored in options[0][], option 1 is in options[0][0] and so on.
 	static String[] sliderTitles = null; //this is the slider title for different questions (if the question has a slider in the first place)
-	static int answerSize = 0;	//the number of different answers there are from user inputs
-	static int fragmentSize = 0;	//the total number of questions. eg. Q1, Q2, Q3 ..... (i.e. the number of pages/fragments generated for the entire assessment)
+	static int questionsSize = 0;	//the total number of questions. eg. Q1, Q2, Q3 ..... (i.e. the number of pages/fragments generated for the entire assessment)
 	
 	/**
 	 * This will change depending on the specific questions
@@ -58,7 +58,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 	 */
 	//For now, the questionsAnswers stores answers for the static assessment: PQAS with the following questions below
 	//answers to questions 1-21 are string[0] - string[20]
-	static String[] questionAnswers = null;
+	static String[] response = null;
 	
 	ImageView ivIcon;
     TextView tvItemName;    
@@ -76,19 +76,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     static final int NUMBER_OF_RADIO_IDS_AVAILABLE = 10;
     static final int QUESTION_INDEX = 0;
     static final int DEFAULT_INT_ZERO = 0;
-    static final int SLIDER_QUESTION_SIZE = 1;
-    
-    static final int OPTION_ONE = 1;
-    static final int OPTION_TWO = 2;
-    static final int OPTION_THREE = 3;
-    static final int OPTION_FOUR = 4;
-    static final int OPTION_FIVE = 5;
-    static final int OPTION_SIX = 6;
-    static final int OPTION_SEVEN = 7;
-    static final int OPTION_EIGHT = 8;
-    static final int OPTION_NINE = 9;
-    static final int OPTION_TEN = 10;
-    
+
     //json keys
     static final String KEY_TITLE = "title";
     static final String KEY_QUESTIONS = "questions";
@@ -98,17 +86,6 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     static final String KEY_NUMBER_OF_QUESTIONS = "numberOfQuestions";
     static final String KEY_QUESTION_TYPE = "questionType";
     static final String KEY_NUMBER_OF_OPTIONS = "numberOfOptions";
-    
-    static final int INDEX_ONE = 0;
-    static final int INDEX_TWO = 1;
-    static final int INDEX_THREE = 2;
-    static final int INDEX_FOUR = 3;
-    static final int INDEX_FIVE = 4;
-    static final int INDEX_SIX = 5;
-    static final int INDEX_SEVEN = 6;
-    static final int INDEX_EIGHT = 7;
-    static final int INDEX_NINE = 8;
-    static final int INDEX_TEN = 9;
     
     //constructor for newly created questions
     public Fragment_Assessment(JSONObject jsonAssessment) {
@@ -121,14 +98,15 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     	try{
     		jsonArrayQuestions = jsonAssessment.getJSONArray(KEY_QUESTIONS);
     		assessmentTitle = jsonAssessment.getString(KEY_TITLE);
-    		fragmentSize = jsonArrayQuestions.length();
-    		//intialise questions multi array
-    		questions = new String[fragmentSize][];
+    		questionsSize = jsonArrayQuestions.length();
+    		//initialise questions
+    		questions = new String[questionsSize];
+    		//initialise options
+    		options = new String[questionsSize][];
     		//initialise questionsType
-    		questionType = new String[fragmentSize];
+    		questionType = new String[questionsSize];
     		//initialise slider titles
-    		sliderTitles = new String[fragmentSize];
-    		answerSize = fragmentSize;
+    		sliderTitles = new String[questionsSize];
     		//intialise questions
     		for(int i=0;i<jsonArrayQuestions.length();i++){
     			jsonQuestion = jsonArrayQuestions.getJSONObject(i);
@@ -140,23 +118,21 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 				switch(questionType[i]){
 					case TYPE_SLIDER:
 						//intialise question
-						questions[i] = new String[SLIDER_QUESTION_SIZE];
-						questions[i][DEFAULT_INT_ZERO] = jsonQuestion.getString(KEY_QUESTION);
+						questions[i] = jsonQuestion.getString(KEY_QUESTION);
 						break;
 					case TYPE_RADIO:
 						//intialise question
-//						String numberOfOptions = json.getString(KEY_NUMBER_OF_OPTIONS);
 						jsonArrayOptions = jsonQuestion.getJSONArray(KEY_OPTIONS);
 						int numberOfOptions = jsonArrayOptions.length();
-						questions[i] = new String[numberOfOptions+1];
-						questions[i][DEFAULT_INT_ZERO] = jsonQuestion.getString(KEY_QUESTION);
+						options[i] = new String[numberOfOptions+1];
+						questions[i] = jsonQuestion.getString(KEY_QUESTION);
 						
 						Log.d("frag number of options", Integer.toString(numberOfOptions));
 						
 						//initialising number of options
 						for(int j=0;j<numberOfOptions;j++){
 							jsonOption = jsonArrayOptions.getJSONObject(j);
-							questions[i][j+1] = jsonOption.getString(KEY_OPTION);
+							options[i][j] = jsonOption.getString(KEY_OPTION);
 						}
 
 						Log.d("questions array inside radio switch: ", Arrays.deepToString(questions));
@@ -169,16 +145,10 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 		}
     	
     	//sets up currentQuestion
-    	if (fragmentSize!=0){
-    		currentQuestion = questions[0][QUESTION_INDEX];	//gets first question
-    	}
-    	//sets up currentQuestionNumber
-    	if (fragmentSize!=0){
-    		currentQuestionNumber = 1;
-    	}
-    	//sets up questionAnswers
-    	if (answerSize!=0){
-    		questionAnswers = new String[answerSize];
+    	if (questionsSize!=0){
+    		currentQuestion = questions[0];	//sets up first question
+    		currentQuestionNumber = 1;	//sets up question number
+    		response = new String[questionsSize];	//sets up response sheet
     	}
     }
     
@@ -240,12 +210,12 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 			 
 			 if (currentQuestionNumber==1){	//first question does not have a back button
 				 backButtonView.setVisibility(View.GONE);
-				 if(currentQuestionNumber==fragmentSize){	//if the first question is also the last question
+				 if(currentQuestionNumber==questionsSize){	//if the first question is also the last question
 					 nextSaveButton.setText("Save");	//sets the next button to save instead
 				 }else{	//else there are more questions to come, therefore "next"
 					 nextSaveButton.setText("Next");
 				 }
-			 }else if(currentQuestionNumber==fragmentSize){
+			 }else if(currentQuestionNumber==questionsSize){
 				 backButtonView.setVisibility(View.VISIBLE);
 				 nextSaveButton.setText("Save");
 			 }else{	//middle questions
@@ -260,9 +230,9 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 					   */
 						 volumeControl = (SeekBar) view.findViewById(R.id.volume_bar);
 						  //set up seekbar to remember previous entry (if any)
-						  if (questionAnswers[currentQuestionNumber-1] != null){
+						  if (response[currentQuestionNumber-1] != null){
 							  System.out.println(painSliderValue);
-							  painSliderValue = Integer.parseInt(questionAnswers[currentQuestionNumber-1]);
+							  painSliderValue = Integer.parseInt(response[currentQuestionNumber-1]);
 							  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+painSliderValue, 
 										Toast.LENGTH_SHORT).show();
 						  }
@@ -288,20 +258,21 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 					 /**
 			           * RADIO BUTTONS
 			           */
-					 final int numberOfRadioButtons = questions[currentQuestionNumber-1].length-1;
+//					 final int numberOfRadioButtons = questions[currentQuestionNumber-1].length-1;
+					 final int numberOfRadioButtons = options[currentQuestionNumber-1].length-1;
 					 //sets up radio button
 					 if (numberOfRadioButtons<=NUMBER_OF_RADIO_IDS_AVAILABLE){	//but first check if numberOfRadioButtons given by the questions exceeds the available ID Resources created for the radio buttons, CURRENTLY: 10
 						 final RadioButton[] rb = new RadioButton[numberOfRadioButtons]; 
 				         for(int i=0; i<numberOfRadioButtons; i++){
 				        	  rb[i] = new RadioButton(view.getContext());
-				        	  rb[i].setText(questions[currentQuestionNumber-1][i+1]);
+				        	  rb[i].setText(options[currentQuestionNumber-1][i]);
 				        	  int idResource = getResources().getIdentifier("rb"+i, "id", view.getContext().getPackageName());
 				        	  rb[i].setId(idResource);
 				        	  radioGroup.addView(rb[i]);
 				         }
 					     //set up radio buttons to remember previous entry (if any)
-					        if (questionAnswers[currentQuestionNumber-1] != null){
-					        	radioButtonValue = Integer.parseInt(questionAnswers[currentQuestionNumber-1]);
+					        if (response[currentQuestionNumber-1] != null){
+					        	radioButtonValue = Integer.parseInt(response[currentQuestionNumber-1]);
 					      		  Toast.makeText(view.getContext(),"Refresh radiobutton:"+radioButtonValue, 
 					      					Toast.LENGTH_SHORT).show();
 					        }
@@ -354,7 +325,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 	    	case R.id.button_question_back:{
 	    		if(currentQuestionNumber!=1){	//first question does not have a back button
 	    			currentQuestionNumber--;
-			        currentQuestion = questions[currentQuestionNumber-1][QUESTION_INDEX];
+			        currentQuestion = questions[currentQuestionNumber-1];
 			        //update the view by replacing the fragment
 			        FragmentManager frgManager = getFragmentManager();
 			        frgManager.beginTransaction().replace(R.id.content_frame, new Fragment_Assessment()).commit();
@@ -362,21 +333,21 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 	        	break;
 	        }
 	        case R.id.button_question_next_save:{
-	        	//save values into questionAnswers
+	        	//save values into response
 	        	switch(questionType[currentQuestionNumber-1]){
 	        		case TYPE_SLIDER:
-	        			questionAnswers[currentQuestionNumber-1] = Integer.toString(painSliderValue);
+	        			response[currentQuestionNumber-1] = Integer.toString(painSliderValue);
 	        			break;
 	        		case TYPE_RADIO:
-	        			questionAnswers[currentQuestionNumber-1] = Integer.toString(radioButtonValue);	
+	        			response[currentQuestionNumber-1] = Integer.toString(radioButtonValue);	
 	        			break;
 	        		default:
 	        			//do nothing
 	        			break;
 	        	}
-		        if(currentQuestionNumber!=fragmentSize){	//if not the last question update variables to next question in assessment
+		        if(currentQuestionNumber!=questionsSize){	//if not the last question update variables to next question in assessment
 		        	currentQuestionNumber++;
-			        currentQuestion = questions[currentQuestionNumber-1][QUESTION_INDEX];
+			        currentQuestion = questions[currentQuestionNumber-1];
 			      //update the view by replacing the fragment
 			        FragmentManager frgManager = getFragmentManager();
 			        frgManager.beginTransaction().replace(R.id.content_frame, new Fragment_Assessment()).commit();
@@ -403,7 +374,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 			    		        //add assessmentTitle to the memory
 			    		        editor.putString(REPORT_TYPE+reportSize, assessmentTitle);
 			    		        editor.commit();
-			    		        setStringArrayPref(context,REPORT+reportSize, new ArrayList(Arrays.asList(questionAnswers)));
+			    		        setStringArrayPref(context,REPORT+reportSize, new ArrayList(Arrays.asList(response)));
 		    		        dialogInterface.cancel();
 		                }
 		            });
