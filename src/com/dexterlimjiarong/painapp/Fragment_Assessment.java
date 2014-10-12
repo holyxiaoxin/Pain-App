@@ -44,6 +44,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 	static String[] questionType = null;	//eg. slider, radio, checkbox, etc.. 
 	static String[] questions = null;	//this are all the questions for the assessment.
 	static String[][] options = null;	//this are all the options for the assessment. Eg, for question 1, the options are stored in options[0][], option 1 is in options[0][0] and so on.
+	static String[] maxValues = null;	//this are all the maxValues of sliders, can be empty if the question is not a slider
 	static String[] sliderTitles = null; //this is the slider title for different questions (if the question has a slider in the first place)
 	static int questionsSize = 0;	//the total number of questions. eg. Q1, Q2, Q3 ..... (i.e. the number of pages/fragments generated for the entire assessment)
 	
@@ -83,6 +84,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     static final String KEY_QUESTION = "question";
     static final String KEY_OPTIONS = "options";
     static final String KEY_OPTION = "option";
+    static final String KEY_MAX_VALUE = "maxValue";
     static final String KEY_NUMBER_OF_QUESTIONS = "numberOfQuestions";
     static final String KEY_QUESTION_TYPE = "questionType";
     static final String KEY_NUMBER_OF_OPTIONS = "numberOfOptions";
@@ -105,6 +107,8 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     		options = new String[questionsSize][];
     		//initialise questionsType
     		questionType = new String[questionsSize];
+    		//intialise maxValues
+    		maxValues = new String[questionsSize];
     		//initialise slider titles
     		sliderTitles = new String[questionsSize];
     		//intialise questions
@@ -117,8 +121,10 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 				
 				switch(questionType[i]){
 					case TYPE_SLIDER:
-						//intialise question
+						//initialise question
 						questions[i] = jsonQuestion.getString(KEY_QUESTION);
+						//initialise maxValue
+						maxValues[i] = jsonQuestion.getString(KEY_MAX_VALUE);
 						break;
 					case TYPE_RADIO:
 						//intialise question
@@ -181,6 +187,9 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 			 RadioGroup radioGroup = (RadioGroup) radioGroupView;
 			 radioGroupView.setVisibility(View.GONE);
 			 
+//			 Log.d("debug questionType Array: ",Arrays.toString(questionType));
+//			 Log.d("debug questionType currentQuestionNumber: ",Integer.toString(currentQuestionNumber));
+			 
 			 switch (questionType[currentQuestionNumber-1]){
 			 	case "slider":
 					seekBarView.setVisibility(View.VISIBLE);
@@ -237,22 +246,50 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 										Toast.LENGTH_SHORT).show();
 						  }
 						  volumeControl.setProgress(painSliderValue);
-			          volumeControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-			   
+					//sets max for slider if it is not defaulted
+					if(maxValues[currentQuestionNumber-1]!="" && !maxValues[currentQuestionNumber-1].isEmpty()){
+						int maxValue = Integer.parseInt(maxValues[currentQuestionNumber-1]);
+						volumeControl.setMax(maxValue);
+						if(maxValue>=5){
+							//changes the labels of steps until max value shown in the seekbar slider
+							TextView seekbarLabel1 = (TextView) view.findViewById(R.id.seekbar_label1);
+							TextView seekbarLabel2 = (TextView) view.findViewById(R.id.seekbar_label2);
+							TextView seekbarLabel3 = (TextView) view.findViewById(R.id.seekbar_label3);
+							TextView seekbarLabel4 = (TextView) view.findViewById(R.id.seekbar_label4);
+							TextView seekbarLabel5 = (TextView) view.findViewById(R.id.seekbar_label5);
+							seekbarLabel1.setText(Integer.toString((maxValue)*1/5));
+							seekbarLabel2.setText(Integer.toString((maxValue)*2/5));
+							seekbarLabel3.setText(Integer.toString((maxValue)*3/5));
+							seekbarLabel4.setText(Integer.toString((maxValue)*4/5));
+							seekbarLabel5.setText(Integer.toString((maxValue)*5/5));
+						}
+					}else{
+						volumeControl.setMax(10);
+						//changes the labels of steps until max value shown in the seekbar slider to default
+						TextView seekbarLabel1 = (TextView) view.findViewById(R.id.seekbar_label1);
+						TextView seekbarLabel2 = (TextView) view.findViewById(R.id.seekbar_label2);
+						TextView seekbarLabel3 = (TextView) view.findViewById(R.id.seekbar_label3);
+						TextView seekbarLabel4 = (TextView) view.findViewById(R.id.seekbar_label4);
+						TextView seekbarLabel5 = (TextView) view.findViewById(R.id.seekbar_label5);
+						seekbarLabel1.setText("2");
+						seekbarLabel2.setText("4");
+						seekbarLabel3.setText("6");
+						seekbarLabel4.setText("8");
+						seekbarLabel5.setText("10");
+					}
+					volumeControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			  			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
 			  				painSliderValue = progress;
 			  			}
-			   
 			  			public void onStartTrackingTouch(SeekBar seekBar) {
 			  				// TODO Auto-generated method stub
 			  			}
-			   
 			  			public void onStopTrackingTouch(SeekBar seekBar) {
-			  				Toast.makeText(seekBar.getContext(),"Pain Scale:"+painSliderValue, 
-						Toast.LENGTH_SHORT).show();
-			  			}
-			          });
-					 break;
+					  				Toast.makeText(seekBar.getContext(),"Pain Scale:"+painSliderValue, 
+					  				Toast.LENGTH_SHORT).show();
+						}
+					});
+					break;
 				 }
 				 case TYPE_RADIO:{
 					 /**
