@@ -85,7 +85,7 @@ public class MainActivity extends Activity {
       public static final String PQAS_SLIDER_TITLE_21 = "";
       
       /**
-       * HADS
+       * HADS - Hospital Anxiety and Depression Scale
        */
       public static final String HADS_QUESTION_1 = "I wake early and then sleep badly for the rest of the night.";
       public static final String HADS_QUESTION_2 = "I get very frustrated or have panic feelings for apparently no reason at all.";
@@ -106,7 +106,14 @@ public class MainActivity extends Activity {
     	  							HADS_QUESTION_10,HADS_QUESTION_11,HADS_QUESTION_12,HADS_QUESTION_13,HADS_QUESTION_14};
       JSONObject hads_json = null; //JSON object to be passed for HADS assessment
       
-      
+      /**
+       * VAS - Visual Analogue Scale
+       */
+      public static final String VAS_QUESTION_1 = "Rate your PHYSICAL discomfort/distress.";
+      public static final String VAS_QUESTION_2 = "Rate your EMOTIONAL discomfort/distress.";
+      public static final String VAS_MAXVALUE = "10";
+      public static final String[] VAS_QUESTION_LIST = {VAS_QUESTION_1, VAS_QUESTION_2};
+      JSONObject vas_json = null; //JSON object to be passed for VAS assessment
       
       //question types
       public static final String TYPE_SLIDER = "slider";
@@ -147,7 +154,25 @@ public class MainActivity extends Activity {
             	e.printStackTrace();
             }
             
-            Log.d("HADS", hads_json.toString());
+          //sets up the JSONObject for VAS Assessment 
+            vas_json = new JSONObject();
+            JSONArray vas_questions = new JSONArray();
+            try{
+            	vas_json.put("title","VAS");
+            	for(int i=0;i<VAS_QUESTION_LIST.length;i++){
+            		JSONObject vas_question = new JSONObject();
+            		vas_question.put("question",VAS_QUESTION_LIST[i]);
+            		vas_question.put("questionType","slider");
+            		vas_question.put("maxValue", VAS_MAXVALUE);
+            		vas_questions.put(vas_question);
+            	}
+            	vas_json.put("questions",vas_questions);
+            }catch (JSONException e) {
+            	// TODO Auto-generated catch block
+            	e.printStackTrace();
+            }
+            
+            
             
             // Initializing
             dataList = new ArrayList<DrawerItem>();
@@ -161,33 +186,29 @@ public class MainActivity extends Activity {
          //There must always be a drawerItem Header for every drawerItem
          // Add Drawer Item to dataList
  
-            //Username Header
-            dataList.add(new DrawerItem("Username"));
+            dataList.add(new DrawerItem("Username"));	//0. header for username
             dataList.add(new DrawerItem("Home", R.drawable.ic_action_email));	//1. Home
             
-            //Questionaire Header
-            dataList.add(new DrawerItem("Questionaire")); // adding a header to the list
+            dataList.add(new DrawerItem("Assessments")); //2. header for assessment
             dataList.add(new DrawerItem("HADS", R.drawable.ic_action_labels));	//3. HADS
-            //Spinner Future Implementation will allow user to choose which questionnaires to do
-            dataList.add(new DrawerItem("Custom Assessments", R.drawable.ic_action_labels));
+            dataList.add(new DrawerItem("VAS", R.drawable.ic_action_labels));	//4. VAS
+            dataList.add(new DrawerItem("Custom Assessments", R.drawable.ic_action_labels));	//5. Custom Assessments
             //dataList.add(new DrawerItem(true)); // adding a spinner to the list
             	//dataList.add(new DrawerItem("Likes", R.drawable.ic_action_good));
             	//dataList.add(new DrawerItem("Games", R.drawable.ic_action_gamepad));
             	//dataList.add(new DrawerItem("Lables", R.drawable.ic_action_labels));
  
-            //History
-            dataList.add(new DrawerItem("History"));
-            dataList.add(new DrawerItem("View Reports", R.drawable.ic_action_search));	//6. View Reports
+            dataList.add(new DrawerItem("History"));	//6. header for history
+            dataList.add(new DrawerItem("View Reports", R.drawable.ic_action_search));	//7. View Reports
             	//dataList.add(new DrawerItem("Cloud", R.drawable.ic_action_cloud));
             	//dataList.add(new DrawerItem("Camara", R.drawable.ic_action_camera));
             	//dataList.add(new DrawerItem("Video", R.drawable.ic_action_video));
             	//dataList.add(new DrawerItem("Groups", R.drawable.ic_action_group));
             	//dataList.add(new DrawerItem("Import & Export", R.drawable.ic_action_import_export));
  
-            //Pain Assessment
-            dataList.add(new DrawerItem("Pain Assessment"));
-            dataList.add(new DrawerItem("Settings", R.drawable.ic_action_about));	//8. Settings
-            dataList.add(new DrawerItem("Quit", R.drawable.ic_action_settings));	//9. Quit
+            dataList.add(new DrawerItem("Configurations"));	//7. header for configs
+            dataList.add(new DrawerItem("Settings", R.drawable.ic_action_about));	//9. Settings
+            dataList.add(new DrawerItem("Quit", R.drawable.ic_action_settings));	//10. Quit
             	//dataList.add(new DrawerItem("Help", R.drawable.ic_action_help));
  
             adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item,
@@ -267,20 +288,23 @@ public class MainActivity extends Activity {
         case 3:	//HADS Assessment
             fragment = new Fragment_Assessment(hads_json);
             break;
-        case 4:	//Custom Assessment
+        case 4:	//VAS Assessment
+            fragment = new Fragment_Assessment(vas_json);
+            break;    
+        case 5:	//Custom Assessment
             fragment = new Fragment_List_Of_Assessments();
             break;
-        case 6:	//Reports
+        case 7:	//Reports
             fragment = new Fragment_Report();
             args.putString(Fragment_Report.ITEM_NAME, dataList.get(position)
                         .getItemName());
             args.putInt(Fragment_Report.IMAGE_RESOURCE_ID, dataList
                         .get(position).getImgResID());
             break;
-        case 8:	//Settings
+        case 9:	//Settings
             fragment = new Fragment_Settings();
             break;
-        case 9:	//Quit
+        case 10:	//Quit
             fragment = new FragmentTwo();
             args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
                         .getItemName());
