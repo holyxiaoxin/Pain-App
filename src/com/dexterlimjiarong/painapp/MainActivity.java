@@ -118,7 +118,7 @@ public class MainActivity extends Activity {
             
             //Questionaire Header
             dataList.add(new DrawerItem("Questionaire")); // adding a header to the list
-            dataList.add(new DrawerItem("PQAS", R.drawable.ic_action_labels));	//3. PQAS
+            dataList.add(new DrawerItem("Custom Assessments", R.drawable.ic_action_labels));	//3. CustomAssessments
             //Spinner Future Implementation will allow user to choose which questionnaires to do
             dataList.add(new DrawerItem(true)); // adding a spinner to the list
             	//dataList.add(new DrawerItem("Likes", R.drawable.ic_action_good));
@@ -214,9 +214,8 @@ public class MainActivity extends Activity {
 //                          .get(position).getImgResID());
         	fragment = new Fragment_Login();
             break;
-        case 3:	//PQAS
-        	//questionnaireType = "PQAS", answerSize = 21
-            fragment = new Fragment_Question("PQAS", questionsType, questions, sliderTitle, 21);
+        case 3:	//Custom Assessment
+            fragment = new Fragment_List_Of_Assessments();
             break;
             
         case 6:	//Reports
