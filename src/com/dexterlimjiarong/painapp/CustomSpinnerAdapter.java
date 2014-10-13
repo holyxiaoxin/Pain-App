@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
- 
+
 public class CustomSpinnerAdapter extends ArrayAdapter<SpinnerItem>{
 
       Context context;

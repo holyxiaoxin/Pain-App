@@ -50,6 +50,7 @@
 			            android:secondaryProgress="0" />
 			 
 			        <LinearLayout
+			            android:id="@+id/seekbar_mul_5"
 			            android:layout_width="fill_parent"
 			            android:layout_height="wrap_content"
 			            android:orientation="horizontal"
@@ -58,7 +59,7 @@
 			            android:weightSum="12" >
 			 
 			            <TextView
-			                android:id="@+id/seekbar_label0"
+			                android:id="@+id/seekbar_label_typeA_0"
 			                android:layout_width="0dp"
 			                android:layout_height="wrap_content"
 			                android:layout_weight="2"
@@ -68,7 +69,7 @@
 			                android:textStyle="bold" />
 			 
 			            <TextView
-			                android:id="@+id/seekbar_label1"
+			                android:id="@+id/seekbar_label_typeA_1"
 			                android:layout_width="0dp"
 			                android:layout_height="wrap_content"
 			                android:layout_weight="2"
@@ -78,7 +79,7 @@
 			                android:textStyle="bold" />
 			 
 			            <TextView
-			                android:id="@+id/seekbar_label2"
+			                android:id="@+id/seekbar_label_typeA_2"
 			                android:layout_width="0dp"
 			                android:layout_height="wrap_content"
 			                android:layout_weight="2"
@@ -88,7 +89,7 @@
 			                android:textStyle="bold" />
 			 
 			            <TextView
-			                android:id="@+id/seekbar_label3"
+			                android:id="@+id/seekbar_label_typeA_3"
 			                android:layout_width="0dp"
 			                android:layout_height="wrap_content"
 			                android:layout_weight="2"
@@ -98,7 +99,7 @@
 			                android:textStyle="bold" />
 			 
 			            <TextView
-			                android:id="@+id/seekbar_label4"
+			                android:id="@+id/seekbar_label_typeA_4"
 			                android:layout_width="0dp"
 			                android:layout_height="wrap_content"
 			                android:layout_weight="2"
@@ -108,7 +109,7 @@
 			                android:textStyle="bold" />
 			 
 			            <TextView
-			                android:id="@+id/seekbar_label5"
+			                android:id="@+id/seekbar_label_typeA_5"
 			                android:layout_width="0dp"
 			                android:layout_height="wrap_content"
 			                android:layout_weight="2"
@@ -117,6 +118,58 @@
 			                android:textColor="@android:color/white"
 			                android:textStyle="bold" />
 			        </LinearLayout>
+			        
+			        <LinearLayout
+			            android:id="@+id/seekbar_mul_3"
+			            android:layout_width="fill_parent"
+			            android:layout_height="wrap_content"
+			            android:orientation="horizontal"
+			            android:visibility="visible"
+			            android:layout_marginBottom="10dp"
+			            android:weightSum="12" >
+			 
+			            <TextView
+			                android:id="@+id/seekbar_label_typeB_0"
+			                android:layout_width="0dp"
+			                android:layout_height="wrap_content"
+			                android:layout_weight="2"
+			                android:gravity="center_horizontal"
+			                android:text="0"
+			                android:textColor="@android:color/white"
+			                android:textStyle="bold" />
+			 
+			            <TextView
+			                android:id="@+id/seekbar_label_typeB_1"
+			                android:layout_width="0dp"
+			                android:layout_height="wrap_content"
+			                android:layout_weight="4.4"
+			                android:gravity="center_horizontal"
+			                android:text="1"
+			                android:textColor="@android:color/white"
+			                android:textStyle="bold" />
+			 
+			            <TextView
+			                android:id="@+id/seekbar_label_typeB_2"
+			                android:layout_width="0dp"
+			                android:layout_height="wrap_content"
+			                android:layout_weight="2.8"
+			                android:gravity="center_horizontal"
+			                android:text="2"
+			                android:textColor="@android:color/white"
+			                android:textStyle="bold" />
+			            
+			            <TextView
+			                android:id="@+id/seekbar_label_typeB_3"
+			                android:layout_width="0dp"
+			                android:layout_height="wrap_content"
+			                android:layout_weight="3.6"
+			                android:gravity="center_horizontal"
+			                android:text="3"
+			                android:textColor="@android:color/white"
+			                android:textStyle="bold" />
+
+			        </LinearLayout>
+			        
 		    </LinearLayout>
 		    <!--  	End of		-->
 		    <!--	SEEKBAR  	-->

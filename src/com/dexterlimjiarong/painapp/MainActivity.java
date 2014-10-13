@@ -2,15 +2,20 @@ package com.dexterlimjiarong.painapp;
  
 import java.util.ArrayList;
 import java.util.List;
- 
-import android.os.Bundle;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,11 +31,10 @@ public class MainActivity extends Activity {
       private CharSequence mDrawerTitle;
       public CharSequence mTitle;
       CustomDrawerAdapter adapter;
- 
       List<DrawerItem> dataList;
  
       /**
-       * QUESTIONNAIRES
+       * PQAS
        */
       //questions
       public static final String PQAS_QUESTION_1 = "Please use the scale below to tell us how INTENSE your pain has been over the past week, on average.";
@@ -80,6 +84,30 @@ public class MainActivity extends Activity {
       public static final String PQAS_SLIDER_TITLE_20 = "SURFACE";
       public static final String PQAS_SLIDER_TITLE_21 = "";
       
+      /**
+       * HADS
+       */
+      public static final String HADS_QUESTION_1 = "I wake early and then sleep badly for the rest of the night.";
+      public static final String HADS_QUESTION_2 = "I get very frustrated or have panic feelings for apparently no reason at all.";
+      public static final String HADS_QUESTION_3 = "I feel miserable and sad.";
+      public static final String HADS_QUESTION_4 = "I feel anxious when I go out of the house on my own.";
+      public static final String HADS_QUESTION_5 = "I have lost interest in things.";
+      public static final String HADS_QUESTION_6 = "I get palpitations, or sensations or ‘butterflies’ in my stomach or chest.";
+      public static final String HADS_QUESTION_7 = "I have a good appetite.";
+      public static final String HADS_QUESTION_8 = "I feel scared or frightened.";
+      public static final String HADS_QUESTION_9 = "I feel life is not worth living.";
+      public static final String HADS_QUESTION_10 = "I still enjoy the things I used to.";
+      public static final String HADS_QUESTION_11 = "I am restless and can’t keep still.";
+      public static final String HADS_QUESTION_12 = "I am more irritable than usual.";
+      public static final String HADS_QUESTION_13 = "I feel as if I have slowed down.";
+      public static final String HADS_QUESTION_14 = "Worrying thoughts constantly go through my mind.";
+      public static final String HADS_MAXVALUE = "3";
+      public static final String[] HADS_QUESTION_LIST = {HADS_QUESTION_1, HADS_QUESTION_2,HADS_QUESTION_3,HADS_QUESTION_4,HADS_QUESTION_5,HADS_QUESTION_6,HADS_QUESTION_7,HADS_QUESTION_8,HADS_QUESTION_9,
+    	  							HADS_QUESTION_10,HADS_QUESTION_11,HADS_QUESTION_12,HADS_QUESTION_13,HADS_QUESTION_14};
+      JSONObject hads_json = null; //JSON object to be passed for HADS assessment
+      
+      
+      
       //question types
       public static final String TYPE_SLIDER = "slider";
       public static final String TYPE_RADIO = "radio";
@@ -100,6 +128,27 @@ public class MainActivity extends Activity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
  
+            
+            //sets up the JSONObject for HADS Assessment 
+            hads_json = new JSONObject();
+            JSONArray hads_questions = new JSONArray();
+            try{
+            	hads_json.put("title","HADS");
+            	for(int i=0;i<HADS_QUESTION_LIST.length;i++){
+            		JSONObject hads_question = new JSONObject();
+            		hads_question.put("question",HADS_QUESTION_LIST[i]);
+            		hads_question.put("questionType","slider");
+            		hads_question.put("maxValue", HADS_MAXVALUE);
+            		hads_questions.put(hads_question);
+            	}
+            	hads_json.put("questions",hads_questions);
+            }catch (JSONException e) {
+            	// TODO Auto-generated catch block
+            	e.printStackTrace();
+            }
+            
+            Log.d("HADS", hads_json.toString());
+            
             // Initializing
             dataList = new ArrayList<DrawerItem>();
             mTitle = mDrawerTitle = getTitle();
@@ -118,9 +167,10 @@ public class MainActivity extends Activity {
             
             //Questionaire Header
             dataList.add(new DrawerItem("Questionaire")); // adding a header to the list
-            dataList.add(new DrawerItem("Custom Assessments", R.drawable.ic_action_labels));	//3. CustomAssessments
+            dataList.add(new DrawerItem("HADS", R.drawable.ic_action_labels));	//3. HADS
             //Spinner Future Implementation will allow user to choose which questionnaires to do
-            dataList.add(new DrawerItem(true)); // adding a spinner to the list
+            dataList.add(new DrawerItem("Custom Assessments", R.drawable.ic_action_labels));
+            //dataList.add(new DrawerItem(true)); // adding a spinner to the list
             	//dataList.add(new DrawerItem("Likes", R.drawable.ic_action_good));
             	//dataList.add(new DrawerItem("Games", R.drawable.ic_action_gamepad));
             	//dataList.add(new DrawerItem("Lables", R.drawable.ic_action_labels));
@@ -214,10 +264,12 @@ public class MainActivity extends Activity {
 //                          .get(position).getImgResID());
         	fragment = new Fragment_Login();
             break;
-        case 3:	//Custom Assessment
+        case 3:	//HADS Assessment
+            fragment = new Fragment_Assessment(hads_json);
+            break;
+        case 4:	//Custom Assessment
             fragment = new Fragment_List_Of_Assessments();
             break;
-            
         case 6:	//Reports
             fragment = new Fragment_Report();
             args.putString(Fragment_Report.ITEM_NAME, dataList.get(position)

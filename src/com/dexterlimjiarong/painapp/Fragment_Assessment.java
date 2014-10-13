@@ -23,6 +23,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -85,7 +86,6 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     static final String KEY_OPTIONS = "options";
     static final String KEY_OPTION = "option";
     static final String KEY_MAX_VALUE = "maxValue";
-    static final String KEY_NUMBER_OF_QUESTIONS = "numberOfQuestions";
     static final String KEY_QUESTION_TYPE = "questionType";
     static final String KEY_NUMBER_OF_OPTIONS = "numberOfOptions";
     
@@ -148,6 +148,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     		}
 		} catch (JSONException e) {
 			e.printStackTrace();
+			throw new RuntimeException("Assessment not in proper format.");
 		}
     	
     	//sets up currentQuestion
@@ -250,27 +251,67 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 					if(maxValues[currentQuestionNumber-1]!="" && !maxValues[currentQuestionNumber-1].isEmpty()){
 						int maxValue = Integer.parseInt(maxValues[currentQuestionNumber-1]);
 						volumeControl.setMax(maxValue);
-						if(maxValue>=5){
+						if(maxValue>=5){//multiples of 5 or >5
+							//hides l2 and show l1
+							LinearLayout l1 = (LinearLayout) view.findViewById(R.id.seekbar_mul_5);
+							LinearLayout l2 = (LinearLayout) view.findViewById(R.id.seekbar_mul_3);
+							l1.setVisibility(View.VISIBLE);
+							l2.setVisibility(View.GONE);
 							//changes the labels of steps until max value shown in the seekbar slider
-							TextView seekbarLabel1 = (TextView) view.findViewById(R.id.seekbar_label1);
-							TextView seekbarLabel2 = (TextView) view.findViewById(R.id.seekbar_label2);
-							TextView seekbarLabel3 = (TextView) view.findViewById(R.id.seekbar_label3);
-							TextView seekbarLabel4 = (TextView) view.findViewById(R.id.seekbar_label4);
-							TextView seekbarLabel5 = (TextView) view.findViewById(R.id.seekbar_label5);
+							TextView seekbarLabel1 = (TextView) view.findViewById(R.id.seekbar_label_typeA_1);
+							TextView seekbarLabel2 = (TextView) view.findViewById(R.id.seekbar_label_typeA_2);
+							TextView seekbarLabel3 = (TextView) view.findViewById(R.id.seekbar_label_typeA_3);
+							TextView seekbarLabel4 = (TextView) view.findViewById(R.id.seekbar_label_typeA_4);
+							TextView seekbarLabel5 = (TextView) view.findViewById(R.id.seekbar_label_typeA_5);
 							seekbarLabel1.setText(Integer.toString((maxValue)*1/5));
 							seekbarLabel2.setText(Integer.toString((maxValue)*2/5));
 							seekbarLabel3.setText(Integer.toString((maxValue)*3/5));
 							seekbarLabel4.setText(Integer.toString((maxValue)*4/5));
 							seekbarLabel5.setText(Integer.toString((maxValue)*5/5));
+						}else if(maxValue==3){//multiples of 3 or 3
+							//hides l1 and show l2
+							LinearLayout l1 = (LinearLayout) view.findViewById(R.id.seekbar_mul_5);
+							LinearLayout l2 = (LinearLayout) view.findViewById(R.id.seekbar_mul_3);
+							l1.setVisibility(View.GONE);
+							l2.setVisibility(View.VISIBLE);
+							//changes the labels of steps until max value shown in the seekbar slider
+							TextView seekbarLabel1 = (TextView) view.findViewById(R.id.seekbar_label_typeB_1);
+							TextView seekbarLabel2 = (TextView) view.findViewById(R.id.seekbar_label_typeB_2);
+							TextView seekbarLabel3 = (TextView) view.findViewById(R.id.seekbar_label_typeB_3);
+							seekbarLabel1.setText(Integer.toString((maxValue)*1/3));
+							seekbarLabel2.setText(Integer.toString((maxValue)*2/3));
+							seekbarLabel3.setText(Integer.toString((maxValue)*3/3));
+						}else{
+							//hides l2 and show l1
+							LinearLayout l1 = (LinearLayout) view.findViewById(R.id.seekbar_mul_5);
+							LinearLayout l2 = (LinearLayout) view.findViewById(R.id.seekbar_mul_3);
+							l1.setVisibility(View.VISIBLE);
+							l2.setVisibility(View.GONE);
+							//changes the labels of steps until max value shown in the seekbar slider
+							TextView seekbarLabel1 = (TextView) view.findViewById(R.id.seekbar_label_typeA_1);
+							TextView seekbarLabel2 = (TextView) view.findViewById(R.id.seekbar_label_typeA_2);
+							TextView seekbarLabel3 = (TextView) view.findViewById(R.id.seekbar_label_typeA_3);
+							TextView seekbarLabel4 = (TextView) view.findViewById(R.id.seekbar_label_typeA_4);
+							TextView seekbarLabel5 = (TextView) view.findViewById(R.id.seekbar_label_typeA_5);
+							seekbarLabel1.setText("");
+							seekbarLabel2.setText("");
+							seekbarLabel3.setText("");
+							seekbarLabel4.setText("");
+							seekbarLabel5.setText(Integer.toString(maxValue));
 						}
-					}else{
+					}else{//default
 						volumeControl.setMax(10);
+						//hides l2 and show l1
+						LinearLayout l1 = (LinearLayout) view.findViewById(R.id.seekbar_mul_5);
+						LinearLayout l2 = (LinearLayout) view.findViewById(R.id.seekbar_mul_3);
+						l1.setVisibility(View.VISIBLE);
+						l2.setVisibility(View.GONE);
 						//changes the labels of steps until max value shown in the seekbar slider to default
-						TextView seekbarLabel1 = (TextView) view.findViewById(R.id.seekbar_label1);
-						TextView seekbarLabel2 = (TextView) view.findViewById(R.id.seekbar_label2);
-						TextView seekbarLabel3 = (TextView) view.findViewById(R.id.seekbar_label3);
-						TextView seekbarLabel4 = (TextView) view.findViewById(R.id.seekbar_label4);
-						TextView seekbarLabel5 = (TextView) view.findViewById(R.id.seekbar_label5);
+						TextView seekbarLabel1 = (TextView) view.findViewById(R.id.seekbar_label_typeA_1);
+						TextView seekbarLabel2 = (TextView) view.findViewById(R.id.seekbar_label_typeA_2);
+						TextView seekbarLabel3 = (TextView) view.findViewById(R.id.seekbar_label_typeA_3);
+						TextView seekbarLabel4 = (TextView) view.findViewById(R.id.seekbar_label_typeA_4);
+						TextView seekbarLabel5 = (TextView) view.findViewById(R.id.seekbar_label_typeA_5);
 						seekbarLabel1.setText("2");
 						seekbarLabel2.setText("4");
 						seekbarLabel3.setText("6");
