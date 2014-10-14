@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
     >
+    
+    <Button
+        android:id="@+id/export_csv_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/green_custom_button"
+        android:layout_gravity="bottom"
+        android:textSize="20sp"
+        android:text="Export to CSV" />
+    
     <ScrollView
     android:layout_width="fill_parent" 
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_above="@id/export_csv_button"
+    android:layout_alignParentTop="true"
     android:scrollbars="vertical">
 	<HorizontalScrollView
         android:layout_width="fill_parent" 
@@ -78,10 +91,7 @@
 		            android:text="Q18"
 		            android:padding="3dip" />
 		        <TextView
-		            android:text="Q19_1"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q19_2"
+		            android:text="Q19"
 		            android:padding="3dip" />
 		        <TextView
 		            android:text="Q20"
@@ -92,5 +102,6 @@
 	</HorizontalScrollView>
 	</ScrollView>
     
- 
-</LinearLayout>
+	 
+        
+</RelativeLayout>

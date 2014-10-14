@@ -101,16 +101,21 @@ public class MainActivity extends Activity {
       public static final String HADS_QUESTION_12 = "I am more irritable than usual.";
       public static final String HADS_QUESTION_13 = "I feel as if I have slowed down.";
       public static final String HADS_QUESTION_14 = "Worrying thoughts constantly go through my mind.";
+      public static final String HADS_OPTION_1 = "No, not at all";
+      public static final String HADS_OPTION_2 = "No, not much";
+      public static final String HADS_OPTION_3 = "Yes, sometimes";
+      public static final String HADS_OPTION_4 = "Yes, definitely";
       public static final String HADS_MAXVALUE = "3";
       public static final String[] HADS_QUESTION_LIST = {HADS_QUESTION_1, HADS_QUESTION_2,HADS_QUESTION_3,HADS_QUESTION_4,HADS_QUESTION_5,HADS_QUESTION_6,HADS_QUESTION_7,HADS_QUESTION_8,HADS_QUESTION_9,
     	  							HADS_QUESTION_10,HADS_QUESTION_11,HADS_QUESTION_12,HADS_QUESTION_13,HADS_QUESTION_14};
+      public static final String[] HADS_OPTION_LIST = {HADS_OPTION_1, HADS_OPTION_2, HADS_OPTION_3, HADS_OPTION_4};
       JSONObject hads_json = null; //JSON object to be passed for HADS assessment
       
       /**
        * VAS - Visual Analogue Scale
        */
-      public static final String VAS_QUESTION_1 = "Rate your PHYSICAL discomfort/distress.";
-      public static final String VAS_QUESTION_2 = "Rate your EMOTIONAL discomfort/distress.";
+      public static final String VAS_QUESTION_1 = "How is your EMOTIONAL state today?";
+      public static final String VAS_QUESTION_2 = "How is your PHYSICAL health today?";
       public static final String VAS_MAXVALUE = "10";
       public static final String[] VAS_QUESTION_LIST = {VAS_QUESTION_1, VAS_QUESTION_2};
       JSONObject vas_json = null; //JSON object to be passed for VAS assessment
@@ -138,16 +143,53 @@ public class MainActivity extends Activity {
             
             //sets up the JSONObject for HADS Assessment 
             hads_json = new JSONObject();
+            /**
+             * this is only needed if radio buttons are used
+             */
+            JSONArray hads_options = new JSONArray();
+            JSONObject hads_option = null;
+            try{
+            	for(int i=0;i<4;i++){
+            		hads_option = new JSONObject();
+            		hads_option.put("option",HADS_OPTION_LIST[i]);
+            		hads_options.put(hads_option);
+            	}
+            }catch (JSONException e) {
+            	// TODO Auto-generated catch block
+            	e.printStackTrace();
+            }
+            /**
+             * end
+             */
+            
             JSONArray hads_questions = new JSONArray();
             try{
+            	//add the title to the HADS JSONObject
             	hads_json.put("title","HADS");
             	for(int i=0;i<HADS_QUESTION_LIST.length;i++){
+            		//creates a new single question object
             		JSONObject hads_question = new JSONObject();
+            		//adds the question into the question object
             		hads_question.put("question",HADS_QUESTION_LIST[i]);
-            		hads_question.put("questionType","slider");
-            		hads_question.put("maxValue", HADS_MAXVALUE);
+            		//adds the questionTpes into the question object
+            		/**
+            		 * yet to decide to use slider or radio buttons
+            		 * choose 1
+            		 */
+            		//1. for slider
+//            		hads_question.put("questionType","slider");
+//            		hads_question.put("maxValue", HADS_MAXVALUE);
+            		//2. for radio button
+            		hads_question.put("questionType","radio");
+            		hads_question.put("options",hads_options);
+            		hads_question.put("maxValue", "");
+            		/**
+            		 * end
+            		 */
+            		//append the question to the questions JSONArray
             		hads_questions.put(hads_question);
             	}
+            	//add questions JSONArray to the HADS JSONObject
             	hads_json.put("questions",hads_questions);
             }catch (JSONException e) {
             	// TODO Auto-generated catch block

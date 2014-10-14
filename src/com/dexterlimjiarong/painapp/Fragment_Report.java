@@ -1,24 +1,31 @@
 package com.dexterlimjiarong.painapp;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
+import au.com.bytecode.opencsv.CSVWriter;
  
 public class Fragment_Report extends Fragment {
  
@@ -58,9 +65,10 @@ public class Fragment_Report extends Fragment {
 	            //Convert ArrayList to String Array
 	            String[] questionAnswers = new String[questionAnswersList.size()];
 	            questionAnswers = questionAnswersList.toArray(questionAnswers);
-	            String questionType = pref.getString(REPORT_TYPE+i, "");
+	            //gets Question Title
+	            String assessmentTitle = pref.getString(REPORT_TYPE+i, "");
 	            TextView a = new TextView(view.getContext());
-	            a.setText(questionType);
+	            a.setText(assessmentTitle);
 	            a.setPadding(10,10,30,10);
 	            a.setGravity(Gravity.LEFT);
             	tr.addView(a);
@@ -75,6 +83,46 @@ public class Fragment_Report extends Fragment {
 	            }
 	            tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
             }
+            
+            
+            Button button= (Button) view.findViewById(R.id.export_csv_button);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                	
+                	File file = new File("/sdcard/assessmentReport.csv");
+            		if(file.exists()){
+            			new AlertDialog.Builder(v.getContext())
+            		    .setTitle("Export entry")
+            		    .setMessage("Existing report found, do you want to overwrite existing report?")
+            		    .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            		        public void onClick(DialogInterface dialog, int which) { 
+            		            // continue with export
+            		        	exportToCSV();
+            		        }
+            		     })
+            		    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            		        public void onClick(DialogInterface dialog, int which) { 
+            		            // do nothing
+            		        }
+            		     })
+            		    .setIcon(android.R.drawable.ic_dialog_alert)
+            		     .show();
+            		} 
+            		//Do somehting
+            			
+            		else{
+            			exportToCSV();
+            		}
+            		// Do something else.
+                	
+                	
+                	
+                	
+                	
+                }
+            });
+            
             
             return view;
       }
@@ -97,6 +145,48 @@ public class Fragment_Report extends Fragment {
     	    return questionAnswers;
       }
       
-      
+      private void exportToCSV(){
+    	  CSVWriter writer = null;
+    	  Context context = this.getView().getContext();
+      	try 
+      	{
+      		writer = new CSVWriter(new FileWriter("/sdcard/assessmentReport.csv"), ',');
+      	    //adds the header of the csv file
+      	    String[] firstRow = {"TITLE"};
+      	    writer.writeNext(firstRow);
+      	    
+      	    //writes the report into csv file
+      	    SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, 0);
+  	        int reportSize = pref.getInt(REPORT_SIZE,0);
+      	    for(int i=0;i<reportSize;i++){
+      	    	//Retrieve report data from persisted data stored in Shared Preference
+  	            ArrayList<String> questionAnswersList = getStringArrayPref(context,REPORT+i);
+  	            //Convert ArrayList to String Array
+  	            String[] questionAnswers = new String[questionAnswersList.size()];
+  	            questionAnswers = questionAnswersList.toArray(questionAnswers);
+  	            String assessmentTitle = pref.getString(REPORT_TYPE+i, "");
+  	            //creates a new row that contains all the answers to each assessment
+  	            String[] nextRow = new String[questionAnswers.length+1];
+  	            //sets Assessment Title as the first column of the next row
+  	            nextRow[0] = assessmentTitle;
+  	            for(int j=0;j<questionAnswers.length;j++){
+  	            	nextRow[j+1]=questionAnswers[j];
+  	            }    	
+  	            writer.writeNext(nextRow);
+      	    }
+      	    
+      	    
+      	    writer.close();
+      	    Toast.makeText(context,"Report successfully exported to CSV", 
+						Toast.LENGTH_SHORT).show();
+      	} 
+      	catch (IOException e)
+      	{
+      	    //error
+      		Toast.makeText(context,"Export has failed", 
+						Toast.LENGTH_SHORT).show();
+      		
+      	}
+      } 
  
 }

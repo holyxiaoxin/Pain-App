@@ -3,9 +3,19 @@
  
     <!-- special colors -->
     <color name="default_screen_bg">#20324a</color>
-    <color name="rounded_container_bg">#80000000</color>
-    <color name="rounded_container_border">#3b3f44</color>
+    
     <color name="light_gray_header_color">#646663</color>
+    
+    <color name="grey_rounded_container_slider_start">#95a5a6</color>
+    <color name="grey_rounded_container_slider_end">#7f8c8d</color>
+    
+    <color name="pink_rounded_container_slider_start">#ffaaaa</color>
+    <color name="pink_rounded_container_slider_end">#d46a6a</color>
+    
+    <color name="rounded_container_bg_radio_start">#ecf0f1</color>
+    <color name="rounded_container_bg_radio_end">#bdc3c7</color>
+    
+    
     
     <!-- basic colors -->
     <color name="white">#ffffff</color>

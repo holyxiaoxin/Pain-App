@@ -111,6 +111,10 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     		maxValues = new String[questionsSize];
     		//initialise slider titles
     		sliderTitles = new String[questionsSize];
+    		//have not code for slider titles, set as Slider as default
+    		for(int i=0;i<questionsSize;i++){
+    			sliderTitles[i]="Slider";
+    		}
     		//intialise questions
     		for(int i=0;i<jsonArrayQuestions.length();i++){
     			jsonQuestion = jsonArrayQuestions.getJSONObject(i);
@@ -186,6 +190,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 			 
 			 View radioGroupView = view.findViewById(R.id.radioGroup);
 			 RadioGroup radioGroup = (RadioGroup) radioGroupView;
+			 radioGroupView = view.findViewById(R.id.radio_view);
 			 radioGroupView.setVisibility(View.GONE);
 			 
 //			 Log.d("debug questionType Array: ",Arrays.toString(questionType));
