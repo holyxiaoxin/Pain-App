@@ -4,10 +4,9 @@
     <selector>
         <item>
             <shape>
-            	<stroke android:width="1.0px" android:startColor="@color/rounded_container_bg_radio_start" android:endColor="@color/rounded_container_bg_radio_end" />
-                <gradient android:startColor="@color/rounded_container_bg_radio_start" android:endColor="@color/rounded_container_bg_radio_end" android:angle="270.0" />
+            	<stroke android:width="1.0px" android:startColor="@color/orange_start" android:endColor="@color/orange_end" />
+                <gradient android:startColor="@color/orange_start" android:endColor="@color/orange_end" android:angle="270.0" />
                 <corners android:radius="10.0dip" />
- 
             </shape>
         </item>
     </selector>

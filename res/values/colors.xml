@@ -6,15 +6,17 @@
     
     <color name="light_gray_header_color">#646663</color>
     
-    <color name="grey_rounded_container_slider_start">#95a5a6</color>
-    <color name="grey_rounded_container_slider_end">#7f8c8d</color>
+    <color name="grey_start">#95a5a6</color>
+    <color name="grey_end">#95a5a6</color>
     
-    <color name="pink_rounded_container_slider_start">#ffaaaa</color>
-    <color name="pink_rounded_container_slider_end">#d46a6a</color>
+    <color name="pink_start">#ffaaaa</color>
+    <color name="pink_end">#ffaaaa</color>
     
-    <color name="rounded_container_bg_radio_start">#ecf0f1</color>
-    <color name="rounded_container_bg_radio_end">#bdc3c7</color>
+    <color name="silver_start">#ecf0f1</color>
+    <color name="silver_end">#ecf0f1</color>
     
+    <color name="orange_start">#e67e22</color>
+    <color name="orange_end">#e67e22</color>
     
     
     <!-- basic colors -->
