@@ -81,7 +81,7 @@ public class Fragment_Report extends Fragment {
 	            	a.setGravity(Gravity.LEFT);
 	            	tr.addView(a);
 	            }
-	            tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+	            tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
             }
             
             
@@ -93,8 +93,8 @@ public class Fragment_Report extends Fragment {
                 	File file = new File("/sdcard/assessmentReport.csv");
             		if(file.exists()){
             			new AlertDialog.Builder(v.getContext())
-            		    .setTitle("Export entry")
-            		    .setMessage("Existing report found, do you want to overwrite existing report?")
+            		    .setTitle("Existing report found")
+            		    .setMessage("Do you want to overwrite existing report?")
             		    .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
             		        public void onClick(DialogInterface dialog, int which) { 
             		            // continue with export
@@ -109,17 +109,9 @@ public class Fragment_Report extends Fragment {
             		    .setIcon(android.R.drawable.ic_dialog_alert)
             		     .show();
             		} 
-            		//Do somehting
-            			
             		else{
             			exportToCSV();
             		}
-            		// Do something else.
-                	
-                	
-                	
-                	
-                	
                 }
             });
             
