@@ -24,7 +24,7 @@
 			        android:layout_width="match_parent"
 			        android:layout_height="wrap_content"
 			        android:layout_margin="5dp"
-			        android:background="@drawable/background_view_rounded_slider_grey"
+			        android:background="@drawable/background_view_rounded_grey"
 			        android:orientation="vertical"
 			        android:visibility="visible" >
 			 
@@ -34,7 +34,7 @@
 			            android:layout_height="wrap_content"
 			            android:layout_gravity="center"
 			            android:padding="10dp"
-			            android:textColor="#ffffff"
+			            android:textColor="@color/white_smoke"
 			            android:textSize="20sp" />
 			        <!--  	SLIDER IMAGE	-->
 			        <LinearLayout
@@ -96,7 +96,7 @@
 			                android:layout_weight="2"
 			                android:gravity="center_horizontal"
 			                android:text="0"
-			                android:textColor="@android:color/white"
+			                android:textColor="@color/white_smoke"
 			                android:textStyle="bold" />
 			 
 			            <TextView
@@ -106,7 +106,7 @@
 			                android:layout_weight="2"
 			                android:gravity="center_horizontal"
 			                android:text="2"
-			                android:textColor="@android:color/white"
+			                android:textColor="@color/white_smoke"
 			                android:textStyle="bold" />
 			 
 			            <TextView
@@ -116,7 +116,7 @@
 			                android:layout_weight="2"
 			                android:gravity="center_horizontal"
 			                android:text="4"
-			                android:textColor="@android:color/white"
+			                android:textColor="@color/white_smoke"
 			                android:textStyle="bold" />
 			 
 			            <TextView
@@ -126,7 +126,7 @@
 			                android:layout_weight="2"
 			                android:gravity="center_horizontal"
 			                android:text="6"
-			                android:textColor="@android:color/white"
+			                android:textColor="@color/white_smoke"
 			                android:textStyle="bold" />
 			 
 			            <TextView
@@ -136,7 +136,7 @@
 			                android:layout_weight="2"
 			                android:gravity="center_horizontal"
 			                android:text="8"
-			                android:textColor="@android:color/white"
+			                android:textColor="@color/white_smoke"
 			                android:textStyle="bold" />
 			 
 			            <TextView
@@ -146,7 +146,7 @@
 			                android:layout_weight="2"
 			                android:gravity="center_horizontal"
 			                android:text="10"
-			                android:textColor="@android:color/white"
+			                android:textColor="@color/white_smoke"
 			                android:textStyle="bold" />
 			        </LinearLayout>
 			        
@@ -166,7 +166,7 @@
 			                android:layout_weight="2"
 			                android:gravity="center_horizontal"
 			                android:text="0"
-			                android:textColor="@android:color/white"
+			                android:textColor="@color/white_smoke"
 			                android:textStyle="bold" />
 			 
 			            <TextView
@@ -176,7 +176,7 @@
 			                android:layout_weight="4.4"
 			                android:gravity="center_horizontal"
 			                android:text="1"
-			                android:textColor="@android:color/white"
+			                android:textColor="@color/white_smoke"
 			                android:textStyle="bold" />
 			 
 			            <TextView
@@ -186,7 +186,7 @@
 			                android:layout_weight="2.8"
 			                android:gravity="center_horizontal"
 			                android:text="2"
-			                android:textColor="@android:color/white"
+			                android:textColor="@color/white_smoke"
 			                android:textStyle="bold" />
 			            
 			            <TextView
@@ -196,7 +196,7 @@
 			                android:layout_weight="3.6"
 			                android:gravity="center_horizontal"
 			                android:text="3"
-			                android:textColor="@android:color/white"
+			                android:textColor="@color/white_smoke"
 			                android:textStyle="bold" />
 
 			        </LinearLayout>
@@ -215,7 +215,7 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_margin="5dp"
-		        android:background="@drawable/background_view_rounded_radio_orange"
+		        android:background="@drawable/background_view_rounded_orange"
 		        android:orientation="vertical">
 		    
 			<RadioGroup

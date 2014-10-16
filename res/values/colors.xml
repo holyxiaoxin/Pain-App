@@ -12,8 +12,14 @@
     <color name="pink_start">#ffaaaa</color>
     <color name="pink_end">#ffaaaa</color>
     
-    <color name="silver_start">#ecf0f1</color>
-    <color name="silver_end">#ecf0f1</color>
+    <color name="blue_start">#A8B3CD</color>
+    <color name="blue_end">#A8B3CD</color>
+    
+    <color name="green_start">#26C281</color>
+    <color name="green_end">#26C281</color>
+    
+    <color name="yellow_start">#F5D76E</color>
+    <color name="yellow_end">#F5D76E</color>
     
     <color name="orange_start">#e67e22</color>
     <color name="orange_end">#e67e22</color>
@@ -21,6 +27,7 @@
     
     <!-- basic colors -->
     <color name="white">#ffffff</color>
+    <color name="white_smoke">#ECECEC</color>
     
  
 </resources>

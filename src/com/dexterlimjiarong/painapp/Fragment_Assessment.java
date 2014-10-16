@@ -34,7 +34,6 @@ import android.widget.Toast;
 
 public class Fragment_Assessment extends Fragment implements OnClickListener{
 
-	SeekBar volumeControl = null;
 	int painSliderValue = 0;
 	int radioButtonValue = 0;
 	/**
@@ -46,7 +45,8 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 	static String[] questions = null;	//this are all the questions for the assessment.
 	static String[][] options = null;	//this are all the options for the assessment. Eg, for question 1, the options are stored in options[0][], option 1 is in options[0][0] and so on.
 	static String[] maxValues = null;	//this are all the maxValues of sliders, can be empty if the question is not a slider
-	static String[] sliderTitles = null; //this is the slider title for different questions (if the question has a slider in the first place)
+	static String[] sliderTitles = null; //this are all the slider titles for different questions (if the question has a slider in the first place)
+	static String[] colors = null; //this are all the color for the scales
 	static int questionsSize = 0;	//the total number of questions. eg. Q1, Q2, Q3 ..... (i.e. the number of pages/fragments generated for the entire assessment)
 	
 	/**
@@ -88,6 +88,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     static final String KEY_MAX_VALUE = "maxValue";
     static final String KEY_QUESTION_TYPE = "questionType";
     static final String KEY_NUMBER_OF_OPTIONS = "numberOfOptions";
+    static final String KEY_COLOR = "color";
     
     //constructor for newly created questions
     public Fragment_Assessment(JSONObject jsonAssessment) {
@@ -115,6 +116,9 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     		for(int i=0;i<questionsSize;i++){
     			sliderTitles[i]="Slider";
     		}
+    		//initialise colors
+    		colors = new String[questionsSize];
+    		
     		//intialise questions
     		for(int i=0;i<jsonArrayQuestions.length();i++){
     			jsonQuestion = jsonArrayQuestions.getJSONObject(i);
@@ -127,27 +131,26 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 					case TYPE_SLIDER:
 						//initialise question
 						questions[i] = jsonQuestion.getString(KEY_QUESTION);
-						//initialise maxValue
+						//fill maxValue
 						maxValues[i] = jsonQuestion.getString(KEY_MAX_VALUE);
+						//fill colors
+						colors[i] = jsonQuestion.getString(KEY_COLOR);
 						break;
 					case TYPE_RADIO:
 						//intialise question
 						jsonArrayOptions = jsonQuestion.getJSONArray(KEY_OPTIONS);
 						int numberOfOptions = jsonArrayOptions.length();
-						options[i] = new String[numberOfOptions+1];
+						options[i] = new String[numberOfOptions];
 						questions[i] = jsonQuestion.getString(KEY_QUESTION);
-						
-						Log.d("frag number of options", Integer.toString(numberOfOptions));
-						
 						//initialising number of options
 						for(int j=0;j<numberOfOptions;j++){
 							jsonOption = jsonArrayOptions.getJSONObject(j);
 							options[i][j] = jsonOption.getString(KEY_OPTION);
 						}
-
+						//fill colors
+						colors[i] = jsonQuestion.getString(KEY_COLOR);
 						Log.d("questions array inside radio switch: ", Arrays.deepToString(questions));
 						break;
-				
 				}
     		}
 		} catch (JSONException e) {
@@ -185,7 +188,6 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 		   */
 			 //remove every type of inputs before adding the inputs base on the questionType
 			 View seekBarView = view.findViewById(R.id.slider_view);
-			 TextView seekBarTitleView = (TextView) view.findViewById(R.id.frag_slider_text);
 			 seekBarView.setVisibility(View.GONE);
 			 
 			 View radioGroupView = view.findViewById(R.id.radioGroup);
@@ -199,7 +201,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 			 switch (questionType[currentQuestionNumber-1]){
 			 	case "slider":
 					seekBarView.setVisibility(View.VISIBLE);
-					seekBarTitleView.setText(sliderTitles[currentQuestionNumber-1]);
+					
 					painSliderValue = 0; //resets pain slider value
 					break;
 				case "radio":
@@ -243,7 +245,35 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 					 /**
 					   * SEEKBAR
 					   */
-						 volumeControl = (SeekBar) view.findViewById(R.id.volume_bar);
+					 	//sets seekbar title
+					 	TextView seekBarTitleView = (TextView) view.findViewById(R.id.frag_slider_text);
+					 	seekBarTitleView.setText(sliderTitles[currentQuestionNumber-1]);
+					 	//sets seekbar color
+					 	Log.d("color",colors[currentQuestionNumber-1]);
+					 	switch(colors[currentQuestionNumber-1]){
+						 	case "grey":
+						 		seekBarView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_grey));
+						 		break;
+						 	case "pink":
+						 		seekBarView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_pink));
+						 		break;
+						 	case "orange":
+						 		seekBarView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_orange));
+						 		break;
+						 	case "green":
+						 		seekBarView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_green));
+						 		break;
+						 	case "blue":
+						 		seekBarView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_blue));
+						 		break;
+						 	case "yellow":
+						 		seekBarView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_yellow));
+						 		break;
+						 	default:
+						 		seekBarView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_grey));
+						 		break;
+					 	}
+					 	SeekBar seekBar = (SeekBar) view.findViewById(R.id.volume_bar);
 						  //set up seekbar to remember previous entry (if any)
 						  if (response[currentQuestionNumber-1] != null){
 							  System.out.println(painSliderValue);
@@ -251,11 +281,11 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 							  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+painSliderValue, 
 										Toast.LENGTH_SHORT).show();
 						  }
-						  volumeControl.setProgress(painSliderValue);
+						  seekBar.setProgress(painSliderValue);
 					//sets max for slider if it is not defaulted
 					if(maxValues[currentQuestionNumber-1]!="" && !maxValues[currentQuestionNumber-1].isEmpty()){
 						int maxValue = Integer.parseInt(maxValues[currentQuestionNumber-1]);
-						volumeControl.setMax(maxValue);
+						seekBar.setMax(maxValue);
 						if(maxValue>=5){//multiples of 5 or >5
 							//hides l2 and show l1
 							LinearLayout l1 = (LinearLayout) view.findViewById(R.id.seekbar_mul_5);
@@ -305,7 +335,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 							seekbarLabel5.setText(Integer.toString(maxValue));
 						}
 					}else{//default
-						volumeControl.setMax(10);
+						seekBar.setMax(10);
 						//hides l2 and show l1
 						LinearLayout l1 = (LinearLayout) view.findViewById(R.id.seekbar_mul_5);
 						LinearLayout l2 = (LinearLayout) view.findViewById(R.id.seekbar_mul_3);
@@ -323,7 +353,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 						seekbarLabel4.setText("8");
 						seekbarLabel5.setText("10");
 					}
-					volumeControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+					seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			  			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
 			  				painSliderValue = progress;
 			  			}
@@ -341,8 +371,32 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 					 /**
 			           * RADIO BUTTONS
 			           */
-//					 final int numberOfRadioButtons = questions[currentQuestionNumber-1].length-1;
-					 final int numberOfRadioButtons = options[currentQuestionNumber-1].length-1;
+					//sets radio color
+					 	switch(colors[currentQuestionNumber-1]){
+						 	case "grey":
+						 		radioGroupView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_grey));
+						 		break;
+						 	case "pink":
+						 		radioGroupView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_pink));
+						 		break;
+						 	case "orange":
+						 		radioGroupView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_orange));
+						 		break;
+						 	case "green":
+						 		radioGroupView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_green));
+						 		break;
+						 	case "blue":
+						 		radioGroupView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_blue));
+						 		break;
+						 	case "yellow":
+						 		radioGroupView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_yellow));
+						 		break;
+						 	default:
+						 		radioGroupView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_orange));
+						 		break;
+					 	}
+					 
+					 final int numberOfRadioButtons = options[currentQuestionNumber-1].length;
 					 //sets up radio button
 					 if (numberOfRadioButtons<=NUMBER_OF_RADIO_IDS_AVAILABLE){	//but first check if numberOfRadioButtons given by the questions exceeds the available ID Resources created for the radio buttons, CURRENTLY: 10
 						 final RadioButton[] rb = new RadioButton[numberOfRadioButtons]; 

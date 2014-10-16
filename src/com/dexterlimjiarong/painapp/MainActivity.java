@@ -109,6 +109,9 @@ public class MainActivity extends Activity {
       public static final String[] HADS_QUESTION_LIST = {HADS_QUESTION_1, HADS_QUESTION_2,HADS_QUESTION_3,HADS_QUESTION_4,HADS_QUESTION_5,HADS_QUESTION_6,HADS_QUESTION_7,HADS_QUESTION_8,HADS_QUESTION_9,
     	  							HADS_QUESTION_10,HADS_QUESTION_11,HADS_QUESTION_12,HADS_QUESTION_13,HADS_QUESTION_14};
       public static final String[] HADS_OPTION_LIST = {HADS_OPTION_1, HADS_OPTION_2, HADS_OPTION_3, HADS_OPTION_4};
+      public static final String DEFAULT_COLOR = "default";
+      public static final String[] HADS_COLOR_LIST = {DEFAULT_COLOR, DEFAULT_COLOR, DEFAULT_COLOR, DEFAULT_COLOR, DEFAULT_COLOR, DEFAULT_COLOR, DEFAULT_COLOR, 
+    	  											DEFAULT_COLOR, DEFAULT_COLOR, DEFAULT_COLOR, DEFAULT_COLOR, DEFAULT_COLOR, DEFAULT_COLOR, DEFAULT_COLOR};
       JSONObject hads_json = null; //JSON object to be passed for HADS assessment
       
       /**
@@ -118,6 +121,9 @@ public class MainActivity extends Activity {
       public static final String VAS_QUESTION_2 = "How is your PHYSICAL health today?";
       public static final String VAS_MAXVALUE = "10";
       public static final String[] VAS_QUESTION_LIST = {VAS_QUESTION_1, VAS_QUESTION_2};
+      public static final String VAS_QUESTION_1_COLOR = "pink";
+      public static final String VAS_QUESTION_2_COLOR = "blue";
+      public static final String[] VAS_COLOR_LIST = {VAS_QUESTION_1_COLOR, VAS_QUESTION_2_COLOR};
       JSONObject vas_json = null; //JSON object to be passed for VAS assessment
       
       //question types
@@ -171,6 +177,8 @@ public class MainActivity extends Activity {
             		JSONObject hads_question = new JSONObject();
             		//adds the question into the question object
             		hads_question.put("question",HADS_QUESTION_LIST[i]);
+            		//adds the color into the question object
+            		hads_question.put("color", HADS_COLOR_LIST[i]);
             		//adds the questionTpes into the question object
             		/**
             		 * yet to decide to use slider or radio buttons
@@ -206,6 +214,7 @@ public class MainActivity extends Activity {
             		vas_question.put("question",VAS_QUESTION_LIST[i]);
             		vas_question.put("questionType","slider");
             		vas_question.put("maxValue", VAS_MAXVALUE);
+            		vas_question.put("color", VAS_COLOR_LIST[i]);
             		vas_questions.put(vas_question);
             	}
             	vas_json.put("questions",vas_questions);
@@ -213,8 +222,6 @@ public class MainActivity extends Activity {
             	// TODO Auto-generated catch block
             	e.printStackTrace();
             }
-            
-            
             
             // Initializing
             dataList = new ArrayList<DrawerItem>();
