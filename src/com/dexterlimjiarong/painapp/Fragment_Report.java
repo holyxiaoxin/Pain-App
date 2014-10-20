@@ -10,6 +10,7 @@ import org.json.JSONException;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -34,11 +35,11 @@ public class Fragment_Report extends Fragment {
  
       public static final String IMAGE_RESOURCE_ID = "iconResourceID";
       public static final String ITEM_NAME = "itemName";
-	  public static final String PREFS_NAME = "MyPrefsFile";
-	  public static final String REPORT_SIZE = "reportSize";
-	  public static final String REPORT_TYPE = "reportType";
+	  static final String PREFS_NAME = "MyPrefsFile";
+	  static final String REPORT_SIZE = "reportSize";
+	  static final String REPORT_TYPE = "reportType";
 	  static final String REPORT_FREE_TEXT_VAS = "reportFreeTextVAS";
-	  public static final String REPORT = "report";
+	  static final String REPORT = "report";
  
       public Fragment_Report() {
  
@@ -86,8 +87,8 @@ public class Fragment_Report extends Fragment {
             }
             
             
-            Button button= (Button) view.findViewById(R.id.export_csv_button);
-            button.setOnClickListener(new View.OnClickListener() {
+            Button exportButton = (Button) view.findViewById(R.id.export_csv_button);
+            exportButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                 	
@@ -114,6 +115,20 @@ public class Fragment_Report extends Fragment {
             			exportToCSV();
             		}
                 }
+            });
+            
+            Button switchViewButton = (Button) view.findViewById(R.id.switch_report_view_button);
+            switchViewButton.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					//update the view by replacing the fragment
+			        FragmentManager frgManager = getFragmentManager();
+			        frgManager.beginTransaction().replace(R.id.content_frame, new Fragment_Report_List()).commit();
+				}
+            	
+            	
             });
             
             

@@ -6,12 +6,20 @@
     >
     
     <Button
-        android:id="@+id/export_csv_button"
+        android:id="@+id/switch_report_view_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@drawable/blue_custom_button"
+        android:textSize="20sp"
+        android:text="Switch View" />
+    
+    <Button
+        android:id="@+id/export_csv_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/green_custom_button"
-        android:layout_gravity="bottom"
+        android:layout_above="@id/switch_report_view_button"
         android:textSize="20sp"
         android:text="Export to CSV" />
     
