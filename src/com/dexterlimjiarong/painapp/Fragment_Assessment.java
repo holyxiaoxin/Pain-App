@@ -16,12 +16,14 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -62,6 +64,12 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 	//answers to questions 1-21 are string[0] - string[20]
 	static String[] response = null;
 	
+	/**
+	 * ONLY FOR VAS
+	 */
+	static String[] freeTextVAS = null;
+	
+	
 	ImageView ivIcon;
     TextView tvItemName;    
     
@@ -71,6 +79,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 	static final String PREFS_NAME = "MyPrefsFile";
 	static final String REPORT_SIZE = "reportSize";
 	static final String REPORT_TYPE = "reportType";
+	static final String REPORT_FREE_TEXT_VAS = "reportFreeTextVAS";
 	static final String REPORT = "report";
     static final String TYPE_SLIDER = "slider";
     static final String TYPE_RADIO = "radio";
@@ -92,11 +101,15 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     
     //constructor for newly created questions
     public Fragment_Assessment(JSONObject jsonAssessment) {
-    	
     	JSONArray jsonArrayQuestions = null;
     	JSONArray jsonArrayOptions = null;
     	JSONObject jsonQuestion = null;
     	JSONObject jsonOption = null;
+    	
+    	/**
+    	 * ONLY FOR VAS
+    	 */
+    	freeTextVAS = new String[2];
     	
     	try{
     		jsonArrayQuestions = jsonAssessment.getJSONArray(KEY_QUESTIONS);
@@ -482,55 +495,84 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 	        			//do nothing
 	        			break;
 	        	}
-		        if(currentQuestionNumber!=questionsSize){	//if not the last question update variables to next question in assessment
-		        	currentQuestionNumber++;
-			        currentQuestion = questions[currentQuestionNumber-1];
-			      //update the view by replacing the fragment
-			        FragmentManager frgManager = getFragmentManager();
-			        frgManager.beginTransaction().replace(R.id.content_frame, new Fragment_Assessment()).commit();
-		        }else{	//this is the last question, save it to the report
-		        	//sets up a POP-UP
-			        AlertDialog.Builder alertDB = new AlertDialog.Builder(getActivity());
-			        alertDB.setMessage("Do you really want to save this entry?");
-			        alertDB.setCancelable(true);
-			        alertDB.setPositiveButton("Confirm",
-		                    new DialogInterface.OnClickListener() {
-			        	@Override
-		                public void onClick(DialogInterface dialogInterface, int id) {
-			    		        //persist the data
-			    		        Dialog dialog  = (Dialog) dialogInterface;
-			    		        Context context = dialog.getContext();
-			    		        //gets the size of the reports
-			    		        SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, DEFAULT_INT_ZERO);
-			    		        //gets the current reportsize so far
-			    		        int reportSizeInt = pref.getInt(REPORT_SIZE, DEFAULT_INT_ZERO);
-			    		        String reportSize = Integer.toString(reportSizeInt);
-			    		        SharedPreferences.Editor editor = pref.edit();
-			    		        //increase the size of the report by one, so that report fragment knows how many rows to print
-			    		        editor.putInt(REPORT_SIZE,reportSizeInt+1);
-			    		        //add assessmentTitle to the memory
-			    		        editor.putString(REPORT_TYPE+reportSize, assessmentTitle);
-			    		        editor.commit();
-			    		        setStringArrayPref(context,REPORT+reportSize, new ArrayList(Arrays.asList(response)));
-		    		        dialogInterface.cancel();
-		                }
-		            });
-			        alertDB.setNegativeButton("Back",
-		                    new DialogInterface.OnClickListener() {
-		                public void onClick(DialogInterface dialogInterface, int id) {
-		                    dialogInterface.cancel();
-		                    //do nothing
-		                }
-		            });
-			        //create the alertdialog after customizing
-		            AlertDialog confirmSave = alertDB.create();
-		            confirmSave.show();
-		        }
-		        
+	        	
+	        	/**
+    			 * ONLY FOR VAS
+    			 * This is a special request made by NUH Paediatrics Department
+    			 */
+    			final EditText input = new EditText(this.getActivity());
+    			if(assessmentTitle.equals("VAS")&&painSliderValue<5){
+    				new AlertDialog.Builder(view.getContext())
+//    			    .setTitle("")
+    			    .setMessage("Please tell us more.")
+    			    .setView(input)
+    			    .setPositiveButton("Save", new DialogInterface.OnClickListener() {
+    			        public void onClick(DialogInterface dialog, int whichButton) {
+    			            Editable editableValue = input.getText();
+    			            Toast.makeText(getActivity(),editableValue.toString(), Toast.LENGTH_SHORT).show();
+    			            freeTextVAS[currentQuestionNumber-1] = editableValue.toString();
+    			            proceedToNextQuestionOrSave();
+    			        }
+    			    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    			        public void onClick(DialogInterface dialog, int whichButton) {
+    			            // Do nothing.
+    			        }
+    			    }).show();
+    			}else{
+    				proceedToNextQuestionOrSave();
+    			}        
 		        break;
 	        }
     	} 
 
+    }
+    
+    void proceedToNextQuestionOrSave(){
+    	if(currentQuestionNumber!=questionsSize){	//if not the last question update variables to next question in assessment
+        	currentQuestionNumber++;
+	        currentQuestion = questions[currentQuestionNumber-1];
+	      //update the view by replacing the fragment
+	        FragmentManager frgManager = getFragmentManager();
+	        frgManager.beginTransaction().replace(R.id.content_frame, new Fragment_Assessment()).commit();
+        }else{	//this is the last question, save it to the report
+        	//sets up a POP-UP
+	        AlertDialog.Builder alertDB = new AlertDialog.Builder(getActivity());
+	        alertDB.setMessage("Do you really want to save this entry?");
+	        alertDB.setCancelable(true);
+	        alertDB.setPositiveButton("Confirm",
+                    new DialogInterface.OnClickListener() {
+	        	@Override
+                public void onClick(DialogInterface dialogInterface, int id) {
+	    		        //persist the data
+	    		        Dialog dialog  = (Dialog) dialogInterface;
+	    		        Context context = dialog.getContext();
+	    		        //gets the size of the reports
+	    		        SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, DEFAULT_INT_ZERO);
+	    		        //gets the current reportsize so far
+	    		        int reportSizeInt = pref.getInt(REPORT_SIZE, DEFAULT_INT_ZERO);
+	    		        String reportSize = Integer.toString(reportSizeInt);
+	    		        SharedPreferences.Editor editor = pref.edit();
+	    		        //increase the size of the report by one, so that report fragment knows how many rows to print
+	    		        editor.putInt(REPORT_SIZE,reportSizeInt+1);
+	    		        //add assessmentTitle to the memory
+	    		        editor.putString(REPORT_TYPE+reportSize, assessmentTitle);
+	    		        editor.commit();
+	    		        setStringArrayPref(context,REPORT+reportSize, new ArrayList(Arrays.asList(response)));
+	    		        setStringArrayPref(context,REPORT_FREE_TEXT_VAS+reportSize, new ArrayList(Arrays.asList(freeTextVAS)));
+    		        dialogInterface.cancel();
+                }
+            });
+	        alertDB.setNegativeButton("Back",
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogInterface, int id) {
+                    dialogInterface.cancel();
+                    //do nothing
+                }
+            });
+	        //create the alertdialog after customizing
+            AlertDialog confirmSave = alertDB.create();
+            confirmSave.show();
+        }
     }
     
     public String getAssessmentTitle(){

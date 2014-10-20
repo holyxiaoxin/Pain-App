@@ -37,6 +37,7 @@ public class Fragment_Report extends Fragment {
 	  public static final String PREFS_NAME = "MyPrefsFile";
 	  public static final String REPORT_SIZE = "reportSize";
 	  public static final String REPORT_TYPE = "reportType";
+	  static final String REPORT_FREE_TEXT_VAS = "reportFreeTextVAS";
 	  public static final String REPORT = "report";
  
       public Fragment_Report() {
@@ -144,8 +145,10 @@ public class Fragment_Report extends Fragment {
       	{
       		writer = new CSVWriter(new FileWriter("/sdcard/assessmentReport.csv"), ',');
       	    //adds the header of the csv file
-      	    String[] firstRow = {"TITLE"};
-      	    writer.writeNext(firstRow);
+      	    String[] title = {"Title"};
+      	    String[] vasFreeText = {"VAS additional comments"};
+      	    String[] emptyRow = {""};
+      	    writer.writeNext(title);
       	    
       	    //writes the report into csv file
       	    SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, 0);
@@ -166,6 +169,32 @@ public class Fragment_Report extends Fragment {
   	            }    	
   	            writer.writeNext(nextRow);
       	    }
+      	    
+      	    /**
+      	     * ONLY FOR VAS
+      	     */
+      	    writer.writeNext(emptyRow);
+      	    writer.writeNext(vasFreeText);
+      	    writer.writeNext(title);
+      	    for(int i=0;i<reportSize;i++){
+      	    	String assessmentTitle = pref.getString(REPORT_TYPE+i, "");
+      	    	if(assessmentTitle.equals("VAS")){
+      	    		//Retrieve freetextvas data from persisted data stored in Shared Preference
+      	            ArrayList<String> freeTextVASList = getStringArrayPref(context,REPORT_FREE_TEXT_VAS+i);
+      	            //Convert ArrayList to String Array
+      	            String[] freeTextVAS = new String[freeTextVASList.size()];
+      	            freeTextVAS = freeTextVASList.toArray(freeTextVAS);
+      	            //creates a new row that contains all the response to freetextvas
+      	            String[] nextRow = new String[freeTextVAS.length+1];
+      	            //sets Assessment Title as the first column of the next row
+      	            nextRow[0] = assessmentTitle;
+      	            for(int j=0;j<freeTextVAS.length;j++){
+      	            	nextRow[j+1]=freeTextVAS[j];
+      	            }    	
+      	            writer.writeNext(nextRow);
+      	    	}
+      	    }
+      	    
       	    
       	    
       	    writer.close();
