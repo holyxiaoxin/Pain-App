@@ -4,9 +4,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,29 +49,59 @@ public class Fragment_Settings extends Fragment implements OnClickListener{
 	  public void onClick(View view) { 
 		switch (view.getId()) {
 			case R.id.updateAssessments:{
-				JSONObject json = null;
-				JSONArray jsonArray = null;
-				
-				json = wordPressApiFunctions.getPosts();
-				try{
-    				if (json.getJSONArray(KEY_POST) != null) {
-    					//gets all posts
-    					jsonArray = json.getJSONArray(KEY_POST);
-    					//store titles of posts in SharedPreferences
-    					Context context = view.getContext();    					
-    					SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, 0);
-    					SharedPreferences.Editor editor = pref.edit();
-    					editor.putString(ASSESSMENTS_JSONARRAY, jsonArray.toString());
-    					editor.commit();
-    					
-    					//updated assessments successfully
-    					Toast.makeText(view.getContext(),"Updated Assessments successfully!", Toast.LENGTH_SHORT).show();
-    				}
-    			} catch (JSONException e) {
-    				e.printStackTrace();
-    			}
+				new UpdateAssessmentAsyncTask(view.getContext()).execute();
+				break;
 			}
 		}
 	  } 
-    
+	
+	/**
+	 * AsyncTask for Login
+	 */
+	private class UpdateAssessmentAsyncTask extends AsyncTask<Void, Void, JSONObject> {
+		private Context mContext;
+		private ProgressDialog loadingDialog;
+		
+		public UpdateAssessmentAsyncTask (Context context){
+	         mContext = context;
+	         loadingDialog = new ProgressDialog((Activity) context);
+	    }
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			loadingDialog.setMessage("Updating Assesments, please wait.");
+			loadingDialog.setCancelable(false);
+			loadingDialog.show();
+		}
+		@Override
+		protected JSONObject doInBackground(Void... params) {
+			JSONObject json = null;
+			json = wordPressApiFunctions.getPosts();
+			return json;
+		}
+		@Override
+		protected void onPostExecute(JSONObject json) {
+			if (loadingDialog.isShowing()) {
+				loadingDialog.dismiss();
+	        }
+			try{
+				if (json.getJSONArray(KEY_POST) != null) {
+					//gets all posts
+					JSONArray jsonArray = null;
+					jsonArray = json.getJSONArray(KEY_POST);
+					//store titles of posts in SharedPreferences
+					SharedPreferences pref = mContext.getSharedPreferences(PREFS_NAME, 0);
+					SharedPreferences.Editor editor = pref.edit();
+					editor.putString(ASSESSMENTS_JSONARRAY, jsonArray.toString());
+					editor.commit();
+					
+					//updated assessments successfully
+					Toast.makeText(mContext,"Updated Assessments successfully!", Toast.LENGTH_SHORT).show();
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }
