@@ -3,8 +3,10 @@ package com.dexterlimjiarong.painapp;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,8 +37,7 @@ public class Fragment_Login extends Fragment implements OnClickListener{
                 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_layout_login, container,
 	              false);
-		
-		
+
 		mEditUsername   = (EditText) view.findViewById(R.id.editLoginUsername);
 		mEditPassword   = (EditText) view.findViewById(R.id.editLoginPassword);
 		loginErrorMsg = (TextView) view.findViewById(R.id.login_error);
@@ -53,26 +54,8 @@ public class Fragment_Login extends Fragment implements OnClickListener{
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.id.loginButton:{
-//				String username = mEditUsername.getText().toString();
-//				String password = mEditPassword.getText().toString();
 				//uses the wordpress api to login
 				new LoginAsyncTask(view.getContext()).execute();
-				
-//				JSONObject json = wordPressApiFunctions.loginUser(username,password);
-//				try{
-//					if (json.getString(KEY_SUCCESS) != null) {
-//						if(Integer.parseInt(json.getString(KEY_SUCCESS)) == 1){	//SUCCESS
-//							loginErrorMsg.setText("");	//clear error message if successful
-//							Toast.makeText(view.getContext(),"SUCCESS!", 
-//									Toast.LENGTH_SHORT).show();
-//						}else{	//NOT SUCCESS
-//							String error_string = json.getString(KEY_ERROR_STRING);
-//							loginErrorMsg.setText(Html.fromHtml(error_string));
-//						}
-//					}
-//				} catch (JSONException e) {
-//					e.printStackTrace();
-//				}
 				break;
 			}
 			case R.id.registerButton:{
@@ -87,16 +70,24 @@ public class Fragment_Login extends Fragment implements OnClickListener{
 		}
 	}
 	
-	class LoginAsyncTask extends AsyncTask<Void, Void, JSONObject> {
+	/**
+	 * AsyncTask for Login
+	 */
+	private class LoginAsyncTask extends AsyncTask<Void, Void, JSONObject> {
 		private Context mContext;
+		private ProgressDialog loadingDialog;
+		
 		public LoginAsyncTask (Context context){
 	         mContext = context;
+	         loadingDialog = new ProgressDialog((Activity) context);
 	    }
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
+			loadingDialog.setMessage("Logging in, please wait.");
+			loadingDialog.setCancelable(false);
+			loadingDialog.show();
 		}
-		// Login from workPress
 		@Override
 		protected JSONObject doInBackground(Void... params) {
 			String username = mEditUsername.getText().toString();
@@ -104,19 +95,16 @@ public class Fragment_Login extends Fragment implements OnClickListener{
 			JSONObject json = wordPressApiFunctions.loginUser(username,password);
 			return json;
 		}
-
-		// While Downloading Music File
-		protected void onProgressUpdate(String... progress) {
-		}
-
-		// Once Music File is downloaded
 		@Override
 		protected void onPostExecute(JSONObject json) {
+			if (loadingDialog.isShowing()) {
+				loadingDialog.dismiss();
+	        }
 			try{
 				if (json.getString(KEY_SUCCESS) != null) {
 					if(Integer.parseInt(json.getString(KEY_SUCCESS)) == 1){	//SUCCESS
 						loginErrorMsg.setText("");	//clear error message if successful
-						Toast.makeText(mContext,"SUCCESS!", 
+						Toast.makeText(mContext,"You are now logged in.", 
 								Toast.LENGTH_SHORT).show();
 					}else{	//NOT SUCCESS
 						String error_string = json.getString(KEY_ERROR_STRING);
