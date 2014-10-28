@@ -1,7 +1,11 @@
 package com.dexterlimjiarong.painapp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -78,7 +82,8 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     
 	static final String PREFS_NAME = "MyPrefsFile";
 	static final String REPORT_SIZE = "reportSize";
-	static final String REPORT_TYPE = "reportType";
+	static final String REPORT_TITLE = "reportTitle";
+	static final String REPORT_DATETIME = "reportDateTime";
 	static final String REPORT_FREE_TEXT_VAS = "reportFreeTextVAS";
 	static final String REPORT = "report";
     static final String TYPE_SLIDER = "slider";
@@ -555,11 +560,15 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 	    		        //increase the size of the report by one, so that report fragment knows how many rows to print
 	    		        editor.putInt(REPORT_SIZE,reportSizeInt+1);
 	    		        //add assessmentTitle to the memory
-	    		        editor.putString(REPORT_TYPE+reportSize, assessmentTitle);
+	    		        editor.putString(REPORT_TITLE+reportSize, assessmentTitle);
+	    		        //get datetime and add it to memory
+	    		        String currentDateTime = getDateTime(System.currentTimeMillis());
+	    		        editor.putString(REPORT_DATETIME+reportSize, currentDateTime);
 	    		        editor.commit();
 	    		        setStringArrayPref(context,REPORT+reportSize, new ArrayList(Arrays.asList(response)));
 	    		        setStringArrayPref(context,REPORT_FREE_TEXT_VAS+reportSize, new ArrayList(Arrays.asList(freeTextVAS)));
-    		        dialogInterface.cancel();
+	    		        
+	    		    dialogInterface.cancel();
                 }
             });
 	        alertDB.setNegativeButton("Back",
@@ -592,6 +601,12 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
             editor.putString(key, null);
         }
         editor.commit();
+    }
+    
+    public  String getDateTime(long timestamp) {
+    	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy_HH:mm:ss");
+    	String currentDateandTime = sdf.format(new Date());
+    	return currentDateandTime;
     }
     
     

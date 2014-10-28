@@ -42,7 +42,10 @@
 
 		    <TableRow>
 		        <TextView
-		            android:text="Type"
+		            android:text="Title"
+		            android:padding="3dip"/>
+		        <TextView
+		            android:text="DateTime"
 		            android:padding="3dip"/>
 		        <TextView
 		            android:text="Q1"

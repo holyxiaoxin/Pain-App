@@ -37,7 +37,8 @@ public class Fragment_Report extends Fragment {
       public static final String ITEM_NAME = "itemName";
 	  static final String PREFS_NAME = "MyPrefsFile";
 	  static final String REPORT_SIZE = "reportSize";
-	  static final String REPORT_TYPE = "reportType";
+	  static final String REPORT_TITLE = "reportTitle";
+	  static final String REPORT_DATETIME = "reportDateTime";
 	  static final String REPORT_FREE_TEXT_VAS = "reportFreeTextVAS";
 	  static final String REPORT = "report";
  
@@ -67,11 +68,20 @@ public class Fragment_Report extends Fragment {
 	            //Convert ArrayList to String Array
 	            String[] questionAnswers = new String[questionAnswersList.size()];
 	            questionAnswers = questionAnswersList.toArray(questionAnswers);
-	            //gets Question Title
-	            String assessmentTitle = pref.getString(REPORT_TYPE+i, "");
+	            //gets Assessment Title
+	            String assessmentTitle = pref.getString(REPORT_TITLE+i, "");
+	            //gets Assessment DateTime
+	            String assessmentDateTime = pref.getString(REPORT_DATETIME+i, "");
+	            
+	            //This are the rows
 	            TextView a = new TextView(view.getContext());
 	            a.setText(assessmentTitle);
 	            a.setPadding(10,10,30,10);
+	            a.setGravity(Gravity.LEFT);
+            	tr.addView(a);
+            	a = new TextView(view.getContext());
+            	a.setText(assessmentDateTime);
+            	a.setPadding(10,10,30,10);
 	            a.setGravity(Gravity.LEFT);
             	tr.addView(a);
 	         	// create a new TextView and add it to the table row through the string array
@@ -174,11 +184,14 @@ public class Fragment_Report extends Fragment {
   	            //Convert ArrayList to String Array
   	            String[] questionAnswers = new String[questionAnswersList.size()];
   	            questionAnswers = questionAnswersList.toArray(questionAnswers);
-  	            String assessmentTitle = pref.getString(REPORT_TYPE+i, "");
+  	            String assessmentTitle = pref.getString(REPORT_TITLE+i, "");
+  	          	String assessmentDateTime = pref.getString(REPORT_DATETIME+i, "");
   	            //creates a new row that contains all the answers to each assessment
   	            String[] nextRow = new String[questionAnswers.length+1];
   	            //sets Assessment Title as the first column of the next row
   	            nextRow[0] = assessmentTitle;
+  	            //sets Assessment DateTime as the second column of the next row
+  	          	nextRow[0] = assessmentDateTime;
   	            for(int j=0;j<questionAnswers.length;j++){
   	            	nextRow[j+1]=questionAnswers[j];
   	            }    	
@@ -192,7 +205,8 @@ public class Fragment_Report extends Fragment {
       	    writer.writeNext(vasFreeText);
       	    writer.writeNext(title);
       	    for(int i=0;i<reportSize;i++){
-      	    	String assessmentTitle = pref.getString(REPORT_TYPE+i, "");
+      	    	String assessmentTitle = pref.getString(REPORT_TITLE+i, "");
+      	    	String assessmentDateTime = pref.getString(REPORT_DATETIME+i, "");
       	    	if(assessmentTitle.equals("VAS")){
       	    		//Retrieve freetextvas data from persisted data stored in Shared Preference
       	            ArrayList<String> freeTextVASList = getStringArrayPref(context,REPORT_FREE_TEXT_VAS+i);
@@ -203,6 +217,8 @@ public class Fragment_Report extends Fragment {
       	            String[] nextRow = new String[freeTextVAS.length+1];
       	            //sets Assessment Title as the first column of the next row
       	            nextRow[0] = assessmentTitle;
+      	        	//sets Assessment DateTime as the second column of the next row
+      	          	nextRow[0] = assessmentDateTime;
       	            for(int j=0;j<freeTextVAS.length;j++){
       	            	nextRow[j+1]=freeTextVAS[j];
       	            }    	
