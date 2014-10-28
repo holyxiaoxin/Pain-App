@@ -40,7 +40,9 @@ public class Fragment_Report extends Fragment {
 	  static final String REPORT_TITLE = "reportTitle";
 	  static final String REPORT_DATETIME = "reportDateTime";
 	  static final String REPORT_FREE_TEXT_VAS = "reportFreeTextVAS";
+	  static final String REPORT_MAX_QUESTION = "reportMaxQuestion";
 	  static final String REPORT = "report";
+	  static final int DEFAULT_INT_ZERO = 0;
  
       public Fragment_Report() {
  
@@ -57,11 +59,36 @@ public class Fragment_Report extends Fragment {
             TableLayout tl = (TableLayout) view.findViewById(R.id.frag_report_table);
             SharedPreferences pref = view.getContext().getSharedPreferences(PREFS_NAME, 0);
 	        int reportSize = pref.getInt(REPORT_SIZE,0);
+	        
+	        /* Create a new row to be added. */
+            TableRow tr = new TableRow(view.getContext());
+            tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        	//Sets up first Row as Headers
+            int maxQuestion = pref.getInt(REPORT_MAX_QUESTION, DEFAULT_INT_ZERO);
+            TextView a = new TextView(view.getContext());
+            a.setText("Title");
+            a.setPadding(10,10,30,10);
+            a.setGravity(Gravity.LEFT);
+        	tr.addView(a);
+        	a = new TextView(view.getContext());
+            a.setText("DateTime");
+            a.setPadding(10,10,30,10);
+            a.setGravity(Gravity.LEFT);
+        	tr.addView(a);
+        	for(int j=0; j<maxQuestion; j++){
+        		String currentNumber = Integer.toString(j+1);
+        		a = new TextView(view.getContext());
+	            a.setText("Q"+currentNumber);
+	            a.setPadding(10,10,30,10);
+	            a.setGravity(Gravity.LEFT);
+            	tr.addView(a);
+        	}
+        	tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+	        
 	        //loop through the entire report size
             for(int i=0;i<reportSize;i++){
-            	System.out.println("ENTERED LOOP");
 	            /* Create a new row to be added. */
-	            TableRow tr = new TableRow(view.getContext());
+	            tr = new TableRow(view.getContext());
 	            tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 	            //Retrieve report data from persisted data stored in Shared Preference
 	            ArrayList<String> questionAnswersList = getStringArrayPref(view.getContext(),REPORT+i);
@@ -74,7 +101,7 @@ public class Fragment_Report extends Fragment {
 	            String assessmentDateTime = pref.getString(REPORT_DATETIME+i, "");
 	            
 	            //This are the rows
-	            TextView a = new TextView(view.getContext());
+	            a = new TextView(view.getContext());
 	            a.setText(assessmentTitle);
 	            a.setPadding(10,10,30,10);
 	            a.setGravity(Gravity.LEFT);
@@ -170,10 +197,11 @@ public class Fragment_Report extends Fragment {
       	{
       		writer = new CSVWriter(new FileWriter("/sdcard/assessmentReport.csv"), ',');
       	    //adds the header of the csv file
-      	    String[] title = {"Title"};
+      	    String[] header = {"Title", "DateTime"};
+      	    
       	    String[] vasFreeText = {"VAS additional comments"};
       	    String[] emptyRow = {""};
-      	    writer.writeNext(title);
+      	    writer.writeNext(header);
       	    
       	    //writes the report into csv file
       	    SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, 0);
@@ -187,13 +215,13 @@ public class Fragment_Report extends Fragment {
   	            String assessmentTitle = pref.getString(REPORT_TITLE+i, "");
   	          	String assessmentDateTime = pref.getString(REPORT_DATETIME+i, "");
   	            //creates a new row that contains all the answers to each assessment
-  	            String[] nextRow = new String[questionAnswers.length+1];
+  	            String[] nextRow = new String[questionAnswers.length+2];
   	            //sets Assessment Title as the first column of the next row
   	            nextRow[0] = assessmentTitle;
   	            //sets Assessment DateTime as the second column of the next row
-  	          	nextRow[0] = assessmentDateTime;
+  	          	nextRow[1] = assessmentDateTime;
   	            for(int j=0;j<questionAnswers.length;j++){
-  	            	nextRow[j+1]=questionAnswers[j];
+  	            	nextRow[j+2]=questionAnswers[j];
   	            }    	
   	            writer.writeNext(nextRow);
       	    }
@@ -203,7 +231,7 @@ public class Fragment_Report extends Fragment {
       	     */
       	    writer.writeNext(emptyRow);
       	    writer.writeNext(vasFreeText);
-      	    writer.writeNext(title);
+      	    writer.writeNext(header);
       	    for(int i=0;i<reportSize;i++){
       	    	String assessmentTitle = pref.getString(REPORT_TITLE+i, "");
       	    	String assessmentDateTime = pref.getString(REPORT_DATETIME+i, "");
@@ -214,13 +242,13 @@ public class Fragment_Report extends Fragment {
       	            String[] freeTextVAS = new String[freeTextVASList.size()];
       	            freeTextVAS = freeTextVASList.toArray(freeTextVAS);
       	            //creates a new row that contains all the response to freetextvas
-      	            String[] nextRow = new String[freeTextVAS.length+1];
+      	            String[] nextRow = new String[freeTextVAS.length+2];
       	            //sets Assessment Title as the first column of the next row
       	            nextRow[0] = assessmentTitle;
       	        	//sets Assessment DateTime as the second column of the next row
-      	          	nextRow[0] = assessmentDateTime;
+      	          	nextRow[1] = assessmentDateTime;
       	            for(int j=0;j<freeTextVAS.length;j++){
-      	            	nextRow[j+1]=freeTextVAS[j];
+      	            	nextRow[j+2]=freeTextVAS[j];
       	            }    	
       	            writer.writeNext(nextRow);
       	    	}

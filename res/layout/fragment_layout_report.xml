@@ -40,74 +40,7 @@
 	        android:paddingBottom="10dp"
 	        android:stretchColumns="*" >
 
-		    <TableRow>
-		        <TextView
-		            android:text="Title"
-		            android:padding="3dip"/>
-		        <TextView
-		            android:text="DateTime"
-		            android:padding="3dip"/>
-		        <TextView
-		            android:text="Q1"
-		            android:padding="3dip"/>
-		        <TextView
-		            android:text="Q2"
-		            android:padding="3dip"/>
-		        <TextView
-		            android:text="Q3"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q4"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q5"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q6"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q7"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q8"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q9"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q10"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q11"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q12"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q13"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q14"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q15"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q16"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q17"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q18"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q19"
-		            android:padding="3dip" />
-		        <TextView
-		            android:text="Q20"
-		            android:padding="3dip" />
-		    </TableRow>
+		    
 		 </TableLayout>
 		 
 	</HorizontalScrollView>

@@ -82,6 +82,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     
 	static final String PREFS_NAME = "MyPrefsFile";
 	static final String REPORT_SIZE = "reportSize";
+	static final String REPORT_MAX_QUESTION = "reportMaxQuestion";
 	static final String REPORT_TITLE = "reportTitle";
 	static final String REPORT_DATETIME = "reportDateTime";
 	static final String REPORT_FREE_TEXT_VAS = "reportFreeTextVAS";
@@ -564,6 +565,11 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 	    		        //get datetime and add it to memory
 	    		        String currentDateTime = getDateTime(System.currentTimeMillis());
 	    		        editor.putString(REPORT_DATETIME+reportSize, currentDateTime);
+	    		        //updates max question number
+	    		        int maxQuestion = pref.getInt(REPORT_MAX_QUESTION, DEFAULT_INT_ZERO);
+	    		        if(questionsSize>maxQuestion){
+	    		        	editor.putInt(REPORT_MAX_QUESTION, questionsSize);
+	    		        }
 	    		        editor.commit();
 	    		        setStringArrayPref(context,REPORT+reportSize, new ArrayList(Arrays.asList(response)));
 	    		        setStringArrayPref(context,REPORT_FREE_TEXT_VAS+reportSize, new ArrayList(Arrays.asList(freeTextVAS)));

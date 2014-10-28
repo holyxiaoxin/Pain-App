@@ -35,7 +35,7 @@ public class Fragment_Report_List extends Fragment{
     public static final String ITEM_NAME = "itemName";
 	static final String PREFS_NAME = "MyPrefsFile";
 	static final String REPORT_SIZE = "reportSize";
-	static final String REPORT_TYPE = "reportType";
+	static final String REPORT_TITLE = "reportTitle";
 	static final String REPORT_FREE_TEXT_VAS = "reportFreeTextVAS";
 	static final String REPORT = "report";
 	
@@ -50,7 +50,7 @@ public class Fragment_Report_List extends Fragment{
 		int reportSize = pref.getInt(REPORT_SIZE,0);
 		String[] listOfReportTitles = new String[reportSize];
 		for(int i=0;i<reportSize;i++){
-            String assessmentTitle = pref.getString(REPORT_TYPE+i, "");
+            String assessmentTitle = pref.getString(REPORT_TITLE+i, "");
             listOfReportTitles[i] = assessmentTitle;
 	    }
 		
@@ -158,7 +158,7 @@ public class Fragment_Report_List extends Fragment{
 	            //Convert ArrayList to String Array
 	            String[] questionAnswers = new String[questionAnswersList.size()];
 	            questionAnswers = questionAnswersList.toArray(questionAnswers);
-	            String assessmentTitle = pref.getString(REPORT_TYPE+i, "");
+	            String assessmentTitle = pref.getString(REPORT_TITLE+i, "");
 	            //creates a new row that contains all the answers to each assessment
 	            String[] nextRow = new String[questionAnswers.length+1];
 	            //sets Assessment Title as the first column of the next row
@@ -176,7 +176,7 @@ public class Fragment_Report_List extends Fragment{
     	    writer.writeNext(vasFreeText);
     	    writer.writeNext(title);
     	    for(int i=0;i<reportSize;i++){
-    	    	String assessmentTitle = pref.getString(REPORT_TYPE+i, "");
+    	    	String assessmentTitle = pref.getString(REPORT_TITLE+i, "");
     	    	if(assessmentTitle.equals("VAS")){
     	    		//Retrieve freetextvas data from persisted data stored in Shared Preference
     	            ArrayList<String> freeTextVASList = getStringArrayPref(context,REPORT_FREE_TEXT_VAS+i);
