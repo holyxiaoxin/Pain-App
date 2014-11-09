@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Pain App</string>
+    <string name="app_name">USRS</string>
     <string name="hello_user">Hello User!</string>
     <string name="action_settings">Settings</string>
     <string name="drawer_open">Open drawer</string>
