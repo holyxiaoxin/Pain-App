@@ -93,6 +93,10 @@ public class Fragment_Login extends Fragment implements OnClickListener{
 			String username = mEditUsername.getText().toString();
 			String password = mEditPassword.getText().toString();
 			JSONObject json = wordPressApiFunctions.loginUser(username,password);
+			
+			//testing
+			wordPressApiFunctions.testAPI("jiarong", "jiarong");
+			
 			return json;
 		}
 		@Override

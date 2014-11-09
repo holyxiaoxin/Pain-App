@@ -10,20 +10,25 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpConnectionParams;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.StrictMode;
+import android.util.Base64;
 import android.util.Log;
 
 public class WordPressApiFunctions {
 	
 	final static String API_USER_URL = "http://jiarong.me/painapp/api/user.php";
 	final static String API_POST_URL = "http://jiarong.me/painapp/api/post.php";
+	final static String API_TEST_URL = "http://sails-wusrs.herokuapp.com/user";
 	final static String LOGIN_TAG = "login";
 	final static String REGISTER_TAG = "register";
 	final static String GET_POSTS_TAG = "get";
@@ -123,5 +128,73 @@ public class WordPressApiFunctions {
 
         return json;
 	}
+	
+	
+	
+	public JSONArray testAPI(String username, String password){
+		JSONArray jsonArray = testGetJSONFromUrl(API_TEST_URL, username, password);
+		return jsonArray;
+	}
+	
+private JSONArray testGetJSONFromUrl(String url, String username, String password) {
+		
+		String jsonArrayStringResponse = null;
+		JSONArray jsonArray = null;
+        
+        InputStream is = null;
+        
+        HttpUriRequest request = new HttpGet(url);
+        String credentials = username + ":" + password;
+        String base64EncodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+        request.addHeader("Authorization", "Basic " + base64EncodedCredentials);
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), 10000); //Timeout Limit
+        
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+        
+        try {
+        	HttpResponse response = httpclient.execute(request); 
+
+            /*Checking response */
+            if(response!=null){
+                is = response.getEntity().getContent(); //Get the data in the entity
+            }
+
+        } catch(Exception e) {
+            e.printStackTrace();
+            Log.e("Connection Error", e.toString());
+            Log.d("Error", "Cannot Estabilish Connection");
+        }
+        
+        try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					is, "iso-8859-1"), 8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			is.close();
+			jsonArrayStringResponse = sb.toString();
+			Log.e("testHEROKUAPI", jsonArrayStringResponse);
+		} catch (Exception e) {
+			Log.e("Buffer Error", "Error converting result " + e.toString());
+		}
+        Log.d("stringResponse", jsonArrayStringResponse);
+     // try parse the string to a JSON object
+     		try {
+     			jsonArray = new JSONArray(jsonArrayStringResponse);
+     		} catch (JSONException e) {
+     			Log.e("JSON Parser", "Error parsing data " + e.toString());
+     		}
+
+        return jsonArray;
+	}
+	
+	
+	
+	
+	
 
 }
