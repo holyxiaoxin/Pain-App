@@ -9,11 +9,14 @@
     <color name="grey_start">#95a5a6</color>
     <color name="grey_end">#95a5a6</color>
     
-    <color name="pink_start">#ffaaaa</color>
-    <color name="pink_end">#ffaaaa</color>
+    <color name="pink_start">#F48FB1</color>
+    <color name="pink_end">#F48FB1</color>
+
+    <color name="red_start">#D32F2F</color>
+    <color name="red_end">#D32F2F</color>
     
-    <color name="blue_start">#A8B3CD</color>
-    <color name="blue_end">#A8B3CD</color>
+    <color name="blue_start">#7986CB</color>
+    <color name="blue_end">#7986CB</color>
     
     <color name="green_start">#26C281</color>
     <color name="green_end">#26C281</color>

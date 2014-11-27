@@ -276,6 +276,9 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 						 	case "pink":
 						 		seekBarView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_pink));
 						 		break;
+                            case "red":
+                                seekBarView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_red));
+                                break;
 						 	case "orange":
 						 		seekBarView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_orange));
 						 		break;
@@ -297,8 +300,9 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 						  if (response[currentQuestionNumber-1] != null){
 							  System.out.println(painSliderValue);
 							  painSliderValue = Integer.parseInt(response[currentQuestionNumber-1]);
-							  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+painSliderValue, 
-										Toast.LENGTH_SHORT).show();
+                              //debug purposes
+//							  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+painSliderValue,
+//										Toast.LENGTH_SHORT).show();
 						  }
 						  seekBar.setProgress(painSliderValue);
 					//sets max for slider if it is not defaulted
@@ -380,8 +384,8 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 			  				// TODO Auto-generated method stub
 			  			}
 			  			public void onStopTrackingTouch(SeekBar seekBar) {
-					  				Toast.makeText(seekBar.getContext(),"Pain Scale:"+painSliderValue, 
-					  				Toast.LENGTH_SHORT).show();
+//					  				Toast.makeText(seekBar.getContext(),"Pain Scale:"+painSliderValue,
+//					  				Toast.LENGTH_SHORT).show();
 						}
 					});
 					break;
@@ -398,6 +402,9 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 						 	case "pink":
 						 		radioGroupView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_pink));
 						 		break;
+                            case "red":
+                                radioGroupView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_red));
+                                break;
 						 	case "orange":
 						 		radioGroupView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_orange));
 						 		break;
@@ -429,8 +436,9 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 					     //set up radio buttons to remember previous entry (if any)
 					        if (response[currentQuestionNumber-1] != null){
 					        	radioButtonValue = Integer.parseInt(response[currentQuestionNumber-1]);
-					      		  Toast.makeText(view.getContext(),"Refresh radiobutton:"+radioButtonValue, 
-					      					Toast.LENGTH_SHORT).show();
+                                //debug purposes
+//					      		  Toast.makeText(view.getContext(),"Refresh radiobutton:"+radioButtonValue,
+//					      					Toast.LENGTH_SHORT).show();
 					        }
 					        int idResource = getResources().getIdentifier("rb"+radioButtonValue, "id", view.getContext().getPackageName());
 					        

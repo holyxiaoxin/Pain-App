@@ -76,8 +76,8 @@
     <color name="abc_search_url_text_selected">@android:color/black</color>
     <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/src/main/res/values/colors.xml -->
     <eat-comment/>
-    <color name="blue_end">#A8B3CD</color>
-    <color name="blue_start">#A8B3CD</color>
+    <color name="blue_end">#7986CB</color>
+    <color name="blue_start">#7986CB</color>
     <color name="default_screen_bg">#20324a</color>
     <color name="green_end">#26C281</color>
     <color name="green_start">#26C281</color>
@@ -86,8 +86,10 @@
     <color name="light_gray_header_color">#646663</color>
     <color name="orange_end">#e67e22</color>
     <color name="orange_start">#e67e22</color>
-    <color name="pink_end">#ffaaaa</color>
-    <color name="pink_start">#ffaaaa</color>
+    <color name="pink_end">#F48FB1</color>
+    <color name="pink_start">#F48FB1</color>
+    <color name="red_end">#D32F2F</color>
+    <color name="red_start">#D32F2F</color>
     <color name="white">#ffffff</color>
     <color name="white_smoke">#ECECEC</color>
     <color name="yellow_end">#F5D76E</color>

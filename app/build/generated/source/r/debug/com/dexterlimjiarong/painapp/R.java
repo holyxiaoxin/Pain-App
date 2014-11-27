@@ -695,7 +695,7 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f050005;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f060013;
+        public static final int abc_search_url_text_holo=0x7f060015;
         public static final int abc_search_url_text_normal=0x7f060000;
         public static final int abc_search_url_text_pressed=0x7f060001;
         public static final int abc_search_url_text_selected=0x7f060002;
@@ -711,10 +711,12 @@ containing a value of this type.
         public static final int orange_start=0x7f06000c;
         public static final int pink_end=0x7f06000d;
         public static final int pink_start=0x7f06000e;
-        public static final int white=0x7f06000f;
-        public static final int white_smoke=0x7f060010;
-        public static final int yellow_end=0x7f060011;
-        public static final int yellow_start=0x7f060012;
+        public static final int red_end=0x7f06000f;
+        public static final int red_start=0x7f060010;
+        public static final int white=0x7f060011;
+        public static final int white_smoke=0x7f060012;
+        public static final int yellow_end=0x7f060013;
+        public static final int yellow_start=0x7f060014;
     }
     public static final class dimen {
         public static final int abc_action_bar_default_height=0x7f080000;
@@ -834,33 +836,34 @@ containing a value of this type.
         public static final int background_view_rounded_grey=0x7f020059;
         public static final int background_view_rounded_orange=0x7f02005a;
         public static final int background_view_rounded_pink=0x7f02005b;
-        public static final int background_view_rounded_yellow=0x7f02005c;
-        public static final int blue_custom_button=0x7f02005d;
-        public static final int drawer_shadow=0x7f02005e;
-        public static final int green_custom_button=0x7f02005f;
-        public static final int ic_action_about=0x7f020060;
-        public static final int ic_action_camera=0x7f020061;
-        public static final int ic_action_cloud=0x7f020062;
-        public static final int ic_action_email=0x7f020063;
-        public static final int ic_action_gamepad=0x7f020064;
-        public static final int ic_action_good=0x7f020065;
-        public static final int ic_action_group=0x7f020066;
-        public static final int ic_action_help=0x7f020067;
-        public static final int ic_action_import_export=0x7f020068;
-        public static final int ic_action_labels=0x7f020069;
-        public static final int ic_action_search=0x7f02006a;
-        public static final int ic_action_settings=0x7f02006b;
-        public static final int ic_action_video=0x7f02006c;
-        public static final int ic_drawer=0x7f02006d;
-        public static final int ic_launcher=0x7f02006e;
-        public static final int normal=0x7f02006f;
-        public static final int pressed=0x7f020070;
-        public static final int progressbar=0x7f020071;
-        public static final int user1=0x7f020072;
-        public static final int user2=0x7f020073;
-        public static final int vas_face1=0x7f020074;
-        public static final int vas_face2=0x7f020075;
-        public static final int vas_face3=0x7f020076;
+        public static final int background_view_rounded_red=0x7f02005c;
+        public static final int background_view_rounded_yellow=0x7f02005d;
+        public static final int blue_custom_button=0x7f02005e;
+        public static final int drawer_shadow=0x7f02005f;
+        public static final int green_custom_button=0x7f020060;
+        public static final int ic_action_about=0x7f020061;
+        public static final int ic_action_camera=0x7f020062;
+        public static final int ic_action_cloud=0x7f020063;
+        public static final int ic_action_email=0x7f020064;
+        public static final int ic_action_gamepad=0x7f020065;
+        public static final int ic_action_good=0x7f020066;
+        public static final int ic_action_group=0x7f020067;
+        public static final int ic_action_help=0x7f020068;
+        public static final int ic_action_import_export=0x7f020069;
+        public static final int ic_action_labels=0x7f02006a;
+        public static final int ic_action_search=0x7f02006b;
+        public static final int ic_action_settings=0x7f02006c;
+        public static final int ic_action_video=0x7f02006d;
+        public static final int ic_drawer=0x7f02006e;
+        public static final int ic_launcher=0x7f02006f;
+        public static final int normal=0x7f020070;
+        public static final int pressed=0x7f020071;
+        public static final int progressbar=0x7f020072;
+        public static final int user1=0x7f020073;
+        public static final int user2=0x7f020074;
+        public static final int vas_face1=0x7f020075;
+        public static final int vas_face2=0x7f020076;
+        public static final int vas_face3=0x7f020077;
     }
     public static final class id {
         public static final int action_bar=0x7f070026;
