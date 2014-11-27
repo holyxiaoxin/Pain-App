@@ -392,17 +392,9 @@ public class MainActivity extends Activity {
                   break;
               case 6:	//Reports
                   fragment = new Fragment_Report();
-                  args.putString(Fragment_Report.ITEM_NAME, dataList.get(position)
-                          .getItemName());
-                  args.putInt(Fragment_Report.IMAGE_RESOURCE_ID, dataList
-                          .get(position).getImgResID());
                   break;
               case 8:	//Quit
                   fragment = new FragmentTwo();
-                  args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
-                          .getItemName());
-                  args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList
-                          .get(position).getImgResID());
                   break;
               default:
                   break;

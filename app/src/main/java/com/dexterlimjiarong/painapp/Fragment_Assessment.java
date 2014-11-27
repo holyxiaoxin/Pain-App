@@ -581,7 +581,14 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 	    		        editor.commit();
 	    		        setStringArrayPref(context,REPORT+reportSize, new ArrayList(Arrays.asList(response)));
 	    		        setStringArrayPref(context,REPORT_FREE_TEXT_VAS+reportSize, new ArrayList(Arrays.asList(freeTextVAS)));
-	    		        
+
+                          Toast.makeText(dialog.getContext(),"Report successfully recorded.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        //switch to report fragment
+                        FragmentManager frgManager = getFragmentManager();
+                        frgManager.beginTransaction().replace(R.id.content_frame, new Fragment_Report()).commit();
+
 	    		    dialogInterface.cancel();
                 }
             });
