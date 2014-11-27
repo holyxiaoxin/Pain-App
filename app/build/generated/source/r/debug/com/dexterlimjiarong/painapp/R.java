@@ -903,7 +903,7 @@ containing a value of this type.
         public static final int end=0x7f07000c;
         public static final int expand_activities_button=0x7f070030;
         public static final int expanded_menu=0x7f070036;
-        public static final int export_csv_button=0x7f070079;
+        public static final int export_csv_button=0x7f070078;
         public static final int frag1_icon=0x7f070071;
         public static final int frag1_text=0x7f070072;
         public static final int frag2_icon=0x7f07007f;
@@ -912,7 +912,7 @@ containing a value of this type.
         public static final int frag3_text=0x7f07007e;
         public static final int frag_question_image=0x7f070053;
         public static final int frag_question_text=0x7f070054;
-        public static final int frag_report_table=0x7f07007a;
+        public static final int frag_report_table=0x7f070079;
         public static final int frag_slider_text=0x7f070056;
         public static final int headerLayout=0x7f07004b;
         public static final int home=0x7f070017;
@@ -983,7 +983,7 @@ containing a value of this type.
         public static final int split_action_bar=0x7f070028;
         public static final int sub_text_email=0x7f070052;
         public static final int submit_area=0x7f070043;
-        public static final int switch_report_view_button=0x7f070078;
+        public static final int switch_report_view_button=0x7f07007a;
         public static final int tabMode=0x7f070002;
         public static final int text_main_name=0x7f070051;
         public static final int title=0x7f070035;

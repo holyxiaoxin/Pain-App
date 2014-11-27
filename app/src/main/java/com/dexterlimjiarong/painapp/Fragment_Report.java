@@ -154,19 +154,19 @@ public class Fragment_Report extends Fragment {
                 }
             });
             
-            Button switchViewButton = (Button) view.findViewById(R.id.switch_report_view_button);
-            switchViewButton.setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					//update the view by replacing the fragment
-			        FragmentManager frgManager = getFragmentManager();
-			        frgManager.beginTransaction().replace(R.id.content_frame, new Fragment_Report_List()).commit();
-				}
-            	
-            	
-            });
+//            Button switchViewButton = (Button) view.findViewById(R.id.switch_report_view_button);
+//            switchViewButton.setOnClickListener(new View.OnClickListener() {
+//
+//				@Override
+//				public void onClick(View v) {
+//					// TODO Auto-generated method stub
+//					//update the view by replacing the fragment
+//			        FragmentManager frgManager = getFragmentManager();
+//			        frgManager.beginTransaction().replace(R.id.content_frame, new Fragment_Report_List()).commit();
+//				}
+//
+//
+//            });
             
             
             return view;
