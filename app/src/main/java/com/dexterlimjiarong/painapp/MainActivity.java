@@ -92,12 +92,12 @@ public class MainActivity extends Activity {
       public static final String HADS_QUESTION_3 = "I feel miserable and sad.";
       public static final String HADS_QUESTION_4 = "I feel anxious when I go out of the house on my own.";
       public static final String HADS_QUESTION_5 = "I have lost interest in things.";
-      public static final String HADS_QUESTION_6 = "I get palpitations, or sensations or �butterflies� in my stomach or chest.";
+      public static final String HADS_QUESTION_6 = "I get palpitations, or sensations or 'butterflies' in my stomach or chest.";
       public static final String HADS_QUESTION_7 = "I have a good appetite.";
       public static final String HADS_QUESTION_8 = "I feel scared or frightened.";
       public static final String HADS_QUESTION_9 = "I feel life is not worth living.";
       public static final String HADS_QUESTION_10 = "I still enjoy the things I used to.";
-      public static final String HADS_QUESTION_11 = "I am restless and can�t keep still.";
+      public static final String HADS_QUESTION_11 = "I am restless and can't keep still.";
       public static final String HADS_QUESTION_12 = "I am more irritable than usual.";
       public static final String HADS_QUESTION_13 = "I feel as if I have slowed down.";
       public static final String HADS_QUESTION_14 = "Worrying thoughts constantly go through my mind.";
