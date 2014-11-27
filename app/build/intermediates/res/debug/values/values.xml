@@ -178,7 +178,7 @@
     <string name="drawer_close">Close drawer</string>
     <string name="drawer_open">Open drawer</string>
     <string name="hello_user">Hello User!</string>
-    <string name="home_text1">Hello User,\nPlease choose one of the Questionnaires to begin. Your Reports are stored under History. Have a nice day.</string>
+    <string name="home_text1">\nSlide from the left edge of the screen to the right to bring up the menu.\n\nPlease choose one of the Assessments.\n\nYour Reports are stored under History.</string>
     <string name="register_me"><u>I don\'t have account. Register Me!</u></string>
     <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/src/main/res/values/styles.xml -->
     <eat-comment/>

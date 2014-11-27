@@ -92,12 +92,12 @@ public class MainActivity extends Activity {
       public static final String HADS_QUESTION_3 = "I feel miserable and sad.";
       public static final String HADS_QUESTION_4 = "I feel anxious when I go out of the house on my own.";
       public static final String HADS_QUESTION_5 = "I have lost interest in things.";
-      public static final String HADS_QUESTION_6 = "I get palpitations, or sensations or ‘butterflies’ in my stomach or chest.";
+      public static final String HADS_QUESTION_6 = "I get palpitations, or sensations or ï¿½butterfliesï¿½ in my stomach or chest.";
       public static final String HADS_QUESTION_7 = "I have a good appetite.";
       public static final String HADS_QUESTION_8 = "I feel scared or frightened.";
       public static final String HADS_QUESTION_9 = "I feel life is not worth living.";
       public static final String HADS_QUESTION_10 = "I still enjoy the things I used to.";
-      public static final String HADS_QUESTION_11 = "I am restless and can’t keep still.";
+      public static final String HADS_QUESTION_11 = "I am restless and canï¿½t keep still.";
       public static final String HADS_QUESTION_12 = "I am more irritable than usual.";
       public static final String HADS_QUESTION_13 = "I feel as if I have slowed down.";
       public static final String HADS_QUESTION_14 = "Worrying thoughts constantly go through my mind.";
@@ -235,30 +235,45 @@ public class MainActivity extends Activity {
          //There must always be a drawerItem Header for every drawerItem
          // Add Drawer Item to dataList
  
-            dataList.add(new DrawerItem("Username"));	//0. header for username
-            dataList.add(new DrawerItem("Home", R.drawable.ic_action_email));	//1. Home
-            
-            dataList.add(new DrawerItem("Assessments")); //2. header for assessment
-            dataList.add(new DrawerItem("HADS", R.drawable.ic_action_labels));	//3. HADS
-            dataList.add(new DrawerItem("VAS", R.drawable.ic_action_labels));	//4. VAS
-            dataList.add(new DrawerItem("Custom Assessments", R.drawable.ic_action_labels));	//5. Custom Assessments
-            //dataList.add(new DrawerItem(true)); // adding a spinner to the list
-            	//dataList.add(new DrawerItem("Likes", R.drawable.ic_action_good));
-            	//dataList.add(new DrawerItem("Games", R.drawable.ic_action_gamepad));
-            	//dataList.add(new DrawerItem("Lables", R.drawable.ic_action_labels));
- 
-            dataList.add(new DrawerItem("History"));	//6. header for history
-            dataList.add(new DrawerItem("View Reports", R.drawable.ic_action_search));	//7. View Reports
-            	//dataList.add(new DrawerItem("Cloud", R.drawable.ic_action_cloud));
-            	//dataList.add(new DrawerItem("Camara", R.drawable.ic_action_camera));
-            	//dataList.add(new DrawerItem("Video", R.drawable.ic_action_video));
-            	//dataList.add(new DrawerItem("Groups", R.drawable.ic_action_group));
-            	//dataList.add(new DrawerItem("Import & Export", R.drawable.ic_action_import_export));
- 
-            dataList.add(new DrawerItem("Configurations"));	//7. header for configs
-            dataList.add(new DrawerItem("Settings", R.drawable.ic_action_about));	//9. Settings
-            dataList.add(new DrawerItem("Quit", R.drawable.ic_action_settings));	//10. Quit
-            	//dataList.add(new DrawerItem("Help", R.drawable.ic_action_help));
+//            dataList.add(new DrawerItem("Username"));	//0. header for username
+//            dataList.add(new DrawerItem("Home", R.drawable.ic_action_email));	//1. Home
+//
+//            dataList.add(new DrawerItem("Assessments")); //2. header for assessment
+//            dataList.add(new DrawerItem("HADS", R.drawable.ic_action_labels));	//3. HADS
+//            dataList.add(new DrawerItem("VAS", R.drawable.ic_action_labels));	//4. VAS
+//            dataList.add(new DrawerItem("Custom Assessments", R.drawable.ic_action_labels));	//5. Custom Assessments
+//            //dataList.add(new DrawerItem(true)); // adding a spinner to the list
+//            	//dataList.add(new DrawerItem("Likes", R.drawable.ic_action_good));
+//            	//dataList.add(new DrawerItem("Games", R.drawable.ic_action_gamepad));
+//            	//dataList.add(new DrawerItem("Lables", R.drawable.ic_action_labels));
+//
+//            dataList.add(new DrawerItem("History"));	//6. header for history
+//            dataList.add(new DrawerItem("View Reports", R.drawable.ic_action_search));	//7. View Reports
+//            	//dataList.add(new DrawerItem("Cloud", R.drawable.ic_action_cloud));
+//            	//dataList.add(new DrawerItem("Camara", R.drawable.ic_action_camera));
+//            	//dataList.add(new DrawerItem("Video", R.drawable.ic_action_video));
+//            	//dataList.add(new DrawerItem("Groups", R.drawable.ic_action_group));
+//            	//dataList.add(new DrawerItem("Import & Export", R.drawable.ic_action_import_export));
+//
+//            dataList.add(new DrawerItem("Configurations"));	//7. header for configs
+//            dataList.add(new DrawerItem("Settings", R.drawable.ic_action_about));	//9. Settings
+//            dataList.add(new DrawerItem("Quit", R.drawable.ic_action_settings));	//10. Quit
+//            	//dataList.add(new DrawerItem("Help", R.drawable.ic_action_help));
+
+          dataList.add(new DrawerItem("Home"));	//0. header for username
+          dataList.add(new DrawerItem("Instructions", R.drawable.ic_action_email));	//1. Home
+
+          dataList.add(new DrawerItem("Assessments")); //2. header for assessment
+          dataList.add(new DrawerItem("HADS", R.drawable.ic_action_labels));	//3. HADS
+          dataList.add(new DrawerItem("VAS", R.drawable.ic_action_labels));	//4. VAS
+
+          dataList.add(new DrawerItem("History"));	//5. header for history
+          dataList.add(new DrawerItem("View Reports", R.drawable.ic_action_search));	//6. View Reports
+
+          dataList.add(new DrawerItem("Configurations"));	//7. header for configs
+          dataList.add(new DrawerItem("Quit", R.drawable.ic_action_settings));	//8. Quit
+
+
  
             adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item,
                         dataList);
@@ -312,7 +327,7 @@ public class MainActivity extends Activity {
       }
  
       
-      //You need to update this according to the “dataList” item position. 
+      //You need to update this according to the ï¿½dataListï¿½ item position. 
       //Fragment should be only need to change when we click in a selectable 
       //item not in header or spinner.  So change the case statements to point 
       //correct selectable item. (Be careful you may get runtime errors if you 
@@ -324,45 +339,73 @@ public class MainActivity extends Activity {
           Bundle args = new Bundle();
           switch (position) {
      
-        case 1:	//Login
-        	//since it did not fetch previous bundle, all data will be lost once the home navigation button is pressed
-        	//should remember questionnaires entries? 
-//              fragment = new FragmentOne();
-//              args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
-//                          .getItemName());
-//              args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList
-//                          .get(position).getImgResID());
-        	fragment = new Fragment_Login();
-            break;
-        case 3:	//HADS Assessment
-            fragment = new Fragment_Assessment(hads_json);
-            break;
-        case 4:	//VAS Assessment
-            fragment = new Fragment_Assessment(vas_json);
-            break;    
-        case 5:	//Custom Assessment
-            fragment = new Fragment_List_Of_Assessments();
-            break;
-        case 7:	//Reports
-            fragment = new Fragment_Report();
-            args.putString(Fragment_Report.ITEM_NAME, dataList.get(position)
-                        .getItemName());
-            args.putInt(Fragment_Report.IMAGE_RESOURCE_ID, dataList
-                        .get(position).getImgResID());
-            break;
-        case 9:	//Settings
-            fragment = new Fragment_Settings();
-            break;
-        case 10:	//Quit
-            fragment = new FragmentTwo();
-            args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
-                        .getItemName());
-            args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList
-                        .get(position).getImgResID());
-            break;
-        
-          default:
-                break;
+//        case 1:	//Login
+//        	//since it did not fetch previous bundle, all data will be lost once the home navigation button is pressed
+//        	//should remember questionnaires entries?
+////              fragment = new FragmentOne();
+////              args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
+////                          .getItemName());
+////              args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList
+////                          .get(position).getImgResID());
+//        	fragment = new Fragment_Login();
+//            break;
+//        case 3:	//HADS Assessment
+//            fragment = new Fragment_Assessment(hads_json);
+//            break;
+//        case 4:	//VAS Assessment
+//            fragment = new Fragment_Assessment(vas_json);
+//            break;
+//        case 5:	//Custom Assessment
+//            fragment = new Fragment_List_Of_Assessments();
+//            break;
+//        case 7:	//Reports
+//            fragment = new Fragment_Report();
+//            args.putString(Fragment_Report.ITEM_NAME, dataList.get(position)
+//                        .getItemName());
+//            args.putInt(Fragment_Report.IMAGE_RESOURCE_ID, dataList
+//                        .get(position).getImgResID());
+//            break;
+//        case 9:	//Settings
+//            fragment = new Fragment_Settings();
+//            break;
+//        case 10:	//Quit
+//            fragment = new FragmentTwo();
+//            args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
+//                        .getItemName());
+//            args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList
+//                        .get(position).getImgResID());
+//            break;
+//
+//          default:
+//                break;
+//          }
+
+
+              case 1:	//Instructions
+                  fragment = new Fragment_Instructions();
+                  break;
+              case 3:	//HADS Assessment
+                  fragment = new Fragment_Assessment(hads_json);
+                  break;
+              case 4:	//VAS Assessment
+                  fragment = new Fragment_Assessment(vas_json);
+                  break;
+              case 6:	//Reports
+                  fragment = new Fragment_Report();
+                  args.putString(Fragment_Report.ITEM_NAME, dataList.get(position)
+                          .getItemName());
+                  args.putInt(Fragment_Report.IMAGE_RESOURCE_ID, dataList
+                          .get(position).getImgResID());
+                  break;
+              case 8:	//Quit
+                  fragment = new FragmentTwo();
+                  args.putString(FragmentOne.ITEM_NAME, dataList.get(position)
+                          .getItemName());
+                  args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList
+                          .get(position).getImgResID());
+                  break;
+              default:
+                  break;
           }
      
           fragment.setArguments(args);
