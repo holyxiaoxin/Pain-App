@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" >
+        <shape>
+                <gradient android:startColor="#45a0de" android:endColor="#45a0de"/>
+        </shape>
+        </item>
+    <item  android:state_focused="false" >
+        <shape>
+               <gradient android:startColor="#2980b9" android:endColor="#2980b9"/>
+        </shape>
+    </item>
+</selector>
+<!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/src/main/res/drawable/blue_custom_button.xml -->

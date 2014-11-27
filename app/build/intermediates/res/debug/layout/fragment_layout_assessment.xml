@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+	        <ImageView
+	        android:id="@+id/frag_question_image"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+			/>
+		 
+		    <TextView
+		        android:id="@+id/frag_question_text"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="10dp"
+		        android:textSize="20sp"
+			/>
+		 		<!--  	Start of	-->
+			    <!--	SEEKBAR  	-->
+			    <!--  				-->
+			    <LinearLayout
+			        android:id="@+id/slider_view"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_margin="5dp"
+			        android:background="@drawable/background_view_rounded_grey"
+			        android:orientation="vertical"
+			        android:visibility="visible" >
+			 
+			        <TextView
+			            android:id="@+id/frag_slider_text"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="center"
+			            android:padding="10dp"
+			            android:textColor="@color/white_smoke"
+			            android:textSize="20sp" />
+			        <!--  	SLIDER IMAGE	-->
+			        <LinearLayout
+			            android:layout_width="match_parent"
+			       		android:layout_height="match_parent"
+			            android:orientation="horizontal">
+			            
+			            <ImageView
+			            android:id="@+id/seekbar_image1"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:gravity="left"
+			            android:paddingLeft="7dp"
+			            android:src="@drawable/vas_face1" />
+			            
+			            <ImageView
+			            android:id="@+id/seekbar_image2"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:gravity="center"
+			            android:layout_weight="1"
+			            android:src="@drawable/vas_face2" />
+
+			            <ImageView
+		                android:id="@+id/seekbar_image3"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:gravity="right"
+		                android:paddingRight="7dp"
+		                android:src="@drawable/vas_face3" />
+			            
+			        </LinearLayout>
+			 
+			        <SeekBar
+			            android:id="@+id/volume_bar"
+			            android:layout_width="fill_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_margin="10dp"
+			            android:progress="0"
+			            android:max="10"
+			            android:minHeight="10dip"
+        				android:maxHeight="10dip" 
+			            android:progressDrawable="@drawable/progressbar"
+			            android:secondaryProgress="0" />
+			 
+			        <LinearLayout
+			            android:id="@+id/seekbar_mul_5"
+			            android:layout_width="fill_parent"
+			            android:layout_height="wrap_content"
+			            android:orientation="horizontal"
+			            android:visibility="visible"
+			            android:layout_marginBottom="10dp"
+			            android:weightSum="12" >
+			 
+			            <TextView
+			                android:id="@+id/seekbar_label_typeA_0"
+			                android:layout_width="0dp"
+			                android:layout_height="wrap_content"
+			                android:layout_weight="2"
+			                android:gravity="center_horizontal"
+			                android:text="0"
+			                android:textColor="@color/white_smoke"
+			                android:textStyle="bold" />
+			 
+			            <TextView
+			                android:id="@+id/seekbar_label_typeA_1"
+			                android:layout_width="0dp"
+			                android:layout_height="wrap_content"
+			                android:layout_weight="2"
+			                android:gravity="center_horizontal"
+			                android:text="2"
+			                android:textColor="@color/white_smoke"
+			                android:textStyle="bold" />
+			 
+			            <TextView
+			                android:id="@+id/seekbar_label_typeA_2"
+			                android:layout_width="0dp"
+			                android:layout_height="wrap_content"
+			                android:layout_weight="2"
+			                android:gravity="center_horizontal"
+			                android:text="4"
+			                android:textColor="@color/white_smoke"
+			                android:textStyle="bold" />
+			 
+			            <TextView
+			                android:id="@+id/seekbar_label_typeA_3"
+			                android:layout_width="0dp"
+			                android:layout_height="wrap_content"
+			                android:layout_weight="2"
+			                android:gravity="center_horizontal"
+			                android:text="6"
+			                android:textColor="@color/white_smoke"
+			                android:textStyle="bold" />
+			 
+			            <TextView
+			                android:id="@+id/seekbar_label_typeA_4"
+			                android:layout_width="0dp"
+			                android:layout_height="wrap_content"
+			                android:layout_weight="2"
+			                android:gravity="center_horizontal"
+			                android:text="8"
+			                android:textColor="@color/white_smoke"
+			                android:textStyle="bold" />
+			 
+			            <TextView
+			                android:id="@+id/seekbar_label_typeA_5"
+			                android:layout_width="0dp"
+			                android:layout_height="wrap_content"
+			                android:layout_weight="2"
+			                android:gravity="center_horizontal"
+			                android:text="10"
+			                android:textColor="@color/white_smoke"
+			                android:textStyle="bold" />
+			        </LinearLayout>
+			        
+			        <LinearLayout
+			            android:id="@+id/seekbar_mul_3"
+			            android:layout_width="fill_parent"
+			            android:layout_height="wrap_content"
+			            android:orientation="horizontal"
+			            android:visibility="visible"
+			            android:layout_marginBottom="10dp"
+			            android:weightSum="12" >
+			 
+			            <TextView
+			                android:id="@+id/seekbar_label_typeB_0"
+			                android:layout_width="0dp"
+			                android:layout_height="wrap_content"
+			                android:layout_weight="2"
+			                android:gravity="center_horizontal"
+			                android:text="0"
+			                android:textColor="@color/white_smoke"
+			                android:textStyle="bold" />
+			 
+			            <TextView
+			                android:id="@+id/seekbar_label_typeB_1"
+			                android:layout_width="0dp"
+			                android:layout_height="wrap_content"
+			                android:layout_weight="4.4"
+			                android:gravity="center_horizontal"
+			                android:text="1"
+			                android:textColor="@color/white_smoke"
+			                android:textStyle="bold" />
+			 
+			            <TextView
+			                android:id="@+id/seekbar_label_typeB_2"
+			                android:layout_width="0dp"
+			                android:layout_height="wrap_content"
+			                android:layout_weight="2.8"
+			                android:gravity="center_horizontal"
+			                android:text="2"
+			                android:textColor="@color/white_smoke"
+			                android:textStyle="bold" />
+			            
+			            <TextView
+			                android:id="@+id/seekbar_label_typeB_3"
+			                android:layout_width="0dp"
+			                android:layout_height="wrap_content"
+			                android:layout_weight="3.6"
+			                android:gravity="center_horizontal"
+			                android:text="3"
+			                android:textColor="@color/white_smoke"
+			                android:textStyle="bold" />
+
+			        </LinearLayout>
+			        
+		    </LinearLayout>
+		    <!--  	End of		-->
+		    <!--	SEEKBAR  	-->
+		    <!--  				-->
+	        <!-- Button -->
+	        
+	        <!-- Start of -->
+		    <!-- RADIO BUTTONS -->
+		    <!--  -->
+		    <LinearLayout
+		        android:id="@+id/radio_view"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_margin="5dp"
+		        android:background="@drawable/background_view_rounded_orange"
+		        android:orientation="vertical">
+		    
+			<RadioGroup
+		        android:id="@+id/radioGroup"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content" >
+			</RadioGroup>
+			
+			</LinearLayout>
+		    <!-- End of -->
+		    <!-- RADIO BUTTONS -->
+		    <!--  -->
+		    <!-- Button -->
+	        
+			<RelativeLayout 
+			    android:layout_width="fill_parent"
+			    android:layout_height="fill_parent">
+			<Button
+			        android:id="@+id/button_question_back"
+			        android:minHeight="0dp"
+		        	android:minWidth="0dp"
+		        	android:layout_alignParentLeft="true"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="Back" />
+
+			<Button
+			    android:id="@+id/button_question_next_save"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_alignParentRight="true"
+			    android:minHeight="0dp"
+			    android:minWidth="0dp"
+			    android:text="Next" />
+		    </RelativeLayout>
+    </LinearLayout>
+<!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/src/main/res/layout/fragment_layout_assessment.xml -->

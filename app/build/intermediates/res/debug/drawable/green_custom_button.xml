@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" >
+        <shape>
+                <gradient android:startColor="#30cd72" android:endColor="#30cd72"/>
+        </shape>
+        </item>
+    <item  android:state_focused="false" >
+        <shape>
+               <gradient android:startColor="#27ae60" android:endColor="#27ae60"/>
+        </shape>
+    </item>
+</selector>
+<!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/src/main/res/drawable/green_custom_button.xml -->

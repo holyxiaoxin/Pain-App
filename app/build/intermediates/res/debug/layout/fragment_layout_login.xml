@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="10dip" >
+	    <!--  View Title Label -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="LOGIN"
+	        android:layout_marginBottom="10dip" 
+	        android:textSize="25dip"
+	        android:textStyle="bold"/>
+		<!--  Username Label -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Username" />
+	    <!--  Username TextField -->
+	    <EditText
+	        android:id="@+id/editLoginUsername"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10" >
+	    </EditText>
+		<!--  Password Label -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="15dip"
+	        android:text="Password" />
+		<!--  Password TextField -->
+	    <EditText
+	        android:id="@+id/editLoginPassword"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:inputType="textPassword" />
+	    <!--  Error message -->
+	    <TextView android:id="@+id/login_error"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:textColor="#e30000"
+			android:padding="10dip"
+			android:textStyle="bold"/>
+	    <!--  Login Button -->        
+	    <Button
+	        android:id="@+id/loginButton"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="20dip"
+	        android:text="Login" />
+	    <!--  Link to Registration Screen -->
+	    <Button
+	        android:id="@+id/registerButton"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="40dip"
+	        android:background="@null"
+	        android:text="@string/register_me"
+	        android:textColor="#21dbd4"
+	        android:textStyle="bold" />
+    </LinearLayout>
+</ScrollView>
+<!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/src/main/res/layout/fragment_layout_login.xml -->

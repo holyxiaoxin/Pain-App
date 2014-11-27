@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="vertical"
+	    >
+	
+	    <Button
+        android:id="@+id/switch_report_view_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/blue_custom_button"
+        android:textSize="20sp"
+        android:text="Switch View" />
+    
+	    <Button
+	        android:id="@+id/export_csv_button"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/green_custom_button"
+	        android:layout_above="@id/switch_report_view_button"
+	        android:textSize="20sp"
+	        android:text="Export to CSV" />
+ 
+	    <ListView
+	        android:id="@+id/reportList"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:layout_above="@id/export_csv_button">
+
+	    </ListView>
+
+	</RelativeLayout><!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/src/main/res/layout/fragment_layout_report_list.xml -->

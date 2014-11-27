@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="10dip" >
+	    <!--  View Title Label -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="REGISTER"
+	        android:layout_marginBottom="10dip" 
+	        android:textSize="25dip"
+	        android:textStyle="bold"/>
+		<!--  Username Label -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Username" />
+	    <!--  Username TextField -->
+	    <EditText
+	        android:id="@+id/editRegisterUsername"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10" />
+	    <!--  Email Label -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Email" />
+	    <!--  Email TextField -->
+	    <EditText
+	        android:id="@+id/editRegisterEmail"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10" />
+		<!--  Password Label -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="15dip"
+	        android:text="Password" />
+		<!--  Password TextField -->
+	    <EditText
+	        android:id="@+id/editRegisterPassword"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:inputType="textPassword" />
+	    <!--  Confirm Password Label -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="15dip"
+	        android:text="Confirm Password" />
+		<!--  Confirm Password TextField -->
+	    <EditText
+	        android:id="@+id/editRegisterConfirmPassword"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:inputType="textPassword" />
+	    <!--  Error message -->
+	    <TextView android:id="@+id/register_error"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:textColor="#e30000"
+			android:padding="10dip"
+			android:textStyle="bold"/>
+	    <!--  Register Button -->        
+	    <Button
+	        android:id="@+id/registerButton"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="20dip"
+	        android:text="Register" />
+    </LinearLayout>
+</ScrollView>
+<!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/src/main/res/layout/fragment_layout_register.xml -->
