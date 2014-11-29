@@ -198,8 +198,9 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 		
 		  ivIcon = (ImageView) view.findViewById(R.id.frag_question_image);
 		  tvItemName = (TextView) view.findViewById(R.id.frag_question_text);
-		
-		  ivIcon.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_action_labels));
+
+          //disable image
+		  //ivIcon.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_action_labels));
 		  tvItemName.setText(currentQuestion);
 		  
 		  /**
