@@ -253,7 +253,7 @@ public final class R {
 		public static final int view_touch_selector = 0x7f02007b;
 	}
 	public static final class id {
-		public static final int action_add_new_alarm = 0x7f0700ae;
+		public static final int action_add_new_alarm = 0x7f0700b1;
 		public static final int action_bar = 0x7f070026;
 		public static final int action_bar_activity_content = 0x7f070014;
 		public static final int action_bar_container = 0x7f070025;
@@ -265,8 +265,8 @@ public final class R {
 		public static final int action_menu_divider = 0x7f070015;
 		public static final int action_menu_presenter = 0x7f070016;
 		public static final int action_mode_close_button = 0x7f07002e;
-		public static final int action_save_alarm_details = 0x7f0700ad;
-		public static final int action_settings = 0x7f0700af;
+		public static final int action_save_alarm_details = 0x7f0700b0;
+		public static final int action_settings = 0x7f0700b2;
 		public static final int activity_chooser_view_content = 0x7f07002f;
 		public static final int alarm_details_name = 0x7f07004c;
 		public static final int alarm_details_repeat_friday = 0x7f070055;
@@ -302,10 +302,10 @@ public final class R {
 		public static final int alarm_type_container = 0x7f070059;
 		public static final int alarm_vibrate_selector = 0x7f070061;
 		public static final int alertVolumeSetting = 0x7f070057;
-		public static final int alert_launch_app = 0x7f0700b3;
-		public static final int alert_music = 0x7f0700b1;
-		public static final int alert_ringtone = 0x7f0700b2;
-		public static final int alert_silent = 0x7f0700b0;
+		public static final int alert_launch_app = 0x7f0700b6;
+		public static final int alert_music = 0x7f0700b4;
+		public static final int alert_ringtone = 0x7f0700b5;
+		public static final int alert_silent = 0x7f0700b3;
 		public static final int always = 0x7f07000f;
 		public static final int apps_listView = 0x7f07004a;
 		public static final int apps_row_textview = 0x7f070071;

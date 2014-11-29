@@ -1,16 +1,5 @@
 package com.dexterlimjiarong.painapp;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -38,6 +27,15 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+
 public class Fragment_Assessment extends Fragment implements OnClickListener{
 
 	int painSliderValue = 0;
@@ -51,7 +49,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 	static String[] questions = null;	//this are all the questions for the assessment.
 	static String[][] options = null;	//this are all the options for the assessment. Eg, for question 1, the options are stored in options[0][], option 1 is in options[0][0] and so on.
 	static String[] maxValues = null;	//this are all the maxValues of sliders, can be empty if the question is not a slider
-	static String[] sliderTitles = null; //this are all the slider titles for different questions (if the question has a slider in the first place)
+	static String[][] sliderTitles = null; //this are all the slider titles for different questions (if the question has a slider in the first place)
 	static String[] colors = null; //this are all the color for the scales
 	static int questionsSize = 0;	//the total number of questions. eg. Q1, Q2, Q3 ..... (i.e. the number of pages/fragments generated for the entire assessment)
 	
@@ -130,10 +128,12 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
     		//intialise maxValues
     		maxValues = new String[questionsSize];
     		//initialise slider titles
-    		sliderTitles = new String[questionsSize];
+    		sliderTitles = new String[questionsSize][3];
     		//have not code for slider titles, set as Slider as default
     		for(int i=0;i<questionsSize;i++){
-    			sliderTitles[i]="Slider";
+                sliderTitles[i][0]="Very Bad";
+                sliderTitles[i][1]="Neither good nor bad";
+                sliderTitles[i][2]="Very Good";
     		}
     		//initialise colors
     		colors = new String[questionsSize];
@@ -264,9 +264,14 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 					 /**
 					   * SEEKBAR
 					   */
-					 	//sets seekbar title
-					 	TextView seekBarTitleView = (TextView) view.findViewById(R.id.frag_slider_text);
-					 	seekBarTitleView.setText(sliderTitles[currentQuestionNumber-1]);
+			       	//sets seekbar title
+				    TextView seekBarTitleView1 = (TextView) view.findViewById(R.id.frag_slider_text1);
+                    TextView seekBarTitleView2 = (TextView) view.findViewById(R.id.frag_slider_text2);
+                    TextView seekBarTitleView3 = (TextView) view.findViewById(R.id.frag_slider_text3);
+                     seekBarTitleView1.setText(sliderTitles[currentQuestionNumber-1][0]);
+                     seekBarTitleView2.setText(sliderTitles[currentQuestionNumber-1][1]);
+                     seekBarTitleView3.setText(sliderTitles[currentQuestionNumber-1][2]);
+
 					 	//sets seekbar color
 					 	Log.d("color",colors[currentQuestionNumber-1]);
 					 	switch(colors[currentQuestionNumber-1]){

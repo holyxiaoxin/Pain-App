@@ -27,19 +27,45 @@
 			        android:background="@drawable/background_view_rounded_grey"
 			        android:orientation="vertical"
 			        android:visibility="visible" >
-			 
-			        <TextView
-			            android:id="@+id/frag_slider_text"
-			            android:layout_width="wrap_content"
-			            android:layout_height="wrap_content"
-			            android:layout_gravity="center"
-			            android:padding="10dp"
-			            android:textColor="@color/white_smoke"
-			            android:textSize="20sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/frag_slider_text1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:padding="10dp"
+                            android:textColor="@color/white_smoke"
+                            android:textSize="15sp" />
+                        <TextView
+                            android:id="@+id/frag_slider_text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:textColor="@color/white_smoke"
+                            android:textSize="15sp" />
+                        <TextView
+                            android:id="@+id/frag_slider_text3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:padding="10dp"
+                            android:textColor="@color/white_smoke"
+                            android:textSize="15sp" />
+                    </LinearLayout>
 			        <!--  	SLIDER IMAGE	-->
 			        <LinearLayout
 			            android:layout_width="match_parent"
 			       		android:layout_height="match_parent"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
 			            android:orientation="horizontal">
 			            
 			            <ImageView
@@ -161,8 +187,8 @@
 			            android:orientation="horizontal"
 			            android:visibility="visible"
 			            android:layout_marginBottom="10dp"
-                        android:paddingLeft="12dp"
-                        android:paddingRight="12dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
 			            android:weightSum="12" >
 			 
 			            <TextView
