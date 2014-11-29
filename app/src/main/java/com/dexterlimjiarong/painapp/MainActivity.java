@@ -93,20 +93,37 @@ public class MainActivity extends Activity {
       /**
        * HADS - Hospital Anxiety and Depression Scale
        */
-      public static final String HADS_QUESTION_1 = "I wake early and then sleep badly for the rest of the night.";
-      public static final String HADS_QUESTION_2 = "I get very frustrated or have panic feelings for apparently no reason at all.";
-      public static final String HADS_QUESTION_3 = "I feel miserable and sad.";
-      public static final String HADS_QUESTION_4 = "I feel anxious when I go out of the house on my own.";
-      public static final String HADS_QUESTION_5 = "I have lost interest in things.";
-      public static final String HADS_QUESTION_6 = "I get palpitations, or sensations or 'butterflies' in my stomach or chest.";
-      public static final String HADS_QUESTION_7 = "I have a good appetite.";
-      public static final String HADS_QUESTION_8 = "I feel scared or frightened.";
-      public static final String HADS_QUESTION_9 = "I feel life is not worth living.";
-      public static final String HADS_QUESTION_10 = "I still enjoy the things I used to.";
-      public static final String HADS_QUESTION_11 = "I am restless and can't keep still.";
-      public static final String HADS_QUESTION_12 = "I am more irritable than usual.";
-      public static final String HADS_QUESTION_13 = "I feel as if I have slowed down.";
-      public static final String HADS_QUESTION_14 = "Worrying thoughts constantly go through my mind.";
+//      public static final String HADS_QUESTION_1 = "I wake early and then sleep badly for the rest of the night.";
+//      public static final String HADS_QUESTION_2 = "I get very frustrated or have panic feelings for apparently no reason at all.";
+//      public static final String HADS_QUESTION_3 = "I feel miserable and sad.";
+//      public static final String HADS_QUESTION_4 = "I feel anxious when I go out of the house on my own.";
+//      public static final String HADS_QUESTION_5 = "I have lost interest in things.";
+//      public static final String HADS_QUESTION_6 = "I get palpitations, or sensations or 'butterflies' in my stomach or chest.";
+//      public static final String HADS_QUESTION_7 = "I have a good appetite.";
+//      public static final String HADS_QUESTION_8 = "I feel scared or frightened.";
+//      public static final String HADS_QUESTION_9 = "I feel life is not worth living.";
+//      public static final String HADS_QUESTION_10 = "I still enjoy the things I used to.";
+//      public static final String HADS_QUESTION_11 = "I am restless and can't keep still.";
+//      public static final String HADS_QUESTION_12 = "I am more irritable than usual.";
+//      public static final String HADS_QUESTION_13 = "I feel as if I have slowed down.";
+//      public static final String HADS_QUESTION_14 = "Worrying thoughts constantly go through my mind.";
+
+
+    public static final String HADS_QUESTION_1 = "I feel tense";
+    public static final String HADS_QUESTION_2 = "I still enjoy things that I previously did";
+    public static final String HADS_QUESTION_3 = "I feel frightened something bad will happen";
+    public static final String HADS_QUESTION_4 = "I can smile and see the funny side of things";
+    public static final String HADS_QUESTION_5 = "I have worrying thoughts";
+    public static final String HADS_QUESTION_6 = "I feel cheerful";
+    public static final String HADS_QUESTION_7 = "I am able to relax";
+    public static final String HADS_QUESTION_8 = "I feel like I have slowed down";
+    public static final String HADS_QUESTION_9 = "I feel nervous";
+    public static final String HADS_QUESTION_10 = "I have lost interest in my appearance";
+    public static final String HADS_QUESTION_11 = "I feel restless";
+    public static final String HADS_QUESTION_12 = "I can look forward to things with interest";
+    public static final String HADS_QUESTION_13 = "I get sudden feelings of panic";
+    public static final String HADS_QUESTION_14 = "I am able to enjoy simple things in life";
+
       public static final String HADS_OPTION_1 = "No, not at all";
       public static final String HADS_OPTION_2 = "No, not much";
       public static final String HADS_OPTION_3 = "Yes, sometimes";
