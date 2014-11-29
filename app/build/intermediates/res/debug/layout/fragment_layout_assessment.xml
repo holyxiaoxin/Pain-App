@@ -50,7 +50,11 @@
                             android:paddingTop="10dp"
                             android:paddingRight="10dp"
                             android:paddingBottom="10dp"
-                            android:textColor="@color/white_smoke"
+                            android:textColor="@color/white"
+                            android:shadowColor="#555"
+                            android:shadowDx="0.0"
+                            android:shadowDy="0.0"
+                            android:shadowRadius="1.0"
                             android:textSize="15sp" />
                         <TextView
                             android:id="@+id/frag_slider_text2"
@@ -59,7 +63,11 @@
                             android:gravity="center"
                             android:layout_weight="1"
                             android:padding="10dp"
-                            android:textColor="@color/white_smoke"
+                            android:textColor="@color/white"
+                            android:shadowColor="#555"
+                            android:shadowDx="0.0"
+                            android:shadowDy="0.0"
+                            android:shadowRadius="1.0"
                             android:textSize="15sp" />
                         <TextView
                             android:id="@+id/frag_slider_text3"
@@ -70,7 +78,11 @@
                             android:paddingTop="10dp"
                             android:paddingRight="0dp"
                             android:paddingBottom="10dp"
-                            android:textColor="@color/white_smoke"
+                            android:textColor="@color/white"
+                            android:shadowColor="#555"
+                            android:shadowDx="0.0"
+                            android:shadowDy="0.0"
+                            android:shadowRadius="1.0"
                             android:textSize="15sp" />
                     </LinearLayout>
 			        <!--  	SLIDER IMAGE	-->
@@ -139,7 +151,11 @@
 			                android:layout_weight="2"
 			                android:gravity="center_horizontal"
 			                android:text="0"
-			                android:textColor="@color/white_smoke"
+			                android:textColor="@color/white"
+                            android:shadowColor="#555"
+                            android:shadowDx="0.0"
+                            android:shadowDy="0.0"
+                            android:shadowRadius="1.0"
 			                android:textStyle="bold" />
 			 
 			            <TextView
@@ -149,7 +165,11 @@
 			                android:layout_weight="2"
 			                android:gravity="center_horizontal"
 			                android:text="2"
-			                android:textColor="@color/white_smoke"
+			                android:textColor="@color/white"
+                            android:shadowColor="#555"
+                            android:shadowDx="0.0"
+                            android:shadowDy="0.0"
+                            android:shadowRadius="1.0"
 			                android:textStyle="bold" />
 			 
 			            <TextView
@@ -159,7 +179,11 @@
 			                android:layout_weight="2"
 			                android:gravity="center_horizontal"
 			                android:text="4"
-			                android:textColor="@color/white_smoke"
+			                android:textColor="@color/white"
+                            android:shadowColor="#555"
+                            android:shadowDx="0.0"
+                            android:shadowDy="0.0"
+                            android:shadowRadius="1.0"
 			                android:textStyle="bold" />
 			 
 			            <TextView
@@ -169,7 +193,11 @@
 			                android:layout_weight="2"
 			                android:gravity="center_horizontal"
 			                android:text="6"
-			                android:textColor="@color/white_smoke"
+			                android:textColor="@color/white"
+                            android:shadowColor="#555"
+                            android:shadowDx="0.0"
+                            android:shadowDy="0.0"
+                            android:shadowRadius="1.0"
 			                android:textStyle="bold" />
 			 
 			            <TextView
@@ -179,7 +207,11 @@
 			                android:layout_weight="2"
 			                android:gravity="center_horizontal"
 			                android:text="8"
-			                android:textColor="@color/white_smoke"
+			                android:textColor="@color/white"
+                            android:shadowColor="#555"
+                            android:shadowDx="0.0"
+                            android:shadowDy="0.0"
+                            android:shadowRadius="1.0"
 			                android:textStyle="bold" />
 			 
 			            <TextView
@@ -189,7 +221,11 @@
 			                android:layout_weight="2"
 			                android:gravity="center_horizontal"
 			                android:text="10"
-			                android:textColor="@color/white_smoke"
+			                android:textColor="@color/white"
+                            android:shadowColor="#555"
+                            android:shadowDx="0.0"
+                            android:shadowDy="0.0"
+                            android:shadowRadius="1.0"
 			                android:textStyle="bold" />
 			        </LinearLayout>
 			        
@@ -211,7 +247,11 @@
 			                android:layout_weight="2"
 			                android:gravity="center_horizontal"
 			                android:text="0"
-			                android:textColor="@color/white_smoke"
+			                android:textColor="@color/white"
+                            android:shadowColor="#555"
+                            android:shadowDx="0.0"
+                            android:shadowDy="0.0"
+                            android:shadowRadius="1.0"
 			                android:textStyle="bold" />
 			 
 			            <TextView
@@ -221,7 +261,11 @@
 			                android:layout_weight="4.4"
 			                android:gravity="center_horizontal"
 			                android:text="1"
-			                android:textColor="@color/white_smoke"
+                            android:textColor="@color/white"
+                            android:shadowColor="#555"
+                            android:shadowDx="0.0"
+                            android:shadowDy="0.0"
+                            android:shadowRadius="1.0"
 			                android:textStyle="bold" />
 			 
 			            <TextView
@@ -231,7 +275,11 @@
 			                android:layout_weight="2.8"
 			                android:gravity="center_horizontal"
 			                android:text="2"
-			                android:textColor="@color/white_smoke"
+                            android:textColor="@color/white"
+                            android:shadowColor="#555"
+                            android:shadowDx="0.0"
+                            android:shadowDy="0.0"
+                            android:shadowRadius="1.0"
 			                android:textStyle="bold" />
 			            
 			            <TextView
@@ -241,7 +289,11 @@
 			                android:layout_weight="3.6"
 			                android:gravity="center_horizontal"
 			                android:text="3"
-			                android:textColor="@color/white_smoke"
+                            android:textColor="@color/white"
+                            android:shadowColor="#555"
+                            android:shadowDx="0.0"
+                            android:shadowDy="0.0"
+                            android:shadowRadius="1.0"
 			                android:textStyle="bold" />
 
 			        </LinearLayout>
