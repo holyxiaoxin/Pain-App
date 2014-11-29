@@ -1,11 +1,4 @@
 package com.dexterlimjiarong.painapp;
- 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -21,6 +14,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.riandy.flexiblealertscheduling.AlarmDBHelper;
+import com.riandy.flexiblealertscheduling.AlarmManagerHelper;
+import com.riandy.flexiblealertscheduling.AlarmModel;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
  
 public class MainActivity extends Activity {
  
@@ -145,7 +151,10 @@ public class MainActivity extends Activity {
     	  	//extending the existing parent class' method
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
- 
+
+              getApplicationContext().deleteDatabase(AlarmDBHelper.DATABASE_NAME);
+              scheduleReminders();
+
             
             //sets up the JSONObject for HADS Assessment 
             hads_json = new JSONObject();
@@ -171,7 +180,7 @@ public class MainActivity extends Activity {
             JSONArray hads_questions = new JSONArray();
             try{
             	//add the title to the HADS JSONObject
-            	hads_json.put("title","HADS");
+            	hads_json.put("title","FEEL");
             	for(int i=0;i<HADS_QUESTION_LIST.length;i++){
             		//creates a new single question object
             		JSONObject hads_question = new JSONObject();
@@ -264,7 +273,7 @@ public class MainActivity extends Activity {
           dataList.add(new DrawerItem("Instructions", R.drawable.ic_action_email));	//1. Home
 
           dataList.add(new DrawerItem("Assessments")); //2. header for assessment
-          dataList.add(new DrawerItem("HADS", R.drawable.ic_action_labels));	//3. HADS
+          dataList.add(new DrawerItem("FEEL", R.drawable.ic_action_labels));	//3. HADS is renamed to FEEL
           dataList.add(new DrawerItem("VAS", R.drawable.ic_action_labels));	//4. VAS
 
           dataList.add(new DrawerItem("History"));	//5. header for history
@@ -452,5 +461,65 @@ public class MainActivity extends Activity {
  
             }
       }
+
+    public void scheduleReminders(){
+
+        AlarmDBHelper dbHelper = new AlarmDBHelper(this);
+        File dbFile = getApplicationContext().getDatabasePath(AlarmDBHelper.DATABASE_NAME);
+        if(dbFile.exists()){
+            Log.d("Database exist", "do not schedule again!");
+            return;
+        }
+
+        //Emotional and Physical discomfort (0-19) days = 20
+        //HADS day 7,9,11,13,15,17,19
+        //time will be 6.30pm
+        int alarmHour = 18;
+        int alarmMinute = 30;
+        int numOfDays = 20;
+
+        String EmotionalAndPhysicalMessage = "Please fill in the Emotional and Physical Discomfort survey.";
+        String HADSMessage = "Please fill in the HADS survey";
+
+        Calendar today = Calendar.getInstance();
+        //today.set(2014, Calendar.NOVEMBER, 5,0,0);
+        Calendar startDate = (Calendar) today.clone();
+        Calendar endDate = (Calendar) today.clone();
+        endDate.add(Calendar.DATE, numOfDays);
+
+        //Emotional and Physical discomfort (daily)
+        AlarmModel alarmDetails = new AlarmModel();
+        alarmDetails.name = EmotionalAndPhysicalMessage;
+        alarmDetails.timeHour = alarmHour;
+        alarmDetails.timeMinute = alarmMinute;
+        alarmDetails.isEnabled = true;
+        alarmDetails.repeatWeekly = true;
+        for (int i=0; i<7; i++)
+            alarmDetails.setRepeatingDay(i, true);
+        alarmDetails.startDate = startDate.getTime();
+        alarmDetails.endDate = endDate.getTime();
+        dbHelper.createAlarm(alarmDetails);
+
+        //HADS (7,9,11,13,15,17,19)
+        int[] arr = {7,9,11,13,15,17,19};
+        for (int i=0; i<arr.length; i++) {
+            alarmDetails = new AlarmModel();
+            alarmDetails.name = HADSMessage+" day "+arr[i];
+            alarmDetails.timeHour = alarmHour;
+            alarmDetails.timeMinute = alarmMinute+10;
+            alarmDetails.isEnabled = true;
+            alarmDetails.repeatWeekly = false;
+            for (int j=0; j<7; j++)
+                alarmDetails.setRepeatingDay(j, true);
+            startDate = (Calendar) today.clone();
+            startDate.add(Calendar.DATE, (arr[i]));
+            endDate = (Calendar) startDate.clone();
+            alarmDetails.startDate = startDate.getTime();
+            alarmDetails.endDate = endDate.getTime();
+            dbHelper.createAlarm(alarmDetails);
+        }
+
+        AlarmManagerHelper.setAlarms(getApplicationContext());
+    }
  
 }

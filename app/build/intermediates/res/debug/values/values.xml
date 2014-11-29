@@ -79,6 +79,11 @@
     <color name="blue_end">#7986CB</color>
     <color name="blue_start">#7986CB</color>
     <color name="default_screen_bg">#20324a</color>
+    <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/exploded-aar/Pain-App/faslib/unspecified/res/values/values.xml -->
+    <eat-comment/>
+    <color name="gray">#aaaaaa</color>
+    <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
     <color name="green_end">#26C281</color>
     <color name="green_start">#26C281</color>
     <color name="grey_end">#95a5a6</color>
@@ -176,12 +181,46 @@
     <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Settings</string>
+    <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/exploded-aar/Pain-App/faslib/unspecified/res/values/values.xml -->
+    <eat-comment/>
+    <string name="alarm_notification">Notification</string>
+    <string name="alarm_screen">Alarm Screen</string>
+    <string name="alarm_vibrate">Vibrate</string>
+    <string name="alert_volume_settings">Alert and Volume Settings</string>
+    <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="app_name">USRS</string>
+    <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/exploded-aar/Pain-App/faslib/unspecified/res/values/values.xml -->
+    <eat-comment/>
+    <string name="details_alarm_name">Alarm Name</string>
+    <string name="details_alarm_tone">Alarm Tone</string>
+    <string name="details_alarm_tone_default">Select an alarm tone</string>
+    <string name="details_alarm_type">Alert Type</string>
+    <string name="details_alarm_type_default">Music/Ringtone</string>
+    <string name="details_friday">Friday</string>
+    <string name="details_monday">Monday</string>
+    <string name="details_repeat_weekly">Repeat Weekly</string>
+    <string name="details_saturday">Saturday</string>
+    <string name="details_sunday">Sunday</string>
+    <string name="details_thursday">Thursday</string>
+    <string name="details_tuesday">Tuesday</string>
+    <string name="details_wednesday">Wednesday</string>
+    <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="drawer_close">Close drawer</string>
     <string name="drawer_open">Open drawer</string>
     <string name="hello_user">Hello User!</string>
+    <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/exploded-aar/Pain-App/faslib/unspecified/res/values/values.xml -->
+    <eat-comment/>
+    <string name="hello_world">Hello world! FAS!</string>
+    <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="home_text1">\nSlide from the left edge of the screen to the right to bring up the menu.\n\nPlease choose one of the Assessments.\n\nYour Reports are stored under History.</string>
     <string name="register_me"><u>I don\'t have account. Register Me!</u></string>
+    <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/exploded-aar/Pain-App/faslib/unspecified/res/values/values.xml -->
+    <eat-comment/>
+    <string name="title_activity_apps_list">AppsListActivity</string>
+    <string name="title_activity_test">TestActivity</string>
     <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
@@ -194,6 +233,13 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/exploded-aar/Pain-App/faslib/unspecified/res/values/values.xml -->
+    <eat-comment/>
+    <style name="Divider">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">1dp</item>
+		<item name="android:background">?android:attr/listDivider</item>
+	</style>
     <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/values/values.xml -->
     <eat-comment/>
     <style name="TextAppearance.AppCompat.Base.CompactMenu.Dialog" parent="android:TextAppearance.Medium">

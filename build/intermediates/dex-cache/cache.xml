@@ -2,6 +2,12 @@
 <pre-dex-items>
 
     <item
+        dex="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/pre-dexed/debug/classes-a368a600a9118b2a5d6958d5e0fc851940cf478b.jar"
+        jar="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/exploded-aar/Pain-App/faslib/unspecified/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="88479a4f649b3e0a2d29f95fdc820dd8e02a610f"/>
+    <item
         dex="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-15125258b3d092431a6eb33cb672b13b790225ff.jar"
         jar="/Applications/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar"
         jumboMode="false"

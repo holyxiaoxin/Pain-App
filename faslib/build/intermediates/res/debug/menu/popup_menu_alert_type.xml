@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item  
+        android:id="@+id/alert_silent"  
+        android:title="Silent"/>  
+
+    <item  
+        android:id="@+id/alert_music"  
+        android:title="Music"/>  
+
+    <item  
+        android:id="@+id/alert_ringtone"  
+        android:title="Ringtone"/>  
+    
+    <item  
+        android:id="@+id/alert_launch_app"  
+        android:title="Launch Application"/>  
+
+</menu>
+<!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/faslib/src/main/res/menu/popup_menu_alert_type.xml -->
