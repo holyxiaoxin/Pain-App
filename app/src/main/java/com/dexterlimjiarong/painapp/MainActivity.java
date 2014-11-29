@@ -123,8 +123,8 @@ public class MainActivity extends Activity {
       /**
        * VAS - Visual Analogue Scale
        */
-      public static final String VAS_QUESTION_1 = "How is your EMOTIONAL state today?";
-      public static final String VAS_QUESTION_2 = "How is your PHYSICAL health today?";
+      public static final String VAS_QUESTION_1 = "How is your EMOTIONAL STATE today?";
+      public static final String VAS_QUESTION_2 = "How is your PHYSICAL HEALTH today?";
       public static final String VAS_MAXVALUE = "10";
       public static final String[] VAS_QUESTION_LIST = {VAS_QUESTION_1, VAS_QUESTION_2};
       public static final String VAS_QUESTION_1_COLOR = "blue";
