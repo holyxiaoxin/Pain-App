@@ -1,16 +1,7 @@
 package com.dexterlimjiarong.painapp;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -26,6 +17,16 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import au.com.bytecode.opencsv.CSVWriter;
  
 public class Fragment_Report extends Fragment {
@@ -191,20 +192,32 @@ public class Fragment_Report extends Fragment {
       }
       
       private void exportToCSV(){
+          String[] vasFreeText = {"VAS additional comments"};
+          String[] emptyRow = {""};
     	  CSVWriter writer = null;
     	  Context context = this.getView().getContext();
       	try 
       	{
       		writer = new CSVWriter(new FileWriter("/sdcard/assessmentReport.csv"), ',');
-      	    //adds the header of the csv file
-      	    String[] header = {"Title", "DateTime"};
-      	    
-      	    String[] vasFreeText = {"VAS additional comments"};
-      	    String[] emptyRow = {""};
+            SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, 0);
+
+
+
+
+            int maxQuestion = pref.getInt(REPORT_MAX_QUESTION, DEFAULT_INT_ZERO);
+            String[] header = new String[maxQuestion+2];
+            //adds the header of the csv file
+            header[0]="Title";
+            header[1]="DateTime";
+            //append question number
+            for(int i=2;i<maxQuestion+2;i++){
+                header[i]="Q"+Integer.toString(i-1);
+            }
+
       	    writer.writeNext(header);
       	    
       	    //writes the report into csv file
-      	    SharedPreferences pref = context.getSharedPreferences(PREFS_NAME, 0);
+
   	        int reportSize = pref.getInt(REPORT_SIZE,0);
       	    for(int i=0;i<reportSize;i++){
       	    	//Retrieve report data from persisted data stored in Shared Preference
@@ -231,7 +244,7 @@ public class Fragment_Report extends Fragment {
       	     */
       	    writer.writeNext(emptyRow);
       	    writer.writeNext(vasFreeText);
-      	    writer.writeNext(header);
+      	    writer.writeNext(Arrays.copyOfRange(header, 0, 4));
       	    for(int i=0;i<reportSize;i++){
       	    	String assessmentTitle = pref.getString(REPORT_TITLE+i, "");
       	    	String assessmentDateTime = pref.getString(REPORT_DATETIME+i, "");
