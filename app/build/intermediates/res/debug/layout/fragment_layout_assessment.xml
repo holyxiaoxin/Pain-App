@@ -76,7 +76,9 @@
 			            android:progress="0"
 			            android:max="10"
 			            android:minHeight="10dip"
-        				android:maxHeight="10dip" 
+        				android:maxHeight="10dip"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp"
 			            android:progressDrawable="@drawable/progressbar"
 			            android:secondaryProgress="0" />
 			 
@@ -87,6 +89,8 @@
 			            android:orientation="horizontal"
 			            android:visibility="visible"
 			            android:layout_marginBottom="10dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
 			            android:weightSum="12" >
 			 
 			            <TextView
@@ -157,6 +161,8 @@
 			            android:orientation="horizontal"
 			            android:visibility="visible"
 			            android:layout_marginBottom="10dp"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
 			            android:weightSum="12" >
 			 
 			            <TextView
