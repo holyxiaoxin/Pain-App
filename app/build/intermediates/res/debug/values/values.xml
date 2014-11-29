@@ -84,8 +84,8 @@
     <color name="gray">#aaaaaa</color>
     <!-- From: file:/Users/jiarong/AndroidstudioProjects/Pain-App/app/src/main/res/values/colors.xml -->
     <eat-comment/>
-    <color name="green_end">#81C784</color>
-    <color name="green_start">#81C784</color>
+    <color name="green_end">#66BB6A</color>
+    <color name="green_start">#66BB6A</color>
     <color name="grey_end">#95a5a6</color>
     <color name="grey_start">#95a5a6</color>
     <color name="light_gray_header_color">#646663</color>
