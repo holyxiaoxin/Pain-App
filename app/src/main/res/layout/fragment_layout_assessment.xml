@@ -118,7 +118,7 @@
         				android:maxHeight="10dip"
                         android:paddingLeft="30dp"
                         android:paddingRight="30dp"
-			            android:progressDrawable="@drawable/progressbar"
+			            android:progressDrawable="@drawable/progressbar_green"
 			            android:secondaryProgress="0" />
 			 
 			        <LinearLayout

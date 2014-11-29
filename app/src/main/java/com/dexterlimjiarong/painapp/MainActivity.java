@@ -128,7 +128,7 @@ public class MainActivity extends Activity {
       public static final String VAS_MAXVALUE = "10";
       public static final String[] VAS_QUESTION_LIST = {VAS_QUESTION_1, VAS_QUESTION_2};
       public static final String VAS_QUESTION_1_COLOR = "blue";
-      public static final String VAS_QUESTION_2_COLOR = "red";
+      public static final String VAS_QUESTION_2_COLOR = "green";
       public static final String[] VAS_COLOR_LIST = {VAS_QUESTION_1_COLOR, VAS_QUESTION_2_COLOR};
       JSONObject vas_json = null; //JSON object to be passed for VAS assessment
       

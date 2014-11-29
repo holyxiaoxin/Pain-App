@@ -273,6 +273,17 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
                      seekBarTitleView2.setText(sliderTitles[currentQuestionNumber-1][1]);
                      seekBarTitleView3.setText(sliderTitles[currentQuestionNumber-1][2]);
 
+                     SeekBar seekBar = (SeekBar) view.findViewById(R.id.volume_bar);
+                     //set up seekbar to remember previous entry (if any)
+                     if (response[currentQuestionNumber-1] != null){
+                         System.out.println(painSliderValue);
+                         painSliderValue = Integer.parseInt(response[currentQuestionNumber-1]);
+                         //debug purposes
+//							  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+painSliderValue,
+//										Toast.LENGTH_SHORT).show();
+                     }
+                     seekBar.setProgress(painSliderValue);
+
 					 	//sets seekbar color
 					 	Log.d("color",colors[currentQuestionNumber-1]);
 					 	switch(colors[currentQuestionNumber-1]){
@@ -290,6 +301,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 						 		break;
 						 	case "green":
 						 		seekBarView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_green));
+                                seekBar.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_orange));
 						 		break;
 						 	case "blue":
 						 		seekBarView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_blue));
@@ -301,16 +313,7 @@ public class Fragment_Assessment extends Fragment implements OnClickListener{
 						 		seekBarView.setBackground(getResources().getDrawable(R.drawable.background_view_rounded_grey));
 						 		break;
 					 	}
-					 	SeekBar seekBar = (SeekBar) view.findViewById(R.id.volume_bar);
-						  //set up seekbar to remember previous entry (if any)
-						  if (response[currentQuestionNumber-1] != null){
-							  System.out.println(painSliderValue);
-							  painSliderValue = Integer.parseInt(response[currentQuestionNumber-1]);
-                              //debug purposes
-//							  Toast.makeText(view.getContext(),"Refresh Pain Scale:"+painSliderValue,
-//										Toast.LENGTH_SHORT).show();
-						  }
-						  seekBar.setProgress(painSliderValue);
+
 					//sets max for slider if it is not defaulted
 					if(maxValues[currentQuestionNumber-1]!="" && !maxValues[currentQuestionNumber-1].isEmpty()){
 						int maxValue = Integer.parseInt(maxValues[currentQuestionNumber-1]);

@@ -2,11 +2,17 @@
 <pre-dex-items>
 
     <item
-        dex="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/pre-dexed/debug/classes-a368a600a9118b2a5d6958d5e0fc851940cf478b.jar"
-        jar="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/exploded-aar/Pain-App/faslib/unspecified/classes.jar"
+        dex="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/pre-dexed/debug/classes-8d09c8174122e1fecd3633252d51e635b3783be5.jar"
+        jar="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="88479a4f649b3e0a2d29f95fdc820dd8e02a610f"/>
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
+    <item
+        dex="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-2a65651fe8d9347960acf90dfb2e9da2ca4b00c2.jar"
+        jar="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
     <item
         dex="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-15125258b3d092431a6eb33cb672b13b790225ff.jar"
         jar="/Applications/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar"
@@ -14,11 +20,11 @@
         revision="19.1.0"
         sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
     <item
-        dex="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/pre-dexed/debug/classes-8d09c8174122e1fecd3633252d51e635b3783be5.jar"
-        jar="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
+        dex="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/pre-dexed/debug/classes-a368a600a9118b2a5d6958d5e0fc851940cf478b.jar"
+        jar="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/exploded-aar/Pain-App/faslib/unspecified/classes.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
+        sha1="1b750b03ae92f936348041b9d780ac6678d6fc42"/>
     <item
         dex="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/pre-dexed/debug/opencsv-3.0-af2b0dc3f248e97130a7dc0e148872a80e3eca25.jar"
         jar="/Users/jiarong/AndroidstudioProjects/Pain-App/app/libs/opencsv-3.0.jar"
@@ -31,11 +37,5 @@
         jumboMode="false"
         revision="19.1.0"
         sha1="f21927d22fe31889ecce94dd697a2e75b137e0ef"/>
-    <item
-        dex="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-2a65651fe8d9347960acf90dfb2e9da2ca4b00c2.jar"
-        jar="/Users/jiarong/AndroidstudioProjects/Pain-App/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
 
 </pre-dex-items>
