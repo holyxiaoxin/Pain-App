@@ -76,14 +76,15 @@ public class Fragment_Report extends Fragment {
             a.setPadding(10,10,30,10);
             a.setGravity(Gravity.LEFT);
         	tr.addView(a);
-        	for(int j=0; j<maxQuestion; j++){
-        		String currentNumber = Integer.toString(j+1);
-        		a = new TextView(view.getContext());
-	            a.setText("Q"+currentNumber);
-	            a.setPadding(10,10,30,10);
-	            a.setGravity(Gravity.LEFT);
-            	tr.addView(a);
-        	}
+            //remove below to conceal answers from patients
+//        	for(int j=0; j<maxQuestion; j++){
+//        		String currentNumber = Integer.toString(j+1);
+//        		a = new TextView(view.getContext());
+//	            a.setText("Q"+currentNumber);
+//	            a.setPadding(10,10,30,10);
+//	            a.setGravity(Gravity.LEFT);
+//            	tr.addView(a);
+//        	}
         	tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
 	        
 	        //loop through the entire report size
@@ -112,15 +113,16 @@ public class Fragment_Report extends Fragment {
             	a.setPadding(10,10,30,10);
 	            a.setGravity(Gravity.LEFT);
             	tr.addView(a);
-	         	// create a new TextView and add it to the table row through the string array
-	            for(String item:questionAnswers){
-	            	a = new TextView(view.getContext());
-	            	a.setText(item);
-	            	//edit padding here to suit table's column titles
-	            	a.setPadding(10,10,30,10);
-	            	a.setGravity(Gravity.LEFT);
-	            	tr.addView(a);
-	            }
+                //remove below to conceal answers from patients
+//	         	// create a new TextView and add it to the table row through the string array
+//	            for(String item:questionAnswers){
+//	            	a = new TextView(view.getContext());
+//	            	a.setText(item);
+//	            	//edit padding here to suit table's column titles
+//	            	a.setPadding(10,10,30,10);
+//	            	a.setGravity(Gravity.LEFT);
+//	            	tr.addView(a);
+//	            }
 	            tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
             }
             
