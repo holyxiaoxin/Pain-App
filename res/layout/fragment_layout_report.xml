@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    >
+    
+    <Button
+        android:id="@+id/switch_report_view_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/blue_custom_button"
+        android:textSize="20sp"
+        android:text="Switch View" />
+    
+    <Button
+        android:id="@+id/export_csv_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/green_custom_button"
+        android:layout_above="@id/switch_report_view_button"
+        android:textSize="20sp"
+        android:text="Export to CSV" />
+    
+    <ScrollView
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:layout_above="@id/export_csv_button"
+    android:layout_alignParentTop="true"
+    android:scrollbars="vertical">
+	<HorizontalScrollView
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent">
+
+	    <TableLayout
+	        android:id="@+id/frag_report_table"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:paddingBottom="10dp"
+	        android:stretchColumns="*" >
+
+		    
+		 </TableLayout>
+		 
+	</HorizontalScrollView>
+	</ScrollView>
+    
+	 
+        
+</RelativeLayout>
